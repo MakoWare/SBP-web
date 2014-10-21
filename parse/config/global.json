@@ -1,0 +1,14 @@
+{
+    "applications": {
+        "SBP": {
+            "applicationId": "NKnM9iqa0hnqZhA1M2TdyDYMMMVpW24QNcqaSZ2Y", 
+            "masterKey": "cr3PylXLL9YLuiUGj9aD37swTTURSKrrbZwdeU2G"
+        }, 
+        "_default": {
+            "link": "SBP"
+        }
+    }, 
+    "global": {
+        "parseVersion": "1.3.1"
+    }
+}
