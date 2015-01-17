@@ -2,6 +2,7 @@
 
 angular.module('sbp', [
     'parseService',
+    'globalService',
     'ui.bootstrap',
     'ngRoute'
   ])
