@@ -3,7 +3,8 @@ angular.module('parseService', [])
     .factory('ParseService', function(){
 
         //Init Parse
-	Parse.initialize("8vNcAs6Z0c4jyHvuW5zezUXij8DquZLeYP4pFicD", "Ipw8skfNMGvX9uGc8LHn0qCbAIhWjrZP5LEHm9vI");
+	Parse.initialize("NKnM9iqa0hnqZhA1M2TdyDYMMMVpW24QNcqaSZ2Y", "k7cekvXmYutKXkuSuOp2scFgbkRnAUdQMh4SewsG");
+
         var ParseService = {
             //Login
             login: function(username, password, callback) {
@@ -22,9 +23,46 @@ angular.module('parseService', [])
                 Parse.User.logOut();
             },
 
+            //Get Current User
             getCurrentUser: function(){
                 return Parse.User.current();
+            },
+
+
+            //****** Gyms ******//
+
+
+            //***** Walls ******//
+
+            //Get Walls By Gym
+            getWallsByGym: function(gym, callback){
+                var query = new Parse.Query("Wall");
+                query.equalTo("gym", gym);
+                query.find({
+                    success: function(results){
+                        callback(results);
+                    },
+                    error: function(error){
+                        callback(error);
+                    }
+                });
+            },
+
+            //Get Wall By ID
+            getWallById: function(id, callback){
+                var query = new Parse.Query("Wall");
+                query.get(id, {
+                    success: function(results){
+                        callback(results);
+                    },
+                    error: function(error){
+                        callback(error);
+                    }
+                });
             }
+
+
+
 
         };
         return ParseService;
