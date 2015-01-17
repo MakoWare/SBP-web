@@ -1,0 +1,16 @@
+{
+  "name": "SBP",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "yin",
+  "license": "ISC",
+  "devDependencies": {
+    "gulp": "^3.8.10",
+    "gulp-connect": "^2.2.0",
+    "gulp-load-plugins": "^0.8.0"
+  }
+}
