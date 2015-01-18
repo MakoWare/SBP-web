@@ -13,12 +13,13 @@
 
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-      <ul class="nav navbar-nav navbar-right">
+      <ul class="nav navbar-nav navbar-right" ng-if="currentUser">
         <li ng-class="{active: isRoute('/gyms')}"><a ng-href="#/gyms">Gyms</a></li>
         <li ng-class="{active: isRoute('/walls')}"><a ng-href="#/walls">Walls</a></li>
         <li ng-class="{active: isRoute('/routes')}"><a ng-href="#/routes">Routes</a></li>
         <li ng-class="{active: isRoute('/holds')}"><a ng-href="#/holds">Holds</a></li>
-        <li><p class="navbar-text">Current User</p></li>
+        <li><a ng-click="logout()">Logout</a></li>
+        <li><p class="navbar-text">{{currentUser.get('username')}}</p></li>
       </ul>
     </div><!-- /.navbar-collapse -->
   </div><!-- /.container-fluid -->

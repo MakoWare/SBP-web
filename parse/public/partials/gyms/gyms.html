@@ -1,0 +1,28 @@
+<div class="container">
+
+  <div class="page-header" style="margin-top: 0px">
+    <h2>
+      <span>Gyms</span>
+      <button class="btn btn-success pull-right" ng-click="addGym()">Add a Gym</button>
+    </h2>
+  </div>
+
+  <table class="table table-bordered">
+    <thead>
+      <tr>
+        <td>Name</td>
+        <td>Set as Working Gym</td>
+        <td>Edit</td>
+        <td>Delete</td>
+      </tr>
+    </thead>
+    <tbody>
+      <tr ng-repeat="gym in gyms">
+        <td>{{gym.attributes.name}}</td>
+        <td><button class="btn btn-default" ng-click="setGym(gym)">Work in this Gym</button></td>
+        <td><button class="btn btn-info">Edit</button></td>
+        <td><button class="btn btn-danger">Delete</button></td>
+      </tr>
+    <tbody>
+  </table>
+</div>

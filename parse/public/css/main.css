@@ -14,3 +14,16 @@ ul.nav li.dropdown:hover > ul.dropdown-menu {
     display: block;
     margin: 0;
 }
+
+
+.dropzone {
+    width: 50%;
+    border: 2px dashed #BBB;
+    border-radius: 5px;
+    padding: 25px;
+    text-align: center;
+    color: #BBB;
+}
+.removeAllImages {
+    cursor:pointer;
+}

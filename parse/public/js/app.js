@@ -43,12 +43,12 @@ angular.module('sbp', [
       })
 //Holds
       .when('/holds', {
-        templateUrl: 'partials/walls/walls.html',
-        controller: 'WallsCtrl'
+        templateUrl: 'partials/holds/holds.html',
+        controller: 'HoldsCtrl'
       })
-      .when('/walls/:id', {
-        templateUrl: 'partials/walls/wall.html',
-        controller: 'WallCtrl'
+      .when('/holds/:id', {
+        templateUrl: 'partials/holds/hold.html',
+        controller: 'HoldCtrl'
       })
 //Otherwise
       .otherwise({

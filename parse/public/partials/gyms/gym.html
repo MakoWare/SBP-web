@@ -1,0 +1,25 @@
+<div class="container">
+  <div class="page-header" style="margin-top: 0px">
+    <h2 style="margin-top: 0px">{{title}}</h2>
+  </div>
+
+
+
+  <form name="gymForm">
+    <div class="row">
+      <div class="col-md-4">
+        <input ng-model="gym.attributes.name" type="text" name="name" class="form-control" id="name" placeholder="Name" required/>
+      </div>
+    </div>
+
+  </form>
+
+
+
+  <div class="page-header"></div>
+  <div class="row">
+    <div class="col-md-1 col-md-offset-11">
+      <button class="btn btn-primary" ng-disabled="gymForm.$invalid" ng-click="saveGym()">Save</button>
+    </div>
+  </div>
+</div>
