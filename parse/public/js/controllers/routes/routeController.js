@@ -54,8 +54,6 @@ var RouteCtrl = function($scope, $location, $modal, ParseService, GlobalService)
         }
     };
 
-
-
     //Set Up Route
     $scope.setUpRoute = function(){
         $(".pick-a-color").pickAColor({
@@ -71,6 +69,61 @@ var RouteCtrl = function($scope, $location, $modal, ParseService, GlobalService)
         });
     };
 
+
+    //Save Route
+    $scope.saveRoute = function(){
+        GlobalService.showSpinner();
+
+        var route = $scope.route;
+
+        route.set("name", route.attributes.name);
+        route.set("description", route.attributes.description);
+        route.set("difficulty", route.attributes.difficulty);
+        route.set("holds", route.attributes.holds);
+
+        //Get Color
+        var hex = $("#colorPicker").val();
+        route.set("colorHex", hex);
+
+        switch(hex){
+        case "000000":
+            route.set("colorName", "black");
+            break;
+        case "ffffff":
+            route.set("colorName", "white");
+            break;
+        case "ff0000":
+            route.set("colorName", "red");
+            break;
+        case "ffff00":
+            route.set("colorName", "yellow");
+            break;
+        case "008000":
+            route.set("colorName", "green");
+            break;
+        case "0000ff":
+            route.set("colorName", "blue");
+            break;
+        case "800080":
+            route.set("colorName", "purple");
+            break;
+        }
+
+        if(route.attributes.colorName == ""){
+            route.set("colorName", "grey");
+        }
+
+        $scope.route.save({
+            success: function(route){
+                GlobalService.dismissSpinner();
+                $location.path("/routes");
+                $scope.$apply();
+            },
+            error: function(route, error){
+
+            }
+        });
+    };
 
     $scope.init();
 };

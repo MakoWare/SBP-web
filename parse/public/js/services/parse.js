@@ -160,7 +160,8 @@ angular.module('parseService', [])
                 var route = new Route();
                 route.set("name", "");
                 route.set("difficulty", "");
-                route.set("color", "");
+                route.set("colorName", "");
+                route.set("colorHex", "");
                 route.set("description", "");
                 route.set("createdBy", user);
                 route.set("gymCreatedAt", gym);
@@ -168,11 +169,6 @@ angular.module('parseService', [])
 
                 return route;
             },
-
-
-
-
-
 
 
             //***** Holds ******//
