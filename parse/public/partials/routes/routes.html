@@ -1,0 +1,32 @@
+<div class="container">
+
+  <div class="page-header" style="margin-top: 0px">
+    <h2>
+      <span>Routes</span>
+      <button class="btn btn-success pull-right" ng-click="addRoute()">Make a Route</button>
+    </h2>
+  </div>
+
+  <table class="table table-bordered">
+    <thead>
+      <tr>
+        <td>Name</td>
+        <td>Color</td>
+        <td>Difficulty</td>
+        <td>Description</td>
+        <td>Edit</td>
+        <td>Delete</td>
+      </tr>
+    </thead>
+    <tbody>
+      <tr ng-repeat="route in routes">
+        <td>{{route.attributes.name}}</td>
+        <td>{{route.attributes.color}}</td>
+        <td>{{route.attributes.difficulty}}</td>
+        <td>{{route.attributes.description}}</td>
+        <td><button class="btn btn-info" ng-click="editRoute(route)">Edit</button></td>
+        <td><button class="btn btn-danger" ng-click="deleteRoute(route)">Delete</button></td>
+      </tr>
+    <tbody>
+  </table>
+</div>

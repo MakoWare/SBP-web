@@ -49,6 +49,7 @@ var HoldCtrl = function($scope, $location, ParseService, GlobalService){
     $scope.getHold = function(id){
         ParseService.getHoldById(id, function(results){
             $scope.hold = results;
+
             $scope.title = "Update " +  results.get('name');
             //$(".pick-a-color").val(hex);
             $(".pick-a-color").pickAColor({
@@ -62,12 +63,16 @@ var HoldCtrl = function($scope, $location, ParseService, GlobalService){
                 allowBlank              : false,
                 inlineDropdown          : true
             });
+
+            var url = results.get('holdPicture').url();
+            $('#holdPicture').attr('src', url);
+            $scope.$apply();
         });
     };
 
     //Save Hold
     $scope.saveHold = function(){
-        //GlobalService.showSpinner();
+        GlobalService.showSpinner();
 
         var user = ParseService.getCurrentUser();
         var hold = $scope.hold;
@@ -126,6 +131,7 @@ var HoldCtrl = function($scope, $location, ParseService, GlobalService){
             success: function(hold){
                 GlobalService.dismissSpinner();
                 $location.path("/holds");
+                $scope.$apply();
             },
             error: function(hold, error){
 

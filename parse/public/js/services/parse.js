@@ -125,6 +125,53 @@ angular.module('parseService', [])
 
             //***** Routes ******//
 
+            //Get Routes
+            getRoutes: function(callback){
+                var query = new Parse.Query("Route");
+                query.find({
+                    success: function(results){
+                        callback(results);
+                    },
+                    error: function(error){
+                        callback(error);
+                    }
+                });
+            },
+
+            //Get Route By Id
+            getRouteById: function(id, callback){
+                var query = new Parse.Query("Route");
+                query.get(id, {
+                    success: function(results){
+                        callback(results);
+                    },
+                    error: function(object, error){
+                        console.log(error.message);
+                        callback(error);
+                    }
+                });
+            },
+
+
+            //Create Route
+            createRoute: function(){
+                var user = Parse.User.current();
+                var gym = user.get('currentGym');
+                var route = new Route();
+                route.set("name", "");
+                route.set("difficulty", "");
+                route.set("color", "");
+                route.set("description", "");
+                route.set("createdBy", user);
+                route.set("gymCreatedAt", gym);
+                route.set("holds", []);
+
+                return route;
+            },
+
+
+
+
 
 
 
@@ -147,12 +194,12 @@ angular.module('parseService', [])
             //Get Hold By Id
             getHoldById: function(id, callback){
                 var query = new Parse.Query("Hold");
-                query.include("holdPicture");
                 query.get(id, {
                     success: function(results){
                         callback(results);
                     },
-                    error: function(error){
+                    error: function(object, error){
+                        console.log(error.message);
                         callback(error);
                     }
                 });

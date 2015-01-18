@@ -11,6 +11,8 @@ var HoldsCtrl = function($scope, $location, ParseService, GlobalService){
     $scope.getHolds = function(){
         ParseService.getHolds(function(results){
             $scope.holds = results;
+            $scope.$apply();
+            console.log(results);
         });
     };
 
