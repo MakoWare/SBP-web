@@ -50,30 +50,6 @@ var HoldsTableCtrl = function($scope, $location, $modalInstance, ParseService, G
         }
     };
 
-
-    //Add Hold
-    $scope.addHold = function(hold){
-        if(hold.attributes.add){
-            var hasHold = false;
-            currentHolds.forEach(function(currentHold){
-                if(currentHold.id == hold.id){
-                    hasHold = true;
-                }
-            });
-            if(!hasHold){
-                console.log("adding  hold");
-                currentHolds.push(hold);
-            }
-        } else {
-            for(var i = 0; i < currentHolds.length; i++){
-                var currentHold = currentHolds[i];
-                if(currentHold.id == hold.id){
-                    currentHolds.splice(i, 1);
-                }
-            }
-        }
-    };
-
     $scope.ok = function () {
         console.log(currentHolds);
         $modalInstance.close(currentHolds);

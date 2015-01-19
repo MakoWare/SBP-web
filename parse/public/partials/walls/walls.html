@@ -22,7 +22,7 @@
       <tr ng-repeat="wall in walls">
         <td>{{wall.attributes.name}}</td>
         <td>{{wall.attributes.routes.length}}</td>
-        <td><button class="btn btn-info" ng-click="editWall(wall)">Edit</button></td>
+        <td><button class="btn btn-primary" ng-click="editWall(wall)">Edit</button></td>
         <td><button class="btn btn-danger" ng-click="deleteWall(wall)">Delete</button></td>
       </tr>
     <tbody>

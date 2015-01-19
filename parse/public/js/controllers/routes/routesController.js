@@ -17,7 +17,11 @@ var RoutesCtrl = function($scope, $location, ParseService, GlobalService){
     //Add Route
     $scope.addRoute = function(){
         $location.path("/routes/create");
-        //$scope.$apply();
+    };
+
+    //Edit Route
+    $scope.editRoute = function(route){
+        $location.path("/routes/" + route.id);
     };
 
     //Delete Route
@@ -26,7 +30,6 @@ var RoutesCtrl = function($scope, $location, ParseService, GlobalService){
 
         });
     };
-
 
 
     $scope.init();

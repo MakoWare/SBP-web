@@ -3,7 +3,7 @@
 
 </div>
 <div class="modal-body">
-  <table class="table table-bordered">
+  <table class="table table-bordered table-hover">
     <thead>
       <tr>
         <td>Name</td>
@@ -11,11 +11,11 @@
         <td>Difficulty</td>
         <td>Description</td>
         <td>ID</td>
-        <td>Add Route</td>
+        <td>Using Route</td>
       </tr>
     </thead>
     <tbody>
-      <tr ng-repeat="route in routes">
+      <tr ng-repeat="route in routes" ng-click="rowClicked(route)">
         <td>{{route.attributes.name}}</td>
         <td ng-style="{'background-color': '#' + route.attributes.colorHex}"></td>
         <td>{{route.attributes.difficulty}}</td>
@@ -24,7 +24,7 @@
         <td>
           <div class="checkbox">
             <label>
-              <input type="checkbox" ng-change="addRoute(route)" ng-model="route.attributes.add">
+              <input type="checkbox" ng-model="route.attributes.add">
             </label>
           </div>
         </td>

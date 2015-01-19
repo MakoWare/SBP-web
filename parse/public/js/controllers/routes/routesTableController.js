@@ -13,6 +13,7 @@ var RoutesTableCtrl = function($scope, $location, $modalInstance, ParseService, 
             $scope.routes = results;
 
             $scope.routes.forEach(function(route){
+                route.attributes.add = false;
                 currentRoutes.forEach(function(currentRoute){
                     if(route.id == route.id){
                         route.attributes.add = true;
@@ -23,8 +24,9 @@ var RoutesTableCtrl = function($scope, $location, $modalInstance, ParseService, 
         });
     };
 
-    //Add Route
-    $scope.addRoute = function(route){
+    //Row Clicked
+    $scope.rowClicked = function(route){
+        route.attributes.add = !route.attributes.add;
         if(route.attributes.add){
             var hasRoute = false;
             currentRoutes.forEach(function(currentRoute){

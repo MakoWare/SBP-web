@@ -57,6 +57,7 @@ var RouteCtrl = function($scope, $location, $modal, ParseService, GlobalService)
 
     //Set Up Route
     $scope.setUpRoute = function(){
+        $(".pick-a-color").val($scope.route.attributes.colorHex);
         $(".pick-a-color").pickAColor({
             showSpectrum            : false,
             showSavedColors         : false,

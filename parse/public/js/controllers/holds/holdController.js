@@ -51,7 +51,9 @@ var HoldCtrl = function($scope, $location, ParseService, GlobalService){
             $scope.hold = results;
 
             $scope.title = "Update " +  results.get('name');
-            //$(".pick-a-color").val(hex);
+
+            $(".pick-a-color").val($scope.hold.get('colorHex'));
+
             $(".pick-a-color").pickAColor({
                 showSpectrum            : false,
                 showSavedColors         : false,
