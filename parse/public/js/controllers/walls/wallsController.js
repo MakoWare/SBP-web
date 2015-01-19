@@ -4,12 +4,14 @@ var WallsCtrl = function($scope, $location, ParseService, GlobalService){
         console.log("WallsCtrl");
 
         $scope.currentUser = ParseService.getCurrentUser();
+        $scope.getWallsByGym();
     },
 
     //Get Walls By Gym
     $scope.getWallsByGym = function(){
         var gym = $scope.currentUser.get("currentGym");
         ParseService.getWallsByGym(gym, function(results){
+            console.log(results);
             $scope.walls = results;
             $scope.$apply();
         });

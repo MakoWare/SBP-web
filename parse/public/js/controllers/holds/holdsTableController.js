@@ -15,6 +15,7 @@ var HoldsTableCtrl = function($scope, $location, $modalInstance, ParseService, G
             $scope.holds = results;
 
             $scope.holds.forEach(function(hold){
+                hold.attributes.add = false;
                 currentHolds.forEach(function(currentHold){
                     if(hold.id == currentHold.id){
                         hold.attributes.add = true;
@@ -24,6 +25,31 @@ var HoldsTableCtrl = function($scope, $location, $modalInstance, ParseService, G
             $scope.$apply();
         });
     };
+
+    //Row Clicked
+    $scope.rowClicked = function(hold){
+        hold.attributes.add = !hold.attributes.add;
+        if(hold.attributes.add){
+            var hasHold = false;
+            currentHolds.forEach(function(currentHold){
+                if(currentHold.id == hold.id){
+                    hasHold = true;
+                }
+            });
+            if(!hasHold){
+                console.log("adding  hold");
+                currentHolds.push(hold);
+            }
+        } else {
+            for(var i = 0; i < currentHolds.length; i++){
+                var currentHold = currentHolds[i];
+                if(currentHold.id == hold.id){
+                    currentHolds.splice(i, 1);
+                }
+            }
+        }
+    };
+
 
     //Add Hold
     $scope.addHold = function(hold){

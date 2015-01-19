@@ -99,6 +99,7 @@ angular.module('parseService', [])
             getWallsByGym: function(gym, callback){
                 var query = new Parse.Query("Wall");
                 query.equalTo("gym", gym);
+                query.include("routes");
                 query.find({
                     success: function(results){
                         callback(results);
@@ -112,6 +113,7 @@ angular.module('parseService', [])
             //Get Wall By ID
             getWallById: function(id, callback){
                 var query = new Parse.Query("Wall");
+                query.include("routes");
                 query.get(id, {
                     success: function(results){
                         callback(results);

@@ -22,6 +22,7 @@ var RouteCtrl = function($scope, $location, $modal, ParseService, GlobalService)
         ParseService.getRouteById(id, function(results){
             $scope.route = results;
             $scope.$apply();
+            $scope.setUpRoute();
         });
     };
 
@@ -69,7 +70,6 @@ var RouteCtrl = function($scope, $location, $modal, ParseService, GlobalService)
         });
     };
 
-
     //Save Route
     $scope.saveRoute = function(){
         GlobalService.showSpinner();
@@ -106,6 +106,9 @@ var RouteCtrl = function($scope, $location, $modal, ParseService, GlobalService)
             break;
         case "800080":
             route.set("colorName", "purple");
+            break;
+        case "ff6600":
+            route.set("colorName", "orange");
             break;
         }
 

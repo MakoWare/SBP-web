@@ -21,8 +21,9 @@ var WallCtrl = function($scope, $location, $modal, ParseService, GlobalService){
     //Get Wall
     $scope.getWall = function(id){
         ParseService.getWallById(id, function(results){
-            $scope.route = results;
+            $scope.wall = results;
             $scope.title = results.get("name");
+            console.log(results);
             $scope.$apply();
         });
     };
@@ -70,16 +71,19 @@ var WallCtrl = function($scope, $location, $modal, ParseService, GlobalService){
 
     //Save Wall
     $scope.saveWall = function(){
+        GlobalService.showSpinner();
         var wall = $scope.wall;
+        console.log($scope.wall);
         wall.set("name", wall.attributes.name);
         wall.set("routes", wall.attributes.routes);
 
         wall.save({
             success: function(wall){
-
+                GlobalService.dismissSpinner();
+                $location.path("/walls");
             },
             error: function(wall, error){
-
+                alert(GlobalService.errorMessage + error.message);
             }
         });
 

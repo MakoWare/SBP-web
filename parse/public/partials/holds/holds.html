@@ -11,11 +11,11 @@
     <thead>
       <tr>
         <td>Picture</td>
+        <td>Color</td>
         <td>Name</td>
         <td>Type</td>
         <td>Size</td>
         <td>Description</td>
-        <td>Color</td>
         <td>ID</td>
         <td>Edit</td>
         <td>Delete</td>
@@ -24,14 +24,13 @@
     <tbody>
       <tr ng-repeat="hold in holds">
         <td><img ng-src="{{hold.attributes.holdPicture.url()}}" class="img-responsive" alt="Hold Image" id="holdPicture" style="width: 100px; height: 100px;"></td>
+        <td ng-style="{'background-color': '#' + hold.attributes.colorHex}"></td>
         <td>{{hold.attributes.name}}</td>
         <td>{{hold.attributes.type}}</td>
         <td>{{hold.attributes.size}}</td>
         <td>{{hold.attributes.description}}</td>
-        <td>{{hold.attributes.colorName}}</td>
-
         <td>{{hold.id}}</td>
-        <td><button class="btn btn-info" ng-click="editHold(hold)">Edit</button></td>
+        <td><button class="btn btn-primary" ng-click="editHold(hold)">Edit</button></td>
         <td><button class="btn btn-danger" ng-click="deleteHold(hold)">Delete</button></td>
       </tr>
     <tbody>

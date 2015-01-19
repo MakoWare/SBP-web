@@ -7,9 +7,9 @@
 
   <form name="wallForm">
     <div class="row">
-      <div class="col-md-3" ng-class="{ 'has-error': routeForm.name.$invalid }">
+      <div class="col-md-3" ng-class="{ 'has-error': wallForm.name.$invalid }">
         <label for="name">Name</label>
-        <input ng-model="route.attributes.name" type="text" name="name" class="form-control" id="name" placeholder="Name" required/>
+        <input ng-model="wall.attributes.name" type="text" name="name" class="form-control" id="name" placeholder="Name" required/>
       </div>
     </div>
   </form>

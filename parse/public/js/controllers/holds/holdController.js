@@ -119,6 +119,9 @@ var HoldCtrl = function($scope, $location, ParseService, GlobalService){
         case "800080":
             hold.set("colorName", "purple");
             break;
+        case "ff6600":
+            hold.set("colorName", "orange");
+            break;
         }
 
         if(hold.attributes.colorName == ""){
