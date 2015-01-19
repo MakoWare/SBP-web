@@ -21,7 +21,7 @@
     <tbody>
       <tr ng-repeat="route in routes">
         <td>{{route.attributes.name}}</td>
-        <td ng-style="{'background-color': route.attributes.colorName}">{{route.attributes.colorName}}</td>
+        <td ng-style="{'background-color': route.attributes.colorName}"></td>
         <td>{{route.attributes.difficulty}}</td>
         <td>{{route.attributes.description}}</td>
         <td><button class="btn btn-info" ng-click="editRoute(route)">Edit</button></td>

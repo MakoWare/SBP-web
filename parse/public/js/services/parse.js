@@ -122,6 +122,20 @@ angular.module('parseService', [])
                 });
             },
 
+            //Create Wall
+            createWall: function(){
+                var user = Parse.User.current();
+                var gym = user.get('currentGym');
+                var wall = new Wall();
+                wall.set("name", "");
+                wall.set("description", "");
+                wall.set("createdBy", user);
+                wall.set("gym", gym);
+                wall.set("routes", []);
+
+                return wall;
+            },
+
 
             //***** Routes ******//
 
@@ -141,6 +155,7 @@ angular.module('parseService', [])
             //Get Route By Id
             getRouteById: function(id, callback){
                 var query = new Parse.Query("Route");
+                query.include("holds");
                 query.get(id, {
                     success: function(results){
                         callback(results);

@@ -30,7 +30,7 @@ var HoldsTableCtrl = function($scope, $location, $modalInstance, ParseService, G
         if(hold.attributes.add){
             var hasHold = false;
             currentHolds.forEach(function(currentHold){
-                if(currentHold.id == hold){
+                if(currentHold.id == hold.id){
                     hasHold = true;
                 }
             });
