@@ -1,0 +1,10 @@
+Attribute   Type       Input
+
+name        string     textbox
+setter      user       select
+status      string     select
+theme       string     select
+risk        int        select (1-5)
+intensity   int        select (1-5)
+commitment  int        select (1-5)
+holds       array      modal

@@ -6,42 +6,6 @@ angular.module('globalService', [])
         var GlobalService = {
             errorMessage: "An Error Occured, please contact us with this message: ",
 
-            getObjectType: function(url){
-                switch (url){
-                case "contacts":
-                    return "Contact";
-                    break;
-                case "devices":
-                    return "Device";
-                    break;
-                case "dispatches":
-                    return "Dispatch";
-                    break;
-                case "facilities":
-                    return "Facility";
-                    break;
-                case "installations":
-                    return "Installation";
-                    break;
-                case "patients":
-                    return "Patient";
-                    break;
-                case "users":
-                    return "User";
-                    break;
-                case "vehicles":
-                    return "Vehicle";
-                    break;
-                case "pcrs":
-                    return "PCR";
-                    break;
-                case "files":
-                    return "File";
-                    break;
-                };
-                return "Error";
-            },
-
             showSpinner: function(){
                 var opts = {
                     lines: 13, // The number of lines to draw
@@ -67,7 +31,6 @@ angular.module('globalService', [])
                 var windowH = $(document).outerHeight();
                 $("#overlay").height(windowH);
                 $("#overlay").toggle();
-
             },
 
             dismissSpinner: function(){

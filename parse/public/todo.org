@@ -1,0 +1,80 @@
+** TODO Spend the day understanding what the route setters need.
+
+*** Questions
+
+* Individual Questions
+
+** TODO What kind of stats wolud you like know about the Gym/Walls/Routes/Holds?
+** TODO Gym?
+
+
+** TODO Walls?
+
+
+** TODO Routes?
+
+
+** TODO Holds?
+
+
+** TODO Metrix Gym/Walls/Routes/Holds?
+** TODO Gym?
+
+
+** TODO Walls?
+
+
+** TODO Routes?
+
+
+** TODO Holds?
+
+
+** TODO How many unique holds are there?
+
+
+** DONE Do you ever re-use routes?
+   CLOSED: [2015-01-20 Tue 08:50]
+   NO
+
+** DONE What device would you use it on most?
+   CLOSED: [2015-01-20 Tue 08:50]
+   IPAD
+
+
+** TODO What features are most important to you?
+
+
+
+* Early Morning plans with Christine
+
+1. Update what was last set
+
+2. Atempt to match ideal curve for routes
+
+# Idealistic curve changes infrequently
+# Major discussion point is route density
+
+3. Should know all routes that need to be set by the time she's done
+
+
+* Morning overview with Travis
+
+1. Volumes go up first and are not assoc with the route.
+
+2. Route setters pick from a list of Routes that need to be set.
+
+3. Routes can varry difficulty when being set.
+
+4. Route sheet is updated with status as route progresses.
+
+
+* People I have met
+
+Chad
+Gino
+Christine
+Travis
+Jeff
+Oliver
+Luise
