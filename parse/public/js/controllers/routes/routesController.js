@@ -10,6 +10,7 @@ var RoutesCtrl = function($scope, $location, ParseService, GlobalService){
     $scope.getRoutes = function(){
         ParseService.getRoutes(function(results){
             $scope.routes = results;
+            console.log(results);
             $scope.$apply();
         });
     };
@@ -30,6 +31,14 @@ var RoutesCtrl = function($scope, $location, ParseService, GlobalService){
 
         });
     };
+
+    //Save Route
+    $scope.saveRoute = function(route){
+
+
+
+    };
+
 
 
     $scope.init();

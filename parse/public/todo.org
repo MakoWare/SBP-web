@@ -1,10 +1,7 @@
-** TODO Spend the day understanding what the route setters need.
-
-*** Questions
-
+** TODO Spend the day understanding what the route setters need
 * Individual Questions
 
-** TODO What kind of stats wolud you like know about the Gym/Walls/Routes/Holds?
+** TODO What kind of Stats wolud you like to know about the Gym/Walls/Routes/Holds?
 ** TODO Gym?
 
 
@@ -12,9 +9,18 @@
 
 
 ** TODO Routes?
+   Info about circuits as a whole.
+   How many tops? - users
+   High point
+   Feedback
 
+   User feedback - SandBag FeatherBag
 
 ** TODO Holds?
+
+** TODO Setters?
+   How many problems they set.
+   What grade they set.
 
 
 ** TODO Metrix Gym/Walls/Routes/Holds?
@@ -24,13 +30,25 @@
 ** TODO Walls?
 
 
-** TODO Routes?
-
+** DONE Routes?
+   CLOSED: [2015-01-20 Tue 12:14]
+   Dyno
+   Slab
+   Crimpy
+   Unicorn
+   Pure Power
+   Complex
+   Tic-Tacky
+   Star Fish
+   Yo-Yo
+   Circus Trick
 
 ** TODO Holds?
 
 
-** TODO How many unique holds are there?
+** DONE How many unique holds are there?
+   CLOSED: [2015-01-20 Tue 12:12]
+   1500-2002
 
 
 ** DONE Do you ever re-use routes?
@@ -40,7 +58,6 @@
 ** DONE What device would you use it on most?
    CLOSED: [2015-01-20 Tue 08:50]
    IPAD
-
 
 ** TODO What features are most important to you?
 
@@ -68,12 +85,11 @@
 
 4. Route sheet is updated with status as route progresses.
 
-
 * People I have met
 
 Chad
 Gino
-Christine
+Christine (Deyo)
 Travis
 Jeff
 Oliver

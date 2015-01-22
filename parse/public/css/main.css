@@ -27,3 +27,14 @@ ul.nav li.dropdown:hover > ul.dropdown-menu {
 .removeAllImages {
     cursor:pointer;
 }
+
+
+select option {
+    background-color: red !important;
+    color: red !important;
+}
+
+#redOption {
+   background-color: red !important;
+    color: red !important;
+}

@@ -1,0 +1,7 @@
+Hold Model
+
+Attribute   Type       Input
+
+name        string     textbox
+color       string     select
+type        string     select (pinch, crimp, ???)

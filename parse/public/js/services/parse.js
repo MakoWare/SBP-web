@@ -144,6 +144,7 @@ angular.module('parseService', [])
             //Get Routes
             getRoutes: function(callback){
                 var query = new Parse.Query("Route");
+                query.include("setter");
                 query.find({
                     success: function(results){
                         callback(results);
@@ -157,6 +158,7 @@ angular.module('parseService', [])
             //Get Route By Id
             getRouteById: function(id, callback){
                 var query = new Parse.Query("Route");
+                query.include("setter");
                 query.include("holds");
                 query.get(id, {
                     success: function(results){
@@ -176,10 +178,10 @@ angular.module('parseService', [])
                 var gym = user.get('currentGym');
                 var route = new Route();
                 route.set("name", "");
-                route.set("difficulty", "");
-                route.set("colorName", "");
-                route.set("colorHex", "");
-                route.set("description", "");
+                route.set("grade", "");
+                route.set("color", "");
+                route.set("setterComments", "");
+                route.set("status", "Not Set");
                 route.set("createdBy", user);
                 route.set("gymCreatedAt", gym);
                 route.set("holds", []);
@@ -233,8 +235,21 @@ angular.module('parseService', [])
                 return hold;
             },
 
+            //********* Users ***********//
 
-
+            //Get Users by Gym
+            getUsersByGym: function(gym, callback){
+                var query = new Parse.Query("User");
+                query.equalTo("currentGym", gym);
+                query.find({
+                    success: function(results){
+                        callback(results);
+                    },
+                    error: function(error){
+                        callback(error);
+                    }
+                });
+            }
 
         };
         return ParseService;

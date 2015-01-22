@@ -21,6 +21,7 @@ var RouteCtrl = function($scope, $location, $modal, ParseService, GlobalService)
     $scope.getRoute = function(id){
         ParseService.getRouteById(id, function(results){
             $scope.route = results;
+            console.log(results);
             $scope.$apply();
             $scope.setUpRoute();
         });
@@ -39,9 +40,9 @@ var RouteCtrl = function($scope, $location, $modal, ParseService, GlobalService)
             }
         });
         modalInstance.result.then(function(holds){
-            console.log(holds);
+
         }, function () {
-            console.log("modal closed");
+
         });
     };
 
@@ -57,18 +58,19 @@ var RouteCtrl = function($scope, $location, $modal, ParseService, GlobalService)
 
     //Set Up Route
     $scope.setUpRoute = function(){
-        $(".pick-a-color").val($scope.route.attributes.colorHex);
-        $(".pick-a-color").pickAColor({
-            showSpectrum            : false,
-            showSavedColors         : false,
-            saveColorsPerElement    : false,
-            fadeMenuToggle          : true,
-            showHexInput            : false,
-            showAdvanced            : true,
-            showBasicColors         : true,
-            allowBlank              : false,
-            inlineDropdown          : true
+        //Get All Setters
+        var user = ParseService.getCurrentUser();
+        ParseService.getUsersByGym(user.get("currentGym"), function(results){
+            $scope.setters = results;
+            var currentSetter = $scope.route.attributes.setter;
+            results.forEach(function(setter){
+                if(currentSetter && currentSetter.id == setter.id){
+                    $scope.route.attributes.setter = setter;
+                }
+            });
+            $scope.$apply();
         });
+
     };
 
     //Save Route
@@ -77,46 +79,12 @@ var RouteCtrl = function($scope, $location, $modal, ParseService, GlobalService)
 
         var route = $scope.route;
 
-        route.set("name", route.attributes.name);
-        route.set("description", route.attributes.description);
-        route.set("difficulty", route.attributes.difficulty);
-        route.set("holds", route.attributes.holds);
-
-        //Get Color
-        var hex = $("#colorPicker").val();
-        route.set("colorHex", hex);
-
-        switch(hex){
-        case "000000":
-            route.set("colorName", "black");
-            break;
-        case "ffffff":
-            route.set("colorName", "white");
-            break;
-        case "ff0000":
-            route.set("colorName", "red");
-            break;
-        case "ffff00":
-            route.set("colorName", "yellow");
-            break;
-        case "008000":
-            route.set("colorName", "green");
-            break;
-        case "0000ff":
-            route.set("colorName", "blue");
-            break;
-        case "800080":
-            route.set("colorName", "purple");
-            break;
-        case "ff6600":
-            route.set("colorName", "orange");
-            break;
+        for(var attr in route.attributes) {
+            route.set(attr, route.attributes[attr]);
         }
 
-        if(route.attributes.colorName == ""){
-            route.set("colorName", "grey");
-        }
 
+        console.log(route);
         $scope.route.save({
             success: function(route){
                 GlobalService.dismissSpinner();

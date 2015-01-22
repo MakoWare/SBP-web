@@ -32,6 +32,5 @@ var WallsCtrl = function($scope, $location, ParseService, GlobalService){
 
     };
 
-
     $scope.init();
 };

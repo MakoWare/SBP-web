@@ -12,8 +12,13 @@
       <tr>
         <td>Name</td>
         <td>Color</td>
-        <td>Difficulty</td>
-        <td>Description</td>
+        <td>Grade</td>
+        <td>Comments</td>
+        <td>Risk</td>
+        <td>Intensity</td>
+        <td>Commitment</td>
+        <td>Status</td>
+        <td>Setter</td>
         <td>Edit</td>
         <td>Delete</td>
       </tr>
@@ -21,9 +26,14 @@
     <tbody>
       <tr ng-repeat="route in routes">
         <td>{{route.attributes.name}}</td>
-        <td ng-style="{'background-color': route.attributes.colorName}"></td>
-        <td>{{route.attributes.difficulty}}</td>
-        <td>{{route.attributes.description}}</td>
+        <td ng-style="{'background-color': route.attributes.color}"></td>
+        <td>{{route.attributes.grade}}</td>
+        <td>{{route.attributes.setterComments}}</td>
+        <td>{{route.attributes.risk}}</td>
+        <td>{{route.attributes.intensity}}</td>
+        <td>{{route.attributes.commitment}}</td>
+        <td>{{route.attributes.status}}</td>
+        <td>{{route.attributes.setter.attributes.username}}</td>
         <td><button class="btn btn-primary" ng-click="editRoute(route)">Edit</button></td>
         <td><button class="btn btn-danger" ng-click="deleteRoute(route)">Delete</button></td>
       </tr>
