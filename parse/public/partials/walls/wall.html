@@ -5,15 +5,6 @@
     </div>
   </div>
 
-  <form name="wallForm">
-    <div class="row">
-      <div class="col-md-3" ng-class="{ 'has-error': wallForm.name.$invalid }">
-        <label for="name">Name</label>
-        <input ng-model="wall.attributes.name" type="text" name="name" class="form-control" id="name" placeholder="Name" required/>
-      </div>
-    </div>
-  </form>
-
   <div class="row" style="margin-bottom: 5px">
     <div class="col-md-10">
       <h4 style="margin-top: 10px">Routes on Wall</h4>
@@ -22,7 +13,6 @@
       <button class="btn btn-success" ng-click="createModal()">Add Routes</button>
     </div>
   </div>
-
 
   <table class="table table-bordered">
     <thead>
@@ -39,9 +29,9 @@
     <tbody>
       <tr ng-repeat="route in wall.attributes.routes">
         <td>{{route.attributes.name}}</td>
-        <td ng-style="{'background-color': '#' + route.attributes.colorHex}"></td>
-        <td>{{route.attributes.difficulty}}</td>
-        <td>{{route.attributes.description}}</td>
+        <td ng-style="{'background-color': route.attributes.color}"></td>
+        <td>{{route.attributes.grade}}</td>
+        <td>{{route.attributes.setterComments}}</td>
         <td>{{route.id}}</td>
 
         <td><button class="btn btn-primary" ng-click="viewRoute(route)">View</button></td>       <td><button class="btn btn-danger" ng-click="removeRouteFromWall(route)">Remove</button></td>

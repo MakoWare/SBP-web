@@ -15,26 +15,7 @@ ul.nav li.dropdown:hover > ul.dropdown-menu {
     margin: 0;
 }
 
-
-.dropzone {
-    width: 50%;
-    border: 2px dashed #BBB;
-    border-radius: 5px;
-    padding: 25px;
-    text-align: center;
-    color: #BBB;
-}
-.removeAllImages {
-    cursor:pointer;
-}
-
-
-select option {
-    background-color: red !important;
-    color: red !important;
-}
-
-#redOption {
-   background-color: red !important;
-    color: red !important;
+.chart {
+    width: 500px;
+    height: 500px;
 }

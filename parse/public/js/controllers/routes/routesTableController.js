@@ -15,7 +15,7 @@ var RoutesTableCtrl = function($scope, $location, $modalInstance, ParseService, 
             $scope.routes.forEach(function(route){
                 route.attributes.add = false;
                 currentRoutes.forEach(function(currentRoute){
-                    if(route.id == route.id){
+                    if(route.id == currentRoute.id){
                         route.attributes.add = true;
                     }
                 });

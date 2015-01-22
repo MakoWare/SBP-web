@@ -1,11 +1,15 @@
 <div class="container">
 
-  <div class="page-header" style="margin-top: 0px">
-    <h2>
-      <span>Routes</span>
-      <button class="btn btn-success pull-right" ng-click="addRoute()">Make a Route</button>
-    </h2>
+  <div class="row">
+    <div class="col-md-8">
+      <h2 style="margin: 0px">Routes</h2>
+    </div>
+
+    <div class="col-md pull-right" style="padding-right: 15px; padding-bottom: 10px;">
+      <button class="btn btn-success" ng-click="addRoute()">Add a Route</button>
+    </div>
   </div>
+
 
   <table class="table table-bordered">
     <thead>
@@ -19,7 +23,7 @@
         <td>Commitment</td>
         <td>Status</td>
         <td>Setter</td>
-        <td>Edit</td>
+        <td>View</td>
         <td>Delete</td>
       </tr>
     </thead>
@@ -33,8 +37,8 @@
         <td>{{route.attributes.intensity}}</td>
         <td>{{route.attributes.commitment}}</td>
         <td>{{route.attributes.status}}</td>
-        <td>{{route.attributes.setter.attributes.username}}</td>
-        <td><button class="btn btn-primary" ng-click="editRoute(route)">Edit</button></td>
+        <td>{{route.attributes.setter.attributes.username.toUpperCase()}}</td>
+        <td><button class="btn btn-primary" ng-click="editRoute(route)">View</button></td>
         <td><button class="btn btn-danger" ng-click="deleteRoute(route)">Delete</button></td>
       </tr>
     <tbody>

@@ -25,14 +25,15 @@
       <div class="col-md-4 form-group">
         <label for="type">Type</label>
         <select class="form-control" ng-model="hold.attributes.type">
-          <option>Jug</option>
-          <option>Incut</option>
-          <option>Sloper</option>
-          <option>Pocket</option>
-          <option>Pinch</option>
           <option>Crimp</option>
           <option>Edge</option>
           <option>Gaston</option>
+          <option>Incut</option>
+          <option>Jug</option>
+          <option>Pinch</option>
+          <option>Pocket</option>
+          <option>Slab</option>
+          <option>Sloper</option>
           <option>Undercling</option>
         </select>
       </div>
@@ -48,9 +49,20 @@
         </select>
       </div>
 
+
       <div class="col-md-2 form-group">
         <label for="color">Color</label>
-        <input id="colorPicker" type="text" value="{{hold.attributes.colorHex}}" name="color" class="pick-a-color form-control">
+        <select class="form-control" ng-model="hold.attributes.color" name="color" ng-style="{'background-color': hold.attributes.color}">
+          <option></option>
+          <option>gray</option>
+          <option>yellow</option>
+          <option>green</option>
+          <option>red</option>
+          <option>blue</option>
+          <option>orange</option>
+          <option>purple</option>
+          <option>black</option>
+        </select>
       </div>
     </div>
 

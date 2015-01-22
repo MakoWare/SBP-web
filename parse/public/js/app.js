@@ -50,6 +50,15 @@ angular.module('sbp', [
         templateUrl: 'partials/holds/hold.html',
         controller: 'HoldCtrl'
       })
+//Users
+      .when('/users', {
+        templateUrl: 'partials/users/users.html',
+        controller: 'UsersCtrl'
+      })
+      .when('/users/:id', {
+        templateUrl: 'partials/users/user.html',
+        controller: 'UserCtrl'
+      })
 //Otherwise
       .otherwise({
         redirectTo: '/'

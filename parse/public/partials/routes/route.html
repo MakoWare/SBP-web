@@ -16,9 +16,9 @@
 
       <form name="routeForm">
         <div class="row">
-          <div class="col-md-3" ng-class="{ 'has-error': routeForm.name.$invalid }">
+          <div class="col-md-3">
             <label for="name">Name</label>
-            <input ng-model="route.attributes.name" type="text" name="name" class="form-control" id="name" placeholder="Name" required/>
+            <input ng-model="route.attributes.name" type="text" name="name" class="form-control" id="name" placeholder="Name"/>
           </div>
 
           <div class="col-md-3">
@@ -59,6 +59,7 @@
               <option>green</option>
               <option>red</option>
               <option>blue</option>
+              <option>orange</option>
               <option>purple</option>
               <option>black</option>
             </select>
@@ -115,7 +116,162 @@
           </div>
         </div>
 
+        <div class="row">
+          <div class="col-md-1">
+            <label for="crimps">Crimps</label>
+            <select class="form-control" ng-model="route.attributes.crimps" name="crimps">
+              <option>0</option>
+              <option>1</option>
+              <option>2</option>
+              <option>3</option>
+              <option>4</option>
+              <option>5</option>
+              <option>6</option>
+              <option>7</option>
+              <option>8</option>
+              <option>9</option>
+              <option>10</option>
+              <option>11</option>
+              <option>12</option>
+              <option>13</option>
+              <option>14</option>
+              <option>15</option>
+              <option>16</option>
+              <option>17</option>
+              <option>18</option>
+              <option>19</option>
+              <option>20</option>
+            </select>
+          </div>
 
+          <div class="col-md-1">
+            <label for="jugs">Jugs</label>
+            <select class="form-control" ng-model="route.attributes.jugs" name="jugs">
+              <option>0</option>
+              <option>1</option>
+              <option>2</option>
+              <option>3</option>
+              <option>4</option>
+              <option>5</option>
+              <option>6</option>
+              <option>7</option>
+              <option>8</option>
+              <option>9</option>
+              <option>10</option>
+              <option>11</option>
+              <option>12</option>
+              <option>13</option>
+              <option>14</option>
+              <option>15</option>
+              <option>16</option>
+              <option>17</option>
+              <option>18</option>
+              <option>19</option>
+              <option>20</option>
+            </select>
+          </div>
+
+          <div class="col-md-1">
+            <label for="pinches">Pinches</label>
+            <select class="form-control" ng-model="route.attributes.pinches" name="pinches">
+              <option>0</option>
+              <option>1</option>
+              <option>2</option>
+              <option>3</option>
+              <option>4</option>
+              <option>5</option>
+              <option>6</option>
+              <option>7</option>
+              <option>8</option>
+              <option>9</option>
+              <option>10</option>
+              <option>11</option>
+              <option>12</option>
+              <option>13</option>
+              <option>14</option>
+              <option>15</option>
+              <option>16</option>
+              <option>17</option>
+              <option>18</option>
+              <option>19</option>
+              <option>20</option>
+            </select>
+          </div>
+
+          <div class="col-md-1">
+            <label for="slopers">Slopers</label>
+            <select class="form-control" ng-model="route.attributes.slopers" name="slopers">
+              <option>0</option>
+              <option>1</option>
+              <option>2</option>
+              <option>3</option>
+              <option>4</option>
+              <option>5</option>
+              <option>6</option>
+              <option>7</option>
+              <option>8</option>
+              <option>9</option>
+              <option>10</option>
+              <option>11</option>
+              <option>12</option>
+              <option>13</option>
+              <option>14</option>
+              <option>15</option>
+              <option>16</option>
+              <option>17</option>
+              <option>18</option>
+              <option>19</option>
+              <option>20</option>
+            </select>
+          </div>
+
+          <div class="col-md-1">
+            <label for="edges">Edges</label>
+            <select class="form-control" ng-model="route.attributes.edges" name="edges">
+              <option>0</option>
+              <option>1</option>
+              <option>2</option>
+              <option>3</option>
+              <option>4</option>
+              <option>5</option>
+              <option>6</option>
+              <option>7</option>
+              <option>8</option>
+              <option>9</option>
+              <option>10</option>
+              <option>11</option>
+              <option>12</option>
+              <option>13</option>
+              <option>14</option>
+              <option>15</option>
+              <option>16</option>
+              <option>17</option>
+              <option>18</option>
+              <option>19</option>
+              <option>20</option>
+            </select>
+          </div>
+
+
+          <div class="col-md-2">
+            <label for="totalHolds">Total Holds</label>
+            <input ng-model="route.attributes.totalHolds" type="text" name="totalHolds" class="form-control" id="totalHolds" placeholder="Total Holds"/>
+          </div>
+
+          <div class="col-md-3">
+            <label for="edges">Theme</label>
+            <select class="form-control" ng-model="route.attributes.theme" name="edges">
+              <option>dyno</option>
+              <option>slab</option>
+              <option>crimpy</option>
+              <option>unicorn</option>
+              <option>tictacky</option>
+              <option>starfish</option>
+            </select>
+          </div>
+        </div>
+
+        <br>
         <div class="row">
           <div class="col-md-12">
             <h4 style="margin-top: 10px">User's Comments</h4>
@@ -126,6 +282,7 @@
           <div class="col-md-12" style="margin-left: 10px">
             <p>I Loved this Route, fun dyno's, I want more!</p>
             <p>The dyno on this Route was way too far, I'm only 5'3!!!</p>
+            <p>Some Other Examlpe Feedback!</p>
           </div>
         </div>
 
@@ -147,11 +304,11 @@
         <thead>
           <tr>
             <td>Picture</td>
+            <td>Color</td>
             <td>Name</td>
             <td>Type</td>
             <td>Size</td>
             <td>Description</td>
-            <td>Color</td>
             <td>ID</td>
             <td>Remove</td>
           </tr>
@@ -159,11 +316,11 @@
         <tbody>
           <tr ng-repeat="hold in route.attributes.holds">
             <td><img ng-src="{{hold.attributes.holdPicture.url()}}" class="img-responsive" alt="Hold Image" id="holdPicture" style="width: 100px; height: 100px;"></td>
+            <td ng-style="{'background-color':  hold.attributes.color}"></td>
             <td>{{hold.attributes.name}}</td>
             <td>{{hold.attributes.type}}</td>
             <td>{{hold.attributes.size}}</td>
             <td>{{hold.attributes.description}}</td>
-            <td>{{hold.attributes.colorName}}</td>
             <td>{{hold.id}}</td>
             <td><button class="btn btn-info" ng-click="removeHoldFromRoute(hold)">Remove</button></td>
           </tr>
@@ -171,8 +328,6 @@
       </table>
     </tab>
   </tabset>
-
-
 
 
   <div class="page-header"></div>

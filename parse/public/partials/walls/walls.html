@@ -14,16 +14,14 @@
       <tr>
         <td>Name</td>
         <td># of Routes</td>
-        <td>Edit</td>
-        <td>Delete</td>
+        <td>View</td>
       </tr>
     </thead>
     <tbody>
       <tr ng-repeat="wall in walls">
         <td>{{wall.attributes.name}}</td>
         <td>{{wall.attributes.routes.length}}</td>
-        <td><button class="btn btn-primary" ng-click="editWall(wall)">Edit</button></td>
-        <td><button class="btn btn-danger" ng-click="deleteWall(wall)">Delete</button></td>
+        <td><button class="btn btn-primary" ng-click="viewWall(wall)">View</button></td>
       </tr>
     <tbody>
   </table>

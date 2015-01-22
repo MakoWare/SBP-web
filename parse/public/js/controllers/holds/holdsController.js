@@ -23,7 +23,7 @@ var HoldsCtrl = function($scope, $location, ParseService, GlobalService){
     };
 
     //Edit Hold
-    $scope.editHold = function(hold){
+    $scope.viewHold = function(hold){
         $location.path("/holds/" + hold.id);
     };
 

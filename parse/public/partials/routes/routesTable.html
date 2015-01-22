@@ -17,9 +17,9 @@
     <tbody>
       <tr ng-repeat="route in routes" ng-click="rowClicked(route)">
         <td>{{route.attributes.name}}</td>
-        <td ng-style="{'background-color': '#' + route.attributes.colorHex}"></td>
-        <td>{{route.attributes.difficulty}}</td>
-        <td>{{route.attributes.description}}</td>
+        <td ng-style="{'background-color': route.attributes.color}"></td>
+        <td>{{route.attributes.grade}}</td>
+        <td>{{route.attributes.setterComments}}</td>
         <td>{{route.id}}</td>
         <td>
           <div class="checkbox">

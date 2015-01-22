@@ -145,6 +145,7 @@ angular.module('parseService', [])
             getRoutes: function(callback){
                 var query = new Parse.Query("Route");
                 query.include("setter");
+                query.limit(1000);
                 query.find({
                     success: function(results){
                         callback(results);
@@ -171,6 +172,23 @@ angular.module('parseService', [])
                 });
             },
 
+            //Get Route By User
+            getRoutesByUser: function(user, callback){
+                var query = new Parse.Query("Route");
+                query.equalTo("setter", user);
+                query.limit(1000);
+                query.find({
+                    success: function(results){
+                        callback(results);
+                    },
+                    error: function(error){
+                        console.log(error.message);
+                        callback(error);
+                    }
+                });
+            },
+
+
 
             //Create Route
             createRoute: function(){
@@ -185,10 +203,27 @@ angular.module('parseService', [])
                 route.set("createdBy", user);
                 route.set("gymCreatedAt", gym);
                 route.set("holds", []);
+                route.set("crimps", "0");
+                route.set("jugs", "0");
+                route.set("pinches", "0");
+                route.set("slopers", "0");
+                route.set("edges", "0");
 
                 return route;
             },
 
+
+            //Delete Route
+            deleteRoute: function(route, callback){
+                route.destroy({
+                    success: function(results){
+                        callback(results);
+                    },
+                    error: function(route, error){
+                        callback(error);
+                    }
+                });
+            },
 
             //***** Holds ******//
 
@@ -196,6 +231,7 @@ angular.module('parseService', [])
             //Get Holds
             getHolds: function(callback){
                 var query = new Parse.Query("Hold");
+                query.limit(1000);
                 query.find({
                     success: function(results){
                         callback(results);
@@ -223,19 +259,34 @@ angular.module('parseService', [])
 
             //Create Hold
             createHold: function(){
+                var user = Parse.User.current();
                 var hold = new Hold();
                 hold.set("name", "");
                 hold.set("size", "");
                 hold.set("type", "");
                 hold.set("holdId", "");
-                hold.set("colorHex", "");
-                hold.set("colorName", "");
+                hold.set("color", "");
                 hold.set("description", "");
+                hold.set("createdBy", user);
+                hold.set("gymCreatedAt", user.get('currentGym'));
 
                 return hold;
             },
 
             //********* Users ***********//
+
+            //Get All Users
+            getUsers: function(callback){
+                var query = new Parse.Query("User");
+                query.find({
+                    success: function(results){
+                        callback(results);
+                    },
+                    error: function(error){
+                        callback(error);
+                    }
+                });
+            },
 
             //Get Users by Gym
             getUsersByGym: function(gym, callback){
@@ -249,7 +300,28 @@ angular.module('parseService', [])
                         callback(error);
                     }
                 });
-            }
+            },
+
+            //Get User by Id
+            getUserById: function(id, callback){
+                var query = new Parse.Query("User");
+                query.get(id, {
+                    success: function(results){
+                        callback(results);
+                    },
+                    error: function(error){
+                        callback(error);
+                    }
+                });
+            },
+
+            //Delet User
+            deleteUser: function(user, callback){
+                //var query = new Parse.Query("User");
+            },
+
+
+
 
         };
         return ParseService;

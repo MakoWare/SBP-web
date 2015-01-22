@@ -2,13 +2,14 @@
 var RoutesCtrl = function($scope, $location, ParseService, GlobalService){
     $scope.init = function(){
         console.log("RoutesCtrl");
-
+        GlobalService.showSpinner();
         $scope.getRoutes();
     },
 
     //Get Routes
     $scope.getRoutes = function(){
         ParseService.getRoutes(function(results){
+            GlobalService.dismissSpinner();
             $scope.routes = results;
             console.log(results);
             $scope.$apply();
@@ -27,8 +28,11 @@ var RoutesCtrl = function($scope, $location, ParseService, GlobalService){
 
     //Delete Route
     $scope.deleteRoute = function(route){
+        GlobalService.showSpinner();
         ParseService.deleteRoute(route, function(results){
+            $scope.getRoutes();
 
+            $scope.$apply();
         });
     };
 

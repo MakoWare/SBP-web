@@ -76,11 +76,11 @@ var WallCtrl = function($scope, $location, $modal, ParseService, GlobalService){
         console.log($scope.wall);
         wall.set("name", wall.attributes.name);
         wall.set("routes", wall.attributes.routes);
-
         wall.save({
             success: function(wall){
                 GlobalService.dismissSpinner();
                 $location.path("/walls");
+                $scope.$apply();
             },
             error: function(wall, error){
                 alert(GlobalService.errorMessage + error.message);

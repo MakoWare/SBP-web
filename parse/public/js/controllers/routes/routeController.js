@@ -21,7 +21,7 @@ var RouteCtrl = function($scope, $location, $modal, ParseService, GlobalService)
     $scope.getRoute = function(id){
         ParseService.getRouteById(id, function(results){
             $scope.route = results;
-            console.log(results);
+            $scope.title = results.attributes.name;
             $scope.$apply();
             $scope.setUpRoute();
         });

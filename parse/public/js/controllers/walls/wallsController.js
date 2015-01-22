@@ -2,7 +2,7 @@
 var WallsCtrl = function($scope, $location, ParseService, GlobalService){
     $scope.init = function(){
         console.log("WallsCtrl");
-
+        GlobalService.showSpinner();
         $scope.currentUser = ParseService.getCurrentUser();
         $scope.getWallsByGym();
     },
@@ -11,6 +11,7 @@ var WallsCtrl = function($scope, $location, ParseService, GlobalService){
     $scope.getWallsByGym = function(){
         var gym = $scope.currentUser.get("currentGym");
         ParseService.getWallsByGym(gym, function(results){
+            GlobalService.dismissSpinner();
             console.log(results);
             $scope.walls = results;
             $scope.$apply();
@@ -23,7 +24,7 @@ var WallsCtrl = function($scope, $location, ParseService, GlobalService){
     };
 
     //Edit Wall
-    $scope.editWall = function(wall){
+    $scope.viewWall = function(wall){
         $location.path("/walls/" + wall.id);
     };
 
