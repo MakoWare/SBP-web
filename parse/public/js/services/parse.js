@@ -41,6 +41,7 @@ angular.module('parseService', [])
             createGym: function(){
                 var gym = new Gym();
                 gym.set("name", "");
+                gym.set("walls", []);
                 return gym;
             },
 
@@ -57,7 +58,6 @@ angular.module('parseService', [])
                 });
             },
 
-
             //Get  Gym By Id
             getGymById: function(id, callback){
                 var query = new Parse.Query("Gym");
@@ -69,11 +69,6 @@ angular.module('parseService', [])
                         callback(error);
                     }
                 });
-            },
-
-            //Delete  Gym  TODO
-            getGymById: function(gym, callback){
-
             },
 
 

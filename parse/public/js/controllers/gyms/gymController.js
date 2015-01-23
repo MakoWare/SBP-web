@@ -4,6 +4,7 @@
 var GymCtrl = function($scope, $location, ParseService, GlobalService){
     $scope.init = function(){
         console.log("GymCtrl");
+        $scope.tab = "routeDistribution";
 
         var last = $location.url().split("/")[$location.url().split("/").length -1];
         if(last == "create"){
@@ -24,9 +25,26 @@ var GymCtrl = function($scope, $location, ParseService, GlobalService){
     //Get Gym
     $scope.getGym = function(id){
         ParseService.getGymById(id, function(results){
+            console.log(results);
             $scope.gym = results;
-            $scope.title = "Update " +  results.get('name');
+            $scope.title = results.get('name');
+            $scope.$apply();
         });
+    };
+
+    //Tab Clicked
+    $scope.tabClicked = function(tab){
+        if(tab == "routeDistribution"){
+            $scope.generateRoutesGraph();
+            $scope.tab = "routeDistribution";
+        } else if(tab == "routes"){
+            $scope.tab = "routes";
+        } else if(tab == "holdDistribution"){
+            $scope.generateHoldsDistroGraph();
+            $scope.tab = "holdDistribution";
+        } else if(tab == "holds"){
+            $scope.tab = "holds";
+        }
     };
 
     //Save Gym

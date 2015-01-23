@@ -1,25 +1,79 @@
 <div class="container">
-  <div class="page-header" style="margin-top: 0px">
-    <h2 style="margin-top: 0px">{{title}}</h2>
+  <div class="row">
+    <div class="col-md-12">
+      <h3 style="margin-top: 0px">{{title}}</h3>
+    </div>
+  </div>
+
+  <ul class="nav nav-tabs nav-justified">
+    <li role="presentation" ng-class="{'active':  tab == 'routeDistribution'}"><a ng-click="tabClicked('routeDistribution')">Route Distribution</a></li>
+    <li role="presentation" ng-class="{'active':  tab == 'routes'}"><a ng-click="tabClicked('routes')">Routes on Wall</a></li>
+    <li role="presentation" ng-class="{'active':  tab == 'holdDistribution'}"><a ng-click="tabClicked('holdDistribution')">Hold Distribution</a></li>
+    <li role="presentation" ng-class="{'active':  tab == 'holds'}"><a ng-click="tabClicked('holds')">Holds on Wall</a></li>
+  </ul>
+
+  <div ng-show="tab == 'routeDistribution'">
+    <div class="row">
+      <div class="col-md-12">
+        <div style="font-size: 18px" class="ct-chart ct-octave" id="routeDistribution"></div>
+      </div>
+    </div>
+  </div>
+
+
+  <div ng-show="tab == 'routes'">
+    <div class="row" style="margin-bottom: 5px; margin-top: 15px;">
+      <div class="col-md-10">
+        <h4 style="margin-top: 10px">Routes on Wall</h4>
+      </div>
+      <div class="col-md-2 pull-right">
+        <button class="btn btn-success" ng-click="createModal()">Add Routes</button>
+      </div>
+    </div>
+
+    <table class="table table-bordered">
+      <thead>
+        <tr>
+          <td>Name</td>
+          <td>Color</td>
+          <td>Difficulty</td>
+          <td>Setter's Comments</td>
+          <td>Setter</td>
+          <td>ID</td>
+          <td>View Route</td>
+          <td>Remove</td>
+        </tr>
+      </thead>
+      <tbody>
+        <tr ng-repeat="route in wall.attributes.routes">
+          <td>{{route.attributes.name}}</td>
+          <td ng-style="{'background-color': route.attributes.color}"></td>
+          <td>{{route.attributes.grade}}</td>
+          <td>{{route.attributes.setterComments}}</td>
+          <td>{{route.attributes.setter.attributes.username.toUpperCase()}}</td>
+          <td>{{route.id}}</td>
+
+          <td><button class="btn btn-primary" ng-click="viewRoute(route)">View</button></td>       <td><button class="btn btn-danger" ng-click="removeRouteFromWall(route)">Remove</button></td>
+        </tr>
+      <tbody>
+    </table>
+
+
+    <div class="page-header"></div>
+    <div class="row">
+      <div class="col-md-1 col-md-offset-11">
+        <button class="btn btn-primary" ng-disabled="gymForm.$invalid" ng-click="saveGym()">Save</button>
+      </div>
+    </div>
   </div>
 
 
 
-  <form name="gymForm">
+  <div ng-show="tab == 'holdDistribution'">
     <div class="row">
-      <div class="col-md-4">
-        <input ng-model="gym.attributes.name" type="text" name="name" class="form-control" id="name" placeholder="Name" required/>
+      <div class="col-md-12">
+        <div style="font-size: 18px" class="ct-chart ct-octave" id="holdDistribution"></div>
       </div>
-    </div>
-
-  </form>
-
-
-
-  <div class="page-header"></div>
-  <div class="row">
-    <div class="col-md-1 col-md-offset-11">
-      <button class="btn btn-primary" ng-disabled="gymForm.$invalid" ng-click="saveGym()">Save</button>
     </div>
   </div>
 </div>

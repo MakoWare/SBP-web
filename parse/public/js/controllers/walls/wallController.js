@@ -35,7 +35,6 @@ var WallCtrl = function($scope, $location, $modal, ParseService, GlobalService){
         $scope.generateRoutesGraph();
     };
 
-
     //Create Modal
     $scope.createModal = function(){
         var modalInstance = $modal.open({

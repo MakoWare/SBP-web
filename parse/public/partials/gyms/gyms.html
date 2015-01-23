@@ -11,6 +11,7 @@
     <thead>
       <tr>
         <td>Name</td>
+        <td>Walls</td>
         <td>Set as Working Gym</td>
         <td>View</td>
       </tr>
@@ -18,8 +19,9 @@
     <tbody>
       <tr ng-repeat="gym in gyms">
         <td>{{gym.attributes.name}}</td>
+        <td>{{gym.attributes.walls.length}}</td>
         <td><button class="btn btn-default" ng-click="setGym(gym)">Work in this Gym</button></td>
-        <td><button class="btn btn-info">View</button></td>
+        <td><button class="btn btn-info" ng-click="viewGym(gym)">View</button></td>
       </tr>
     <tbody>
   </table>
