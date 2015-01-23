@@ -7,12 +7,14 @@
 
 
   <ul class="nav nav-tabs nav-justified">
-    <li role="presentation" ng-class="{'active':  tab == 'distribution'}"><a ng-click="tabClicked('distribution')">Route Distribution</a></li>
+    <li role="presentation" ng-class="{'active':  tab == 'routeDistribution'}"><a ng-click="tabClicked('routeDistribution')">Route Distribution</a></li>
     <li role="presentation" ng-class="{'active':  tab == 'routes'}"><a ng-click="tabClicked('routes')">Routes on Wall</a></li>
+    <li role="presentation" ng-class="{'active':  tab == 'holdDistribution'}"><a ng-click="tabClicked('holdDistribution')">Hold Distribution</a></li>
+    <li role="presentation" ng-class="{'active':  tab == 'holds'}"><a ng-click="tabClicked('holds')">Holds on Wall</a></li>
   </ul>
 
 
-  <div ng-show="tab == 'distribution'">
+  <div ng-show="tab == 'routeDistribution'">
     <div class="row">
       <div class="col-md-12">
         <div style="font-size: 18px" class="ct-chart ct-octave" id="routeDistribution"></div>
@@ -22,7 +24,7 @@
 
 
   <div ng-show="tab == 'routes'">
-    <div class="row" style="margin-bottom: 5px">
+    <div class="row" style="margin-bottom: 5px; margin-top: 15px;">
       <div class="col-md-10">
         <h4 style="margin-top: 10px">Routes on Wall</h4>
       </div>
@@ -66,6 +68,17 @@
       </div>
     </div>
   </div>
+
+
+
+  <div ng-show="tab == 'holdDistribution'">
+    <div class="row">
+      <div class="col-md-12">
+        <div style="font-size: 18px" class="ct-chart ct-octave" id="holdDistribution"></div>
+      </div>
+    </div>
+  </div>
+
 
 
 
