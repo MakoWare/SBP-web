@@ -6,25 +6,32 @@
   </div>
 
 
-          <div class="ct-chart ct-perfect-fourth"></div>
 
-  <tabset justified="true" id="tabSet">
-    <tab heading="Setter's Stats">
+  <ul class="nav nav-tabs nav-justified">
+    <li role="presentation" ng-class="{'active':  tab == 'general'}"><a ng-click="tabClicked('general')">General Information</a></li>
+    <li role="presentation" ng-class="{'active':  tab == 'routes'}"><a ng-click="tabClicked('routes')">Routes Set</a></li>
+    <li role="presentation" ng-class="{'active':  tab == 'holds'}"><a ng-click="tabClicked('holds')">Hold Usage</a></li>
+  </ul>
 
-      <div class="row">
-        <div class="col-md-12">
 
-        </div>
+  <div ng-show="tab == 'general'">
+
+
+  </div>
+
+
+  <div ng-show="tab == 'routes'">
+    <div class="row">
+      <div class="col-md-12">
+        <div style="font-size: 18px" class="ct-chart ct-octave" id="general"></div>
       </div>
+    </div>
+  </div>
 
 
+  <div ng-show="tab == 'holds'">
+    Holds
+  </div>
 
 
-    </tab>
-    <tab heading="Setter's Routes">
-
-
-
-    </tab>
-  </tabset>
 </div>

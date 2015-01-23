@@ -114,6 +114,7 @@ angular.module('parseService', [])
             getWallById: function(id, callback){
                 var query = new Parse.Query("Wall");
                 query.include("routes");
+                query.include("routes.setter");
                 query.get(id, {
                     success: function(results){
                         callback(results);

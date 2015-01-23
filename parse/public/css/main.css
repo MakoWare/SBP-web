@@ -14,8 +14,11 @@ ul.nav li.dropdown:hover > ul.dropdown-menu {
     display: block;
     margin: 0;
 }
+.ct-label {
+    font-size: 1.4rem !important;
+}
 
-.chart {
-    width: 500px;
-    height: 500px;
+.grayBar {
+    stroke: gray;
+    fill: gray;
 }

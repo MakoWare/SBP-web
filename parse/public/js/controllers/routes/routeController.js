@@ -2,11 +2,13 @@
 var RouteCtrl = function($scope, $location, $modal, ParseService, GlobalService){
     $scope.init = function(){
         console.log("RouteCtrl");
+
         var last = $location.url().split("/")[$location.url().split("/").length -1];
         if(last == "create"){
             $scope.title = "New Route";
             $scope.createRoute();
         } else {
+            GlobalService.showSpinner();
             $scope.getRoute(last);
         }
     },
@@ -20,6 +22,7 @@ var RouteCtrl = function($scope, $location, $modal, ParseService, GlobalService)
     //Get Route
     $scope.getRoute = function(id){
         ParseService.getRouteById(id, function(results){
+            GlobalService.dismissSpinner();
             $scope.route = results;
             $scope.title = results.attributes.name;
             $scope.$apply();
