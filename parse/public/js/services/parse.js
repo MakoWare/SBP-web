@@ -48,6 +48,9 @@ angular.module('parseService', [])
             //Get Gyms
             getGyms: function(callback){
                 var query = new Parse.Query("Gym");
+                query.include("walls");
+                query.include("walls.routes");
+                query.include("walls.routes.holds");
                 query.find({
                     success: function(results){
                         callback(results);
