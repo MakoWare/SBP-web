@@ -4,7 +4,7 @@
 var GymCtrl = function($scope, $location, $modal, ParseService, GlobalService){
     $scope.init = function(){
         console.log("GymCtrl");
-        $scope.tab = "routeDistribution";
+        $scope.tab = "walls";
 
         var last = $location.url().split("/")[$location.url().split("/").length -1];
         if(last == "create"){
@@ -61,6 +61,7 @@ var GymCtrl = function($scope, $location, $modal, ParseService, GlobalService){
 
     //Create Modal
     $scope.createModal = function(){
+        console.log("createModal");
         var modalInstance = $modal.open({
             templateUrl: 'partials/walls/wallsTable.html',
             controller: 'WallsTableCtrl',

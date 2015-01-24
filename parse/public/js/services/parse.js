@@ -64,6 +64,9 @@ angular.module('parseService', [])
             //Get  Gym By Id
             getGymById: function(id, callback){
                 var query = new Parse.Query("Gym");
+                query.include("walls");
+                query.include("walls.routes");
+                query.include("walls.routes.holds");
                 query.get(id, {
                     success: function(results){
                         callback(results);
