@@ -3,6 +3,7 @@
 //Gym Controller
 var GymCtrl = function($scope, $location, $modal, ParseService, GlobalService){
     $scope.init = function(){
+
         console.log("GymCtrl");
         $scope.tab = "walls";
 
@@ -11,6 +12,7 @@ var GymCtrl = function($scope, $location, $modal, ParseService, GlobalService){
             $scope.title = "New Gym";
             $scope.createGym();
         } else {
+            GlobalService.showSpinner();
             $scope.getGym(last);
         }
     };
@@ -41,6 +43,7 @@ var GymCtrl = function($scope, $location, $modal, ParseService, GlobalService){
                     }
                 });
             });
+            GlobalService.dismissSpinner();
 
             $scope.$apply();
         });

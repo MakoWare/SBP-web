@@ -128,99 +128,99 @@ var WallCtrl = function($scope, $location, $modal, ParseService, GlobalService){
 
         var routes = $scope.wall.attributes.routes;
         routes.forEach(function(route){
-            switch(route.attributes.grade){
-            case "0":
-                if(route.attributes.color == "gray"){
-                    v0.gray++;
-                } else if(route.attributes.color == "yellow"){
-                    v0.yellow++;
-                }
-                break;
-            case "1":
-                v1.yellow++;
-                break;
-            case "2":
-                if(route.attributes.color == "yellow"){
-                    v2.yellow++;
-                } else if(route.attributes.rolor == "green"){
-                    v2.green++;
-                }
-                break;
-            case "3":
-                if(route.attributes.color == "yellow"){
-                    v3.yellow++;
-                } else if(route.attributes.color == "green") {
-                    v3.green++;
-                } else if(route.attributes.color == "red") {
-                    v3.red++;
-                }
-                break;
-            case "4":
-                if(route.attributes.color == "blue"){
-                    v4.blue++;
-                } else if(route.attributes.color == "green") {
-                    v4.green++;
-                } else if(route.attributes.color == "red") {
-                    v4.red++;
-                }
-                break;
-            case "5":
-                if(route.attributes.color == "blue"){
-                    v5.blue++;
-                } else if(route.attributes.color == "orange") {
-                    v5.orange++;
-                } else if(route.attributes.color == "red") {
-                    v5.red++;
-                }
-                break;
-            case "6":
-                if(route.attributes.color == "blue"){
-                    v6.blue++;
-                } else if(route.attributes.color == "orange") {
-                    v6.orange++;
-                } else if(route.attributes.color == "purple") {
-                    v6.purple++;
-                }
-                break;
-            case "7":
-                if(route.attributes.color == "purple"){
-                    v7.purple++;
-                } else if(route.attributes.color == "orange") {
-                    v7.orange++;
-                }
-                break;
-            case "8":
-                if(route.attributes.color == "purple"){
-                    v8.purple++;
-                } else if(route.attributes.color == "black") {
-                    v8.black++;
-                }
-                break;
-            case "9":
-                v9.black++;
-                break;
-            case "10":
-                v10.black++;
-                break;
-            case "11":
-                v11.black++;
-                break;
-            case "12":
-                v12.black++;
-                break;
-            case "13":
-                v13.black++;
-                break;
-            case "14":
-                v14.black++;
-                break;
-            case "15":
-                v15.black++;
-                break;
-            };
-
+            if(route){
+                switch(route.attributes.grade){
+                case "0":
+                    if(route.attributes.color == "gray"){
+                        v0.gray++;
+                    } else if(route.attributes.color == "yellow"){
+                        v0.yellow++;
+                    }
+                    break;
+                case "1":
+                    v1.yellow++;
+                    break;
+                case "2":
+                    if(route.attributes.color == "yellow"){
+                        v2.yellow++;
+                    } else if(route.attributes.rolor == "green"){
+                        v2.green++;
+                    }
+                    break;
+                case "3":
+                    if(route.attributes.color == "yellow"){
+                        v3.yellow++;
+                    } else if(route.attributes.color == "green") {
+                        v3.green++;
+                    } else if(route.attributes.color == "red") {
+                        v3.red++;
+                    }
+                    break;
+                case "4":
+                    if(route.attributes.color == "blue"){
+                        v4.blue++;
+                    } else if(route.attributes.color == "green") {
+                        v4.green++;
+                    } else if(route.attributes.color == "red") {
+                        v4.red++;
+                    }
+                    break;
+                case "5":
+                    if(route.attributes.color == "blue"){
+                        v5.blue++;
+                    } else if(route.attributes.color == "orange") {
+                        v5.orange++;
+                    } else if(route.attributes.color == "red") {
+                        v5.red++;
+                    }
+                    break;
+                case "6":
+                    if(route.attributes.color == "blue"){
+                        v6.blue++;
+                    } else if(route.attributes.color == "orange") {
+                        v6.orange++;
+                    } else if(route.attributes.color == "purple") {
+                        v6.purple++;
+                    }
+                    break;
+                case "7":
+                    if(route.attributes.color == "purple"){
+                        v7.purple++;
+                    } else if(route.attributes.color == "orange") {
+                        v7.orange++;
+                    }
+                    break;
+                case "8":
+                    if(route.attributes.color == "purple"){
+                        v8.purple++;
+                    } else if(route.attributes.color == "black") {
+                        v8.black++;
+                    }
+                    break;
+                case "9":
+                    v9.black++;
+                    break;
+                case "10":
+                    v10.black++;
+                    break;
+                case "11":
+                    v11.black++;
+                    break;
+                case "12":
+                    v12.black++;
+                    break;
+                case "13":
+                    v13.black++;
+                    break;
+                case "14":
+                    v14.black++;
+                    break;
+                case "15":
+                    v15.black++;
+                    break;
+                };
+            }
         });
-
 
         var data = {
             labels: ['v0','v1', 'v2', 'v3', 'V4', 'v5','v6', 'v7', 'v8', 'V9', 'v10','v11', 'v12', 'v13', 'V14', 'v15'],
@@ -353,64 +353,66 @@ var WallCtrl = function($scope, $location, $modal, ParseService, GlobalService){
 
         var routes = $scope.wall.attributes.routes;
         routes.forEach(function(route){
-            switch(route.attributes.color){
-            case "gray":
-                gray.crimp += parseInt(route.attributes.crimps);
-                gray.pinch += parseInt(route.attributes.pinches);
-                gray.jug += parseInt(route.attributes.jugs);
-                gray.edge += parseInt(route.attributes.edges);
-                gray.sloper += parseInt(route.attributes.slopers);
-                break;
-            case "yellow":
-                yellow.crimp += parseInt(route.attributes.crimps);
-                yellow.pinch += parseInt(route.attributes.pinches);
-                yellow.jug += parseInt(route.attributes.jugs);
-                yellow.edge += parseInt(route.attributes.edges);
-                yellow.sloper += parseInt(route.attributes.slopers);
-                break;
-            case "green":
-                green.crimp += parseInt(route.attributes.crimps);
-                green.pinch += parseInt(route.attributes.pinches);
-                green.jug += parseInt(route.attributes.jugs);
-                green.edge += parseInt(route.attributes.edges);
-                green.sloper += parseInt(route.attributes.slopers);
-                break;
-            case "red":
-                red.crimp += parseInt(route.attributes.crimps);
-                red.pinch += parseInt(route.attributes.pinches);
-                red.jug += parseInt(route.attributes.jugs);
-                red.edge += parseInt(route.attributes.edges);
-                red.sloper += parseInt(route.attributes.slopers);
-                break;
-            case "blue":
-                blue.crimp += parseInt(route.attributes.crimps);
-                blue.pinch += parseInt(route.attributes.pinches);
-                blue.jug += parseInt(route.attributes.jugs);
-                blue.edge += parseInt(route.attributes.edges);
-                blue.sloper += parseInt(route.attributes.slopers);
-                break;
-            case "orange":
-                orange.crimp += parseInt(route.attributes.crimps);
-                orange.pinch += parseInt(route.attributes.pinches);
-                orange.jug += parseInt(route.attributes.jugs);
-                orange.edge += parseInt(route.attributes.edges);
-                orange.sloper += parseInt(route.attributes.slopers);
-                break;
-            case "purple":
-                purple.crimp += parseInt(route.attributes.crimps);
-                purple.pinch += parseInt(route.attributes.pinches);
-                purple.jug += parseInt(route.attributes.jugs);
-                purple.edge += parseInt(route.attributes.edges);
-                purple.sloper += parseInt(route.attributes.slopers);
-                break;
-            case "black":
-                black.crimp += parseInt(route.attributes.crimps);
-                black.pinch += parseInt(route.attributes.pinches);
-                black.jug += parseInt(route.attributes.jugs);
-                black.edge += parseInt(route.attributes.edges);
-                black.sloper += parseInt(route.attributes.slopers);
-                break;
-            };
+            if(route){
+                switch(route.attributes.color){
+                case "gray":
+                    gray.crimp += parseInt(route.attributes.crimps);
+                    gray.pinch += parseInt(route.attributes.pinches);
+                    gray.jug += parseInt(route.attributes.jugs);
+                    gray.edge += parseInt(route.attributes.edges);
+                    gray.sloper += parseInt(route.attributes.slopers);
+                    break;
+                case "yellow":
+                    yellow.crimp += parseInt(route.attributes.crimps);
+                    yellow.pinch += parseInt(route.attributes.pinches);
+                    yellow.jug += parseInt(route.attributes.jugs);
+                    yellow.edge += parseInt(route.attributes.edges);
+                    yellow.sloper += parseInt(route.attributes.slopers);
+                    break;
+                case "green":
+                    green.crimp += parseInt(route.attributes.crimps);
+                    green.pinch += parseInt(route.attributes.pinches);
+                    green.jug += parseInt(route.attributes.jugs);
+                    green.edge += parseInt(route.attributes.edges);
+                    green.sloper += parseInt(route.attributes.slopers);
+                    break;
+                case "red":
+                    red.crimp += parseInt(route.attributes.crimps);
+                    red.pinch += parseInt(route.attributes.pinches);
+                    red.jug += parseInt(route.attributes.jugs);
+                    red.edge += parseInt(route.attributes.edges);
+                    red.sloper += parseInt(route.attributes.slopers);
+                    break;
+                case "blue":
+                    blue.crimp += parseInt(route.attributes.crimps);
+                    blue.pinch += parseInt(route.attributes.pinches);
+                    blue.jug += parseInt(route.attributes.jugs);
+                    blue.edge += parseInt(route.attributes.edges);
+                    blue.sloper += parseInt(route.attributes.slopers);
+                    break;
+                case "orange":
+                    orange.crimp += parseInt(route.attributes.crimps);
+                    orange.pinch += parseInt(route.attributes.pinches);
+                    orange.jug += parseInt(route.attributes.jugs);
+                    orange.edge += parseInt(route.attributes.edges);
+                    orange.sloper += parseInt(route.attributes.slopers);
+                    break;
+                case "purple":
+                    purple.crimp += parseInt(route.attributes.crimps);
+                    purple.pinch += parseInt(route.attributes.pinches);
+                    purple.jug += parseInt(route.attributes.jugs);
+                    purple.edge += parseInt(route.attributes.edges);
+                    purple.sloper += parseInt(route.attributes.slopers);
+                    break;
+                case "black":
+                    black.crimp += parseInt(route.attributes.crimps);
+                    black.pinch += parseInt(route.attributes.pinches);
+                    black.jug += parseInt(route.attributes.jugs);
+                    black.edge += parseInt(route.attributes.edges);
+                    black.sloper += parseInt(route.attributes.slopers);
+                    break;
+                };
+            }
         });
 
         console.log(blue);

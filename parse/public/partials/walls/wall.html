@@ -10,7 +10,6 @@
     <li role="presentation" ng-class="{'active':  tab == 'routeDistribution'}"><a ng-click="tabClicked('routeDistribution')">Route Distribution</a></li>
     <li role="presentation" ng-class="{'active':  tab == 'routes'}"><a ng-click="tabClicked('routes')">Routes on Wall</a></li>
     <li role="presentation" ng-class="{'active':  tab == 'holdDistribution'}"><a ng-click="tabClicked('holdDistribution')">Hold Distribution</a></li>
-    <li role="presentation" ng-class="{'active':  tab == 'holds'}"><a ng-click="tabClicked('holds')">Holds on Wall</a></li>
   </ul>
 
 
@@ -60,16 +59,12 @@
       <tbody>
     </table>
 
-
-    <div class="page-header"></div>
     <div class="row">
       <div class="col-md-1 col-md-offset-11">
         <button class="btn btn-primary" ng-disabled="wallForm.$invalid" ng-click="saveWall()">Save</button>
       </div>
     </div>
   </div>
-
-
 
   <div ng-show="tab == 'holdDistribution'">
     <div class="row">
@@ -78,8 +73,5 @@
       </div>
     </div>
   </div>
-
-
-
 
 </div>

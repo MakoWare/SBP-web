@@ -1,14 +1,52 @@
-** TODO Spend the day understanding what the route setters need
+* ACLs
+
+** TODO Make Them
+
+* User
+
+** TODO User Sign ups
+
+* Gym
+
+** TODO Make Tables Responsive
+
+* Wall
+
+** TODO Search Functionality on all Tables
+** TODO Add Wall to the Route when saved
+
+** TODO Holds on Wall
+
+** TODO Edit Wall:  Name and Picture
+
+
+* Routes
+
+** TODO Search Functionality on all Tables
+
+** TODO Be able to Select Wall Route will be on
+
+** TODO Safe Delete - remove from Wall
+
+
+* First Day with SBP
+
+** DONE Spend the day understanding what the route setters need
+   CLOSED: [2015-01-24 Sat 15:16]
 * Individual Questions
 
-** TODO What kind of Stats wolud you like to know about the Gym/Walls/Routes/Holds?
-** TODO Gym?
+** DONE What kind of Stats wolud you like to know about the Gym/Walls/Routes/Holds?
+   CLOSED: [2015-01-24 Sat 15:16]
+** DONE Gym?
+   CLOSED: [2015-01-24 Sat 15:16]
 
 
-** TODO Walls?
+** DONE Walls?
+   CLOSED: [2015-01-24 Sat 15:16]
 
 
-** TODO Routes?
+** DONE Routes?
+   CLOSED: [2015-01-24 Sat 15:16]
    Info about circuits as a whole.
    How many tops? - users
    High point
@@ -16,18 +54,23 @@
 
    User feedback - SandBag FeatherBag
 
-** TODO Holds?
+** DONE Holds?
+   CLOSED: [2015-01-24 Sat 15:16]
 
-** TODO Setters?
+** DONE Setters?
+   CLOSED: [2015-01-24 Sat 15:16]
    How many problems they set.
    What grade they set.
 
 
-** TODO Metrix Gym/Walls/Routes/Holds?
-** TODO Gym?
+** DONE Metrix Gym/Walls/Routes/Holds?
+   CLOSED: [2015-01-24 Sat 15:16]
+** DONE Gym?
+   CLOSED: [2015-01-24 Sat 15:16]
 
 
-** TODO Walls?
+** DONE Walls?
+   CLOSED: [2015-01-24 Sat 15:16]
 
 
 ** DONE Routes?
@@ -43,7 +86,8 @@
    Yo-Yo
    Circus Trick
 
-** TODO Holds?
+** DONE Holds?
+   CLOSED: [2015-01-24 Sat 15:16]
 
 
 ** DONE How many unique holds are there?
@@ -59,9 +103,8 @@
    CLOSED: [2015-01-20 Tue 08:50]
    IPAD
 
-** TODO What features are most important to you?
-
-
+** DONE What features are most important to you?
+   CLOSED: [2015-01-24 Sat 15:16]
 
 * Early Morning plans with Christine
 
@@ -73,7 +116,6 @@
 # Major discussion point is route density
 
 3. Should know all routes that need to be set by the time she's done
-
 
 * Morning overview with Travis
 

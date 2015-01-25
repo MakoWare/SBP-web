@@ -12,7 +12,6 @@ var RoutesCtrl = function($scope, $location, ParseService, GlobalService){
         ParseService.getRoutes(function(results){
             GlobalService.dismissSpinner();
             $scope.routes = results;
-            console.log(results);
             $scope.$apply();
             $scope.getSetters();
         });
