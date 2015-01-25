@@ -1,8 +1,22 @@
 <div class="container">
 
   <div class="row">
-    <div class="col-md-8">
+    <div class="col-md-4">
       <h2 style="margin: 0px">Routes</h2>
+    </div>
+
+    <div class="col-md-5">
+      <form class="form-inline">
+        <div class="form-group">
+          <label for="exampleInputName2">Created On</label>
+          <p class="input-group">
+            <input type="text" class="form-control" datepicker-popup="{{format}}" ng-model="dt" is-open="opened" datepicker-options="dateOptions" close-text="Close" ng-change="searchRoutes()"/>
+            <span class="input-group-btn">
+              <button type="button" class="btn btn-default" ng-click="open($event)"><i class="glyphicon glyphicon-calendar"></i></button>
+            </span>
+          </p>
+        </div>
+      </form>
     </div>
 
     <div class="col-md pull-right" style="padding-right: 15px; padding-bottom: 10px;">
@@ -10,19 +24,19 @@
     </div>
   </div>
 
-
   <table class="table table-bordered">
     <thead>
       <tr>
         <td><a href="" ng-click="predicate = 'attributes.name'; reverse=!reverse">Name</a></td>
         <td><a href="" ng-click="predicate = 'attributes.color'; reverse=!reverse">Color</a></td>
         <td><a href="" ng-click="predicate = 'attributes.grade'; reverse=!reverse">Grade</a></td>
-        <td><a href="" ng-click="predicate = 'attributes.comments'; reverse=!reverse">Setter's Comments</a></td>
+        <td><a href="" ng-click="predicate = 'attributes.setterComments'; reverse=!reverse">Setter's Comments</a></td>
         <td><a href="" ng-click="predicate = 'attributes.risk'; reverse=!reverse">Risk</a></td>
         <td><a href="" ng-click="predicate = 'attributes.intensity'; reverse=!reverse">Intensity</a></td>
         <td><a href="" ng-click="predicate = 'attributes.complexity'; reverse=!reverse">Complexity</a></td>
         <td><a href="" ng-click="predicate = 'attributes.status'; reverse=!reverse">Status</a></td>
         <td><a href="" ng-click="predicate = 'attributes.setter.attributes.username'; reverse=!reverse">Setter</a></td>
+        <td><a href="" ng-click="predicate = 'createdAt'; reverse=!reverse">Created On</a></td>
         <td>View</td>
       </tr>
     </thead>
@@ -48,6 +62,7 @@
             <option></option>
           </select>
         </td>
+        <td>{{(route.createdAt.getMonth() + 1) + "/" + route.createdAt.getDate() + "/" + route.createdAt.getFullYear()}}</td>
         <td><button class="btn btn-primary" ng-click="editRoute(route)">View</button></td>
       </tr>
     <tbody>

@@ -3,12 +3,13 @@ var RoutesCtrl = function($scope, $location, ParseService, GlobalService){
     $scope.init = function(){
         console.log("RoutesCtrl");
         $scope.predicate = "attributes.grade";
-        GlobalService.showSpinner();
         $scope.getRoutes();
+        $scope.setUpDatePicker();
     },
 
     //Get Routes
     $scope.getRoutes = function(){
+        GlobalService.showSpinner();
         ParseService.getRoutes(function(results){
             GlobalService.dismissSpinner();
             $scope.routes = results;
@@ -34,6 +35,68 @@ var RoutesCtrl = function($scope, $location, ParseService, GlobalService){
         });
     };
 
+    $scope.setUpDatePicker = function(){
+        $scope.today = function() {
+            $scope.dt = null;
+        };
+        $scope.today();
+
+        $scope.clear = function () {
+            $scope.dt = null;
+        };
+
+        // Disable weekend selection
+        $scope.disabled = function(date, mode) {
+            return ( mode === 'day' && ( date.getDay() === 0 || date.getDay() === 6 ) );
+        };
+
+
+        $scope.open = function($event) {
+            $event.preventDefault();
+            $event.stopPropagation();
+
+            $scope.opened = true;
+        };
+
+        $scope.dateOptions = {
+            formatYear: 'yy',
+            startingDay: 1
+        };
+
+        $scope.formats = ['dd-MMMM-yyyy', 'yyyy/MM/dd', 'dd.MM.yyyy', 'shortDate'];
+        $scope.format = $scope.formats[0];
+    };
+
+    //Search Routes
+    $scope.searchRoutes = function(){
+        if($scope.dt){
+            GlobalService.showSpinner();
+            var query = new Parse.Query("Route");
+
+            var beginDate = new Date($scope.dt);
+            beginDate.setHours(0, 0, 0, 0);
+
+            var endDate = new Date($scope.dt);
+            endDate.setHours(23,59,59,999);
+
+            query.greaterThan("createdAt", beginDate);
+            query.lessThan("createdAt", endDate);
+
+            query.find({
+                success: function(results){
+                    GlobalService.dismissSpinner();
+                    $scope.routes = results;
+                    $scope.getSetters();
+                    $scope.$apply();
+                },
+                error: function(error){
+                    console.log(error);
+                }
+            });
+        } else {
+            $scope.getRoutes();
+        }
+    };
 
     //Add Route
     $scope.addRoute = function(){
