@@ -4,6 +4,7 @@ var RoutesCtrl = function($scope, $location, ParseService, GlobalService){
         console.log("RoutesCtrl");
         GlobalService.showSpinner();
         $scope.getRoutes();
+        $scope.predicate = "attributes.grade";
     },
 
     //Get Routes

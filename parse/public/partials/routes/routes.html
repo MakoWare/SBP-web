@@ -14,21 +14,21 @@
   <table class="table table-bordered">
     <thead>
       <tr>
-        <td>Name</td>
-        <td>Color</td>
-        <td>Grade</td>
-        <td>Comments</td>
-        <td>Risk</td>
-        <td>Intensity</td>
-        <td>Complexity</td>
-        <td>Status</td>
-        <td>Setter</td>
+        <td><a href="" ng-click="predicate = 'attributes.name'; reverse=!reverse">Name</a></td>
+        <td><a href="" ng-click="predicate = 'attributes.color'; reverse=!reverse">Color</a></td>
+        <td><a href="" ng-click="predicate = 'attributes.grade'; reverse=!reverse">Grade</a></td>
+        <td><a href="" ng-click="predicate = 'attributes.comments'; reverse=!reverse">Setter's Comments</a></td>
+        <td><a href="" ng-click="predicate = 'attributes.risk'; reverse=!reverse">Risk</a></td>
+        <td><a href="" ng-click="predicate = 'attributes.intensity'; reverse=!reverse">Intensity</a></td>
+        <td><a href="" ng-click="predicate = 'attributes.complexity'; reverse=!reverse">Complexity</a></td>
+        <td><a href="" ng-click="predicate = 'attributes.status'; reverse=!reverse">Status</a></td>
+        <td><a href="" ng-click="predicate = 'attributes.setter.attributes.username'; reverse=!reverse">Setter</a></td>
         <td>View</td>
         <td>Delete</td>
       </tr>
     </thead>
     <tbody>
-      <tr ng-repeat="route in routes">
+      <tr ng-repeat="route in routes | orderBy:predicate:reverse | filter:search:strict">
         <td>{{route.attributes.name}}</td>
         <td ng-style="{'background-color': route.attributes.color}"></td>
         <td>{{route.attributes.grade}}</td>

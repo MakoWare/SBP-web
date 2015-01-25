@@ -59,6 +59,11 @@ var GymCtrl = function($scope, $location, $modal, ParseService, GlobalService){
         }
     };
 
+    //View Wall
+    $scope.viewWall = function(wall){
+        $location.path("/walls/" + wall.id);
+    };
+
     //Create Modal
     $scope.createModal = function(){
         console.log("createModal");
