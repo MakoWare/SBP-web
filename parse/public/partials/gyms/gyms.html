@@ -10,18 +10,18 @@
   <table class="table table-bordered">
     <thead>
       <tr>
-        <td>Name</td>
-        <td>Walls</td>
+        <td><a href="" ng-click="predicate = 'attributes.name'; reverse=!reverse">Name</a></td>
+        <td><a href="" ng-click="predicate = 'attributes.walls.length'; reverse=!reverse">Number of Walls</a></td>
         <td>Set as Working Gym</td>
         <td>View</td>
       </tr>
     </thead>
     <tbody>
-      <tr ng-repeat="gym in gyms">
+      <tr ng-repeat="gym in gyms | orderBy:predicate:reverse">
         <td>{{gym.attributes.name}}</td>
         <td>{{gym.attributes.walls.length}}</td>
         <td><button class="btn btn-default" ng-click="setGym(gym)">Work in this Gym</button></td>
-        <td><button class="btn btn-info" ng-click="viewGym(gym)">View</button></td>
+        <td><button class="btn btn-primary" ng-click="viewGym(gym)">View</button></td>
       </tr>
     <tbody>
   </table>

@@ -2,7 +2,7 @@
 var HoldsCtrl = function($scope, $location, ParseService, GlobalService){
     $scope.init = function(){
         console.log("HoldsCtrl");
-
+        $scope.predicate = "attributes.color";
         $scope.getHolds();
     },
 

@@ -13,18 +13,18 @@
     <thead>
       <tr>
         <td>Picture</td>
-        <td>Color</td>
-        <td>Name</td>
-        <td>Type</td>
-        <td>Size</td>
-        <td>Description</td>
-        <td>ID</td>
+        <td><a href="" ng-click="predicate = 'attributes.color'; reverse=!reverse">Color</a></td>
+        <td><a href="" ng-click="predicate = 'attributes.name'; reverse=!reverse">Name</a></td>
+        <td><a href="" ng-click="predicate = 'attributes.type'; reverse=!reverse">Type</a></td>
+        <td><a href="" ng-click="predicate = 'attributes.size'; reverse=!reverse">Size</a></td>
+        <td><a href="" ng-click="predicate = 'attributes.description'; reverse=!reverse">Description</a></td>
+        <td><a href="" ng-click="predicate = id; reverse=!reverse">ID</a></td>
         <td>View</td>
         <td>Delete</td>
       </tr>
     </thead>
     <tbody>
-      <tr ng-repeat="hold in holds">
+      <tr ng-repeat="hold in holds | orderBy:predicate:reverse">
         <td><img ng-src="{{hold.attributes.holdPicture.url()}}" class="img-responsive" alt="Hold Image" id="holdPicture" style="width: 100px; height: 100px;"></td>
         <td ng-style="{'background-color': hold.attributes.color}"></td>
         <td>{{hold.attributes.name}}</td>
