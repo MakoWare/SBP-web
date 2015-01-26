@@ -5,28 +5,34 @@
     </div>
   </div>
 
-
   <ul class="nav nav-tabs nav-justified">
-    <li role="presentation" ng-class="{'active':  tab == 'routeDistribution'}"><a ng-click="tabClicked('routeDistribution')">Route Distribution</a></li>
     <li role="presentation" ng-class="{'active':  tab == 'routes'}"><a ng-click="tabClicked('routes')">Routes on Wall</a></li>
+    <li role="presentation" ng-class="{'active':  tab == 'routeDistribution'}"><a ng-click="tabClicked('routeDistribution')">Route Distribution</a></li>
     <li role="presentation" ng-class="{'active':  tab == 'holdDistribution'}"><a ng-click="tabClicked('holdDistribution')">Hold Distribution</a></li>
+    <li role="presentation" ng-class="{'active':  tab == 'wallInfo'}"><a ng-click="tabClicked('wallInfo')">Wall Information</a></li>
   </ul>
-
-
-  <div ng-show="tab == 'routeDistribution'">
-    <div class="row">
-      <div class="col-md-12">
-        <div style="font-size: 18px" class="ct-chart ct-octave" id="routeDistribution"></div>
-      </div>
-    </div>
-  </div>
-
 
   <div ng-show="tab == 'routes'">
     <div class="row" style="margin-bottom: 5px; margin-top: 15px;">
-      <div class="col-md-10">
+      <div class="col-md-4">
         <h4 style="margin-top: 10px">Routes on Wall</h4>
       </div>
+
+      <div class="col-md-5">
+        <form class="form-inline">
+          <div class="form-group">
+            <label for="exampleInputName2">Set On</label>
+            <p class="input-group">
+              <input type="text" class="form-control" datepicker-popup="{{format}}" ng-model="dt" is-open="opened" datepicker-options="dateOptions" close-text="Close" ng-change="searchRoutes()"/>
+              <span class="input-group-btn">
+                <button type="button" class="btn btn-default" ng-click="open($event)"><i class="glyphicon glyphicon-calendar"></i></button>
+              </span>
+            </p>
+          </div>
+        </form>
+      </div>
+
+
       <div class="col-md-2 pull-right">
         <button class="btn btn-success" ng-click="createModal()">Add Routes</button>
       </div>
@@ -35,25 +41,32 @@
     <table class="table table-bordered">
       <thead>
         <tr>
-          <td>Name</td>
-          <td>Color</td>
-          <td>Difficulty</td>
-          <td>Setter's Comments</td>
-          <td>Setter</td>
-          <td>ID</td>
-          <td>View Route</td>
+          <td><a href="" ng-click="predicate = 'attributes.name'; reverse=!reverse">Name</a></td>
+          <td><a href="" ng-click="predicate = 'attributes.color'; reverse=!reverse">Color</a></td>
+          <td><a href="" ng-click="predicate = 'attributes.grade'; reverse=!reverse">Grade</a></td>
+          <td><a href="" ng-click="predicate = 'attributes.setterComments'; reverse=!reverse">Setter's Comments</a></td>
+          <td><a href="" ng-click="predicate = 'attributes.risk'; reverse=!reverse">Risk</a></td>
+          <td><a href="" ng-click="predicate = 'attributes.intensity'; reverse=!reverse">Intensity</a></td>
+          <td><a href="" ng-click="predicate = 'attributes.complexity'; reverse=!reverse">Complexity</a></td>
+          <td><a href="" ng-click="predicate = 'attributes.status'; reverse=!reverse">Status</a></td>
+          <td><a href="" ng-click="predicate = 'attributes.setter.attributes.username'; reverse=!reverse">Setter</a></td>
+          <td><a href="" ng-click="predicate = 'createdAt'; reverse=!reverse">Created On</a></td>
+          <td>View</td>
           <td>Remove</td>
         </tr>
       </thead>
       <tbody>
-        <tr ng-repeat="route in wall.attributes.routes">
+        <tr ng-repeat="route in wall.attributes.routes | orderBy:predicate:reverse | filter:search:strict">
           <td>{{route.attributes.name}}</td>
           <td ng-style="{'background-color': route.attributes.color}"></td>
           <td>{{route.attributes.grade}}</td>
           <td>{{route.attributes.setterComments}}</td>
+          <td>{{route.attributes.risk}}</td>
+          <td>{{route.attributes.intensity}}</td>
+          <td>{{route.attributes.complexity}}</td>
+          <td>{{route.attributes.status}}</td>
           <td>{{route.attributes.setter.attributes.username.toUpperCase()}}</td>
-          <td>{{route.id}}</td>
-
+          <td>{{(route.createdAt.getMonth() + 1) + "/" + route.createdAt.getDate() + "/" + route.createdAt.getFullYear()}}</td>
           <td><button class="btn btn-primary" ng-click="viewRoute(route)">View</button></td>       <td><button class="btn btn-danger" ng-click="removeRouteFromWall(route)">Remove</button></td>
         </tr>
       <tbody>
@@ -66,6 +79,14 @@
     </div>
   </div>
 
+  <div ng-show="tab == 'routeDistribution'">
+    <div class="row">
+      <div class="col-md-12">
+        <div style="font-size: 18px" class="ct-chart ct-octave" id="routeDistribution"></div>
+      </div>
+    </div>
+  </div>
+
   <div ng-show="tab == 'holdDistribution'">
     <div class="row">
       <div class="col-md-12">
@@ -73,5 +94,11 @@
       </div>
     </div>
   </div>
+
+  <div ng-show="tab == 'wallInfo'">
+    wall info
+
+  </div>
+
 
 </div>

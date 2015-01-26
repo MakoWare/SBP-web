@@ -5,22 +5,48 @@
     </div>
   </div>
 
-
-
   <ul class="nav nav-tabs nav-justified">
-    <li role="presentation" ng-class="{'active':  tab == 'general'}"><a ng-click="tabClicked('general')">General Information</a></li>
-    <li role="presentation" ng-class="{'active':  tab == 'routes'}"><a ng-click="tabClicked('routes')">Routes Set</a></li>
-    <li role="presentation" ng-class="{'active':  tab == 'holds'}"><a ng-click="tabClicked('holds')">Hold Usage</a></li>
+    <li role="presentation" ng-class="{'active':  tab == 'routes'}"><a ng-click="tabClicked('routes')">Routes</a></li>
+    <li role="presentation" ng-class="{'active':  tab == 'routesDistro'}"><a ng-click="tabClicked('routesDistro')">Routes Set Distribution</a></li>
+    <li role="presentation" ng-class="{'active':  tab == 'holds'}"><a ng-click="tabClicked('holds')">Hold Usage Distribution</a></li>
   </ul>
 
 
-  <div ng-show="tab == 'general'">
-
-
-  </div>
-
 
   <div ng-show="tab == 'routes'">
+    <table class="table table-bordered" style="overflow: scroll">
+      <thead>
+        <tr>
+          <td><a href="" ng-click="predicate = 'attributes.name'; reverse=!reverse">Name</a></td>
+          <td><a href="" ng-click="predicate = 'attributes.color'; reverse=!reverse">Color</a></td>
+          <td><a href="" ng-click="predicate = 'attributes.grade'; reverse=!reverse">Grade</a></td>
+          <td><a href="" ng-click="predicate = 'attributes.setterComments'; reverse=!reverse">Setter's Comments</a></td>
+          <td><a href="" ng-click="predicate = 'attributes.risk'; reverse=!reverse">Risk</a></td>
+          <td><a href="" ng-click="predicate = 'attributes.intensity'; reverse=!reverse">Intensity</a></td>
+          <td><a href="" ng-click="predicate = 'attributes.complexity'; reverse=!reverse">Complexity</a></td>
+          <td><a href="" ng-click="predicate = 'attributes.status'; reverse=!reverse">Status</a></td>
+          <td><a href="" ng-click="predicate = 'createdAt'; reverse=!reverse">Created On</a></td>
+          <td>View</td>
+        </tr>
+      </thead>
+      <tbody id="routesTable">
+        <tr ng-repeat="route in user.attributes.routes | orderBy:predicate:reverse | filter:search:strict">
+          <td>{{route.attributes.name}}</td>
+          <td ng-style="{'background-color': route.attributes.color}"></td>
+          <td>{{route.attributes.grade}}</td>
+          <td>{{route.attributes.setterComments}}</td>
+          <td>{{route.attributes.risk}}</td>
+          <td>{{route.attributes.intensity}}</td>
+          <td>{{route.attributes.complexity}}</td>
+          <td>{{route.attributes.status}}</td>
+          <td>{{(route.createdAt.getMonth() + 1) + "/" + route.createdAt.getDate() + "/" + route.createdAt.getFullYear()}}</td>
+          <td><button class="btn btn-primary" ng-click="editRoute(route)">View</button></td>
+        </tr>
+      <tbody>
+    </table>
+  </div>
+
+  <div ng-show="tab == 'routesDistro'">
     <div class="row">
       <div class="col-md-12">
         <div style="font-size: 18px" class="ct-chart ct-octave" id="general"></div>
@@ -30,7 +56,11 @@
 
 
   <div ng-show="tab == 'holds'">
-    Holds
+    <div class="row">
+      <div class="col-md-12">
+        <div style="font-size: 18px" class="ct-chart ct-octave" id="holdDistribution"></div>
+      </div>
+    </div>
   </div>
 
 

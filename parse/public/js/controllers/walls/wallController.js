@@ -1,15 +1,14 @@
 //Wall Controller
 var WallCtrl = function($scope, $location, $modal, ParseService, GlobalService){
     $scope.init = function(){
-        console.log("WallCtrl");
-        $scope.tab = "routeDistribution";
-
         var last = $location.url().split("/")[$location.url().split("/").length -1];
         if(last == "create"){
+            $scope.tab = "wallInfo";
             $scope.title = "New Wall";
             $scope.createWall();
         } else {
-            $scope.getWall(last);
+            $scope.tab = "routes";
+            $scope.getWall();
         }
     },
 
@@ -20,8 +19,11 @@ var WallCtrl = function($scope, $location, $modal, ParseService, GlobalService){
     };
 
     //Get Wall
-    $scope.getWall = function(id){
+    $scope.getWall = function(){
+        GlobalService.showSpinner();
+        var id = $location.url().split("/")[$location.url().split("/").length -1];
         ParseService.getWallById(id, function(results){
+            GlobalService.dismissSpinner();
             $scope.wall = results;
             $scope.title = results.get("name");
             console.log(results);
@@ -32,7 +34,73 @@ var WallCtrl = function($scope, $location, $modal, ParseService, GlobalService){
 
     //Setup Wall
     $scope.setUpWall = function(){
-        $scope.generateRoutesGraph();
+        $scope.setUpDatePicker();
+    };
+
+
+    $scope.setUpDatePicker = function(){
+        $scope.today = function() {
+            $scope.dt = null;
+        };
+        $scope.today();
+
+        $scope.clear = function () {
+            $scope.dt = null;
+        };
+
+        // Disable weekend selection
+        $scope.disabled = function(date, mode) {
+            return ( mode === 'day' && ( date.getDay() === 0 || date.getDay() === 6 ) );
+        };
+
+
+        $scope.open = function($event) {
+            $event.preventDefault();
+            $event.stopPropagation();
+
+            $scope.opened = true;
+        };
+
+        $scope.dateOptions = {
+            formatYear: 'yy',
+            startingDay: 1
+        };
+
+        $scope.formats = ['dd-MMMM-yyyy', 'yyyy/MM/dd', 'dd.MM.yyyy', 'shortDate'];
+        $scope.format = $scope.formats[0];
+    };
+
+
+    //Search Routes
+    $scope.searchRoutes = function(){
+        if($scope.dt){
+            GlobalService.showSpinner();
+            var query = new Parse.Query("Route");
+
+            var beginDate = new Date($scope.dt);
+            beginDate.setHours(0, 0, 0, 0);
+
+            var endDate = new Date($scope.dt);
+            endDate.setHours(23,59,59,999);
+
+            query.greaterThan("createdAt", beginDate);
+            query.lessThan("createdAt", endDate);
+            query.equalTo("wall", $scope.wall);
+            console.log(query);
+            query.find({
+                success: function(results){
+                    GlobalService.dismissSpinner();
+                    console.log(results);
+                    $scope.wall.attributes.routes = results;
+                    $scope.$apply();
+                },
+                error: function(error){
+                    console.log(error);
+                }
+            });
+        } else {
+            $scope.getWall();
+        }
     };
 
     //Create Modal
@@ -79,8 +147,8 @@ var WallCtrl = function($scope, $location, $modal, ParseService, GlobalService){
         } else if(tab == "holdDistribution"){
             $scope.generateHoldsDistroGraph();
             $scope.tab = "holdDistribution";
-        } else if(tab == "holds"){
-            $scope.tab = "holds";
+        } else if(tab == "wallInfo"){
+            $scope.tab = "wallInfo";
         }
     };
 
@@ -92,18 +160,56 @@ var WallCtrl = function($scope, $location, $modal, ParseService, GlobalService){
         console.log($scope.wall);
         wall.set("name", wall.attributes.name);
         wall.set("routes", wall.attributes.routes);
-        wall.save({
-            success: function(wall){
-                GlobalService.dismissSpinner();
-                $location.path("/walls");
-                $scope.$apply();
-            },
-            error: function(wall, error){
-                alert(GlobalService.errorMessage + error.message);
-            }
+
+        //First Save each Route to the Wall
+        var routePromises = [];
+        wall.attributes.routes.forEach(function(route){
+            route.set("wall", $scope.wall);
+            routePromises.push(route.save());
         });
 
+        Parse.Promise.when(routePromises).then(function(){
+            wall.save({
+                success: function(wall){
+                    GlobalService.dismissSpinner();
+                    $location.path("/walls");
+                    $scope.$apply();
+                },
+                error: function(wall, error){
+                    alert(GlobalService.errorMessage + error.message);
+                }
+            });
+        });
     };
+
+    //Take Down Routes
+    $scope.takeDownRoutes = function(){
+        GlobalService.showSpinner();
+        var wall = $scope.wall;
+
+        //First Give each Route a Taken Down Date.
+        var routePromises = [];
+        wall.attributes.routes.forEach(function(route){
+            var today = new Date();
+            route.set("takenDown", today);
+            routePromises.push(route.save());
+        });
+
+        Parse.Promise.when(routePromises).then(function(){
+            wall.set("routes", []);
+            wall.save({
+                success: function(wall){
+                    GlobalService.dismissSpinner();
+                    $location.path("/walls");
+                    $scope.$apply();
+                },
+                error: function(wall, error){
+                    alert(GlobalService.errorMessage + error.message);
+                }
+            });
+        });
+    };
+
 
 
     //Routes Distro Graph

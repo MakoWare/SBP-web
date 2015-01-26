@@ -1,28 +1,11 @@
 //User Controller
 var UserCtrl = function($scope, $location, ParseService, GlobalService){
     $scope.init = function(){
-
-        $scope.tab = "general";
-
-
-
-
-        console.log("UserCtrl");
-
+        GlobalService.showSpinner();
+        $scope.tab = "routes";
         var last = $location.url().split("/")[$location.url().split("/").length -1];
-        if(last == "create"){
-            $scope.title = "New User";
-            $scope.createUser();
-        } else {
-            $scope.getUser(last);
-        }
+        $scope.getUser(last);
     },
-
-    //Create User
-    $scope.createUser = function(){
-        $scope.user = ParseService.createUser();
-        $scope.setUpUser();
-    };
 
     //Get User
     $scope.getUser = function(id){
@@ -30,29 +13,22 @@ var UserCtrl = function($scope, $location, ParseService, GlobalService){
             $scope.user = results;
             $scope.title = results.attributes.username;
             $scope.setUpUser();
-            $scope.$apply();
         });
     };
 
     //Set up User
     $scope.setUpUser = function(){
         $scope.getUserRoutes();
-
     },
 
 
     //Get User's Routes
     $scope.getUserRoutes = function(){
         ParseService.getRoutesByUser($scope.user, function(results){
+            GlobalService.dismissSpinner();
             $scope.user.attributes.routes = results;
-            $scope.generateStats();
+            $scope.$apply();
         });
-    };
-
-
-    //Generate Stats
-    $scope.generateStats = function(){
-        $scope.generateRoutesGraph();
     };
 
     //Generate Routes Graph
@@ -290,14 +266,157 @@ var UserCtrl = function($scope, $location, ParseService, GlobalService){
 
     $scope.tabClicked = function(tab){
         console.log(tab);
-        if(tab == "general"){
-            $scope.tab = "general";
-        } else if(tab == "routes"){
-            $scope.generateRoutesGraph();
+        if(tab == "routes"){
             $scope.tab = "routes";
+        } else if(tab == "routesDistro"){
+            $scope.generateRoutesGraph();
+            $scope.tab = "routesDistro";
         } else if(tab == "holds"){
+            $scope.generateHoldsGraph();
             $scope.tab = "holds";
         }
+    };
+
+
+    //Generate Holds Graph
+    $scope.generateHoldsGraph = function(){
+        var gray = {}; gray.crimp = 0; gray.pinch = 0; gray.jug = 0; gray.edge = 0; gray.sloper = 0;
+        var yellow = {}; yellow.crimp = 0; yellow.pinch = 0; yellow.jug = 0; yellow.edge = 0; yellow.sloper = 0;
+        var green = {}; green.crimp = 0; green.pinch = 0; green.jug = 0; green.edge = 0; green.sloper = 0;
+        var red = {}; red.crimp = 0; red.pinch = 0; red.jug = 0; red.edge = 0; red.sloper = 0;
+        var blue = {}; blue.crimp = 0; blue.pinch = 0; blue.jug = 0; blue.edge = 0; blue.sloper = 0;
+        var orange = {}; orange.crimp = 0; orange.pinch = 0; orange.jug = 0; orange.edge = 0; orange.sloper = 0;
+        var purple = {}; purple.crimp = 0; purple.pinch = 0; purple.jug = 0; purple.edge = 0; purple.sloper = 0;
+        var black = {}; black.crimp = 0; black.pinch = 0; black.jug = 0; black.edge = 0; black.sloper = 0;
+
+        var routes = $scope.user.attributes.routes;
+        routes.forEach(function(route){
+            if(route){
+                switch(route.attributes.color){
+                case "gray":
+                    gray.crimp += parseInt(route.attributes.crimps);
+                    gray.pinch += parseInt(route.attributes.pinches);
+                    gray.jug += parseInt(route.attributes.jugs);
+                    gray.edge += parseInt(route.attributes.edges);
+                    gray.sloper += parseInt(route.attributes.slopers);
+                    break;
+                case "yellow":
+                    yellow.crimp += parseInt(route.attributes.crimps);
+                    yellow.pinch += parseInt(route.attributes.pinches);
+                    yellow.jug += parseInt(route.attributes.jugs);
+                    yellow.edge += parseInt(route.attributes.edges);
+                    yellow.sloper += parseInt(route.attributes.slopers);
+                    break;
+                case "green":
+                    green.crimp += parseInt(route.attributes.crimps);
+                    green.pinch += parseInt(route.attributes.pinches);
+                    green.jug += parseInt(route.attributes.jugs);
+                    green.edge += parseInt(route.attributes.edges);
+                    green.sloper += parseInt(route.attributes.slopers);
+                    break;
+                case "red":
+                    red.crimp += parseInt(route.attributes.crimps);
+                    red.pinch += parseInt(route.attributes.pinches);
+                    red.jug += parseInt(route.attributes.jugs);
+                    red.edge += parseInt(route.attributes.edges);
+                    red.sloper += parseInt(route.attributes.slopers);
+                    break;
+                case "blue":
+                    blue.crimp += parseInt(route.attributes.crimps);
+                    blue.pinch += parseInt(route.attributes.pinches);
+                    blue.jug += parseInt(route.attributes.jugs);
+                    blue.edge += parseInt(route.attributes.edges);
+                    blue.sloper += parseInt(route.attributes.slopers);
+                    break;
+                case "orange":
+                    orange.crimp += parseInt(route.attributes.crimps);
+                    orange.pinch += parseInt(route.attributes.pinches);
+                    orange.jug += parseInt(route.attributes.jugs);
+                    orange.edge += parseInt(route.attributes.edges);
+                    orange.sloper += parseInt(route.attributes.slopers);
+                    break;
+                case "purple":
+                    purple.crimp += parseInt(route.attributes.crimps);
+                    purple.pinch += parseInt(route.attributes.pinches);
+                    purple.jug += parseInt(route.attributes.jugs);
+                    purple.edge += parseInt(route.attributes.edges);
+                    purple.sloper += parseInt(route.attributes.slopers);
+                    break;
+                case "black":
+                    black.crimp += parseInt(route.attributes.crimps);
+                    black.pinch += parseInt(route.attributes.pinches);
+                    black.jug += parseInt(route.attributes.jugs);
+                    black.edge += parseInt(route.attributes.edges);
+                    black.sloper += parseInt(route.attributes.slopers);
+                    break;
+                };
+            }
+        });
+
+        console.log(blue);
+        console.log(green);
+        var data = {
+            labels: ['Crimps','Pinches', 'Jugs', 'Edges', 'Slopers'],
+            series: [
+                [gray.crimp, gray.pinch, gray.jug, gray.edge, gray.sloper],
+                [yellow.crimp, yellow.pinch, yellow.jug, yellow.edge, yellow.sloper],
+                [green.crimp, green.pinch, green.jug, green.edge, green.sloper],
+                [red.crimp, red.pinch, red.jug, red.edge, red.sloper],
+                [blue.crimp, blue.pinch, blue.jug, blue.edge, blue.sloper],
+                [orange.crimp, orange.pinch, orange.jug, orange.edge, orange.sloper],
+                [purple.crimp, purple.pinch, purple.jug, purple.edge, purple.sloper],
+                [black.crimp, black.pinch, black.jug, black.edge, black.sloper]
+            ]
+        };
+
+        var options = {
+            showLine: false,
+            axisY: {
+                labelInterpolationFnc: function(value) {
+                    return ( value % 1 === 0 ) ? value : '';
+                }
+            }
+        };
+
+        var i = 0;
+        new Chartist.Line("#holdDistribution", data, options).on('draw', function(data) {
+            var style = "";
+            if(data.type == "point"){
+                switch(i){
+                case 0:
+                    style = "stroke: gray; fill: gray; stroke-width: 20px";
+                    break;
+                case 1:
+                    style = "stroke: yellow; fill: yellow; stroke-width: 20px";
+                    break;
+                case 2:
+                    style = "stroke: green; fill: green; stroke-width: 20px";
+                    break;
+                case 3:
+                    style = "stroke: red; fill: red; stroke-width: 20px";
+                    break;
+                case 4:
+                    style = "stroke: blue; fill: blue; stroke-width: 20px";
+                    break;
+                case 5:
+                    style = "stroke: orange; fill: orange; stroke-width: 20px";
+                    break;
+                case 6:
+                    style = "stroke: purple; fill: purple; stroke-width: 20px";
+                    break;
+                case 7:
+                    style = "stroke: black; fill: black; stroke-width: 20px";
+                    break;
+                };
+                data.element.attr({
+                    style: style
+                });
+
+                if(data.index == 4){
+                    i++;
+                }
+            }
+        });
     };
 
 

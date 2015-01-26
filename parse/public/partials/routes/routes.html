@@ -24,7 +24,7 @@
     </div>
   </div>
 
-  <table class="table table-bordered">
+  <table class="table table-bordered" style="overflow: scroll">
     <thead>
       <tr>
         <td><a href="" ng-click="predicate = 'attributes.name'; reverse=!reverse">Name</a></td>
@@ -40,7 +40,7 @@
         <td>View</td>
       </tr>
     </thead>
-    <tbody>
+    <tbody id="routesTable">
       <tr ng-repeat="route in routes | orderBy:predicate:reverse | filter:search:strict">
         <td>{{route.attributes.name}}</td>
         <td ng-style="{'background-color': route.attributes.color}"></td>
