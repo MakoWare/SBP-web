@@ -96,9 +96,25 @@
   </div>
 
   <div ng-show="tab == 'wallInfo'">
-    wall info
-
+    <br>
+    <form name="wallForm">
+      <div class="row">
+        <div class="col-md-4">
+          <div class="form-group">
+            <label for="name">Wall Name</label>
+            <input type="text" class="form-control" id="name" placeholder="Wall Name">
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-4">
+          <div class="form-group">
+            <label for="exampleInputFile">Route Map Picture</label>
+            <input type="file" id="routeMapInput">
+          </div>
+        </div>
+      </div>
+    </form>
   </div>
-
 
 </div>

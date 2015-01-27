@@ -8,25 +8,25 @@
 
 * Gym
 
-** TODO Make Tables Responsive
-
 * Wall
 
-** TODO Search Functionality on all Tables
-** TODO Add Wall to the Route when saved
+** DONE Search Functionality on all Tables
+   CLOSED: [2015-01-26 Mon 13:36]
+** DONE Add Wall to the Route when saved
+   CLOSED: [2015-01-26 Mon 13:36]
 
-** TODO Holds on Wall
 
 ** TODO Edit Wall:  Name and Picture
 
-
 * Routes
 
-** TODO Search Functionality on all Tables
+** DONE Search Functionality on all Tables
+   CLOSED: [2015-01-26 Mon 13:36]
 
 ** TODO Be able to Select Wall Route will be on
 
 ** TODO Safe Delete - remove from Wall
+
 
 
 * First Day with SBP

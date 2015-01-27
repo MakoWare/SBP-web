@@ -1,26 +1,51 @@
 <div class="modal-header">
   Search
-
+  <div class="row">
+    <div class="col-md-5">
+      <form class="form-inline">
+        <div class="form-group">
+          <label for="exampleInputName2">Created On</label>
+          <p class="input-group">
+            <input type="text" class="form-control" datepicker-popup="{{format}}" ng-model="dt" is-open="opened" datepicker-options="dateOptions" close-text="Close" ng-change="searchRoutes()"/>
+            <span class="input-group-btn">
+              <button type="button" class="btn btn-default" ng-click="open($event)"><i class="glyphicon glyphicon-calendar"></i></button>
+            </span>
+          </p>
+        </div>
+      </form>
+    </div>
+  </div>
 </div>
+
 <div class="modal-body">
   <table class="table table-bordered table-hover">
     <thead>
       <tr>
-        <td>Name</td>
-        <td>Color</td>
-        <td>Difficulty</td>
-        <td>Description</td>
-        <td>ID</td>
-        <td>Using Route</td>
+        <td><a href="" ng-click="predicate = 'attributes.name'; reverse=!reverse">Name</a></td>
+        <td><a href="" ng-click="predicate = 'attributes.color'; reverse=!reverse">Color</a></td>
+        <td><a href="" ng-click="predicate = 'attributes.grade'; reverse=!reverse">Grade</a></td>
+        <td><a href="" ng-click="predicate = 'attributes.setterComments'; reverse=!reverse">Setter's Comments</a></td>
+        <td><a href="" ng-click="predicate = 'attributes.risk'; reverse=!reverse">Risk</a></td>
+        <td><a href="" ng-click="predicate = 'attributes.intensity'; reverse=!reverse">Intensity</a></td>
+        <td><a href="" ng-click="predicate = 'attributes.complexity'; reverse=!reverse">Complexity</a></td>
+        <td><a href="" ng-click="predicate = 'attributes.status'; reverse=!reverse">Status</a></td>
+        <td><a href="" ng-click="predicate = 'attributes.setter.attributes.username'; reverse=!reverse">Setter</a></td>
+        <td><a href="" ng-click="predicate = 'createdAt'; reverse=!reverse">Created On</a></td>
+        <td><a href="" ng-click="predicate = 'attributes.add'; reverse=!reverse">Using Route</td>
       </tr>
     </thead>
     <tbody>
-      <tr ng-repeat="route in routes" ng-click="rowClicked(route)">
+      <tr ng-repeat="route in routes | orderBy:predicate:reverse | filter:search:strict" ng-click="rowClicked(route)" >
         <td>{{route.attributes.name}}</td>
         <td ng-style="{'background-color': route.attributes.color}"></td>
         <td>{{route.attributes.grade}}</td>
         <td>{{route.attributes.setterComments}}</td>
-        <td>{{route.id}}</td>
+        <td>{{route.attributes.risk}}</td>
+        <td>{{route.attributes.intensity}}</td>
+        <td>{{route.attributes.complexity}}</td>
+        <td>{{route.attributes.status}}</td>
+        <td>{{route.attributes.setter.username}}</td>
+        <td>{{(route.createdAt.getMonth() + 1) + "/" + route.createdAt.getDate() + "/" + route.createdAt.getFullYear()}}</td>
         <td>
           <div class="checkbox">
             <label>
