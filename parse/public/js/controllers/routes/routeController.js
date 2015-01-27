@@ -127,5 +127,60 @@ var RouteCtrl = function($scope, $location, $modal, ParseService, GlobalService)
         });
     };
 
+    //Delete Route
+    $scope.deleteRoute = function(){
+        GlobalService.showSpinner();
+        var query = new Parse.Query("Wall");
+        query.equalTo("routes", $scope.route);
+        query.first({
+            success: function(wall){
+                if(wall){
+                    wall.remove("routes", $scope.route);
+                    wall.save({
+                        success: function(wall){
+                            $scope.route.destroy({
+                                success: function(result){
+                                    GlobalService.dismissSpinner();
+                                    $location.path("/routes");
+                                    $scope.$apply();
+                                },
+                                error: function(object, error){
+                                    GlobalService.dismissSpinner();
+                                    alert(GlobalService.errorMessage + error.message);
+                                    console.log(error);
+                                }
+                            });
+                        },
+                        error: function(wall, error){
+                            GlobalService.dismissSpinner();
+                            alert(GlobalService.errorMessage + error.message);
+                            console.log(error);
+                        }
+                    });
+                } else {
+                    $scope.route.destroy({
+                        success: function(result){
+                            GlobalService.dismissSpinner();
+                            $location.path("/routes");
+                            $scope.$apply();
+                        },
+                        error: function(object, error){
+                            GlobalService.dismissSpinner();
+                            alert(GlobalService.errorMessage + error.message);
+                            console.log(error);
+                        }
+                    });
+                }
+            },
+            error: function(error){
+                alert(GlobalService.errorMessage + error.message);
+                console.log(error);
+            }
+        });
+    };
+
+
+
+
     $scope.init();
 };

@@ -16,19 +16,19 @@
 
       <form name="routeForm">
         <div class="row">
-          <div class="col-md-3">
+          <div class="col-xs-3">
             <label for="name">Name</label>
             <input ng-model="route.attributes.name" type="text" name="name" class="form-control" id="name" placeholder="Name"/>
           </div>
 
-          <div class="col-md-3">
+          <div class="col-xs-3">
             <label for="name">Setter</label>
             <select class="form-control" ng-model="route.attributes.setter" name="setter" ng-options="setter as setter.attributes.username for setter in setters">
               <option></option>
             </select>
           </div>
 
-          <div class="col-md-2 form-group">
+          <div class="col-xs-2 form-group">
             <label for="grade">Grade</label>
             <select class="form-control" ng-model="route.attributes.grade" name="grade">
               <option>0</option>
@@ -50,7 +50,7 @@
             </select>
           </div>
 
-          <div class="col-md-2 form-group">
+          <div class="col-xs-2 form-group">
             <label for="color">Color</label>
             <select class="form-control" ng-model="route.attributes.color" name="color" ng-style="{'background-color': route.attributes.color}">
               <option></option>
@@ -65,7 +65,7 @@
             </select>
           </div>
 
-          <div class="col-md-2 form-group">
+          <div class="col-xs-2 form-group">
             <label for="satuts">Status</label>
             <select class="form-control" ng-model="route.attributes.status" name="status">
               <option>Not Set</option>
@@ -77,7 +77,7 @@
         </div>
 
         <div class="row">
-          <div class="col-md-2 form-group">
+          <div class="col-xs-2 form-group">
             <label for="risk">Risk</label>
             <select class="form-control" ng-model="route.attributes.risk" name="risk">
               <option>1</option>
@@ -88,7 +88,7 @@
             </select>
           </div>
 
-          <div class="col-md-2 form-group">
+          <div class="col-xs-2 form-group">
             <label for="intensity">Intensity</label>
             <select class="form-control" ng-model="route.attributes.intensity" name="intensity">
               <option>1</option>
@@ -99,7 +99,7 @@
             </select>
           </div>
 
-          <div class="col-md-2 form-group">
+          <div class="col-xs-2 form-group">
             <label for="complexity">Complexity</label>
             <select class="form-control" ng-model="route.attributes.complexity" name="complexity">
               <option>1</option>
@@ -110,14 +110,14 @@
             </select>
           </div>
 
-          <div class="col-md-6 form-group">
+          <div class="col-xs-6 form-group">
             <label for="setterComments">Setter's Comments</label>
             <textarea class="form-control" rows="2" ng-model="route.attributes.setterComments"></textarea>
           </div>
         </div>
 
         <div class="row">
-          <div class="col-md-1">
+          <div class="col-xs-1">
             <label for="crimps">Crimps</label>
             <select class="form-control" ng-model="route.attributes.crimps" name="crimps">
               <option>0</option>
@@ -144,7 +144,7 @@
             </select>
           </div>
 
-          <div class="col-md-1">
+          <div class="col-xs-1">
             <label for="jugs">Jugs</label>
             <select class="form-control" ng-model="route.attributes.jugs" name="jugs">
               <option>0</option>
@@ -171,7 +171,7 @@
             </select>
           </div>
 
-          <div class="col-md-1">
+          <div class="col-xs-1">
             <label for="pinches">Pinches</label>
             <select class="form-control" ng-model="route.attributes.pinches" name="pinches">
               <option>0</option>
@@ -198,7 +198,7 @@
             </select>
           </div>
 
-          <div class="col-md-1">
+          <div class="col-xs-1">
             <label for="slopers">Slopers</label>
             <select class="form-control" ng-model="route.attributes.slopers" name="slopers">
               <option>0</option>
@@ -225,7 +225,7 @@
             </select>
           </div>
 
-          <div class="col-md-1">
+          <div class="col-xs-1">
             <label for="edges">Edges</label>
             <select class="form-control" ng-model="route.attributes.edges" name="edges">
               <option>0</option>
@@ -253,12 +253,12 @@
           </div>
 
 
-          <div class="col-md-2">
+          <div class="col-xs-3">
             <label for="totalHolds">Total Holds</label>
             <input ng-model="route.attributes.totalHolds" type="text" name="totalHolds" class="form-control" id="totalHolds" placeholder="Total Holds"/>
           </div>
 
-          <div class="col-md-3">
+          <div class="col-xs-3">
             <label for="edges">Theme</label>
             <select class="form-control" ng-model="route.attributes.theme" name="edges">
               <option>dyno</option>
@@ -273,13 +273,13 @@
 
         <br>
         <div class="row">
-          <div class="col-md-12">
+          <div class="col-xs-12">
             <h4 style="margin-top: 10px">User's Comments</h4>
           </div>
         </div>
 
         <div class="row">
-          <div class="col-md-12" style="margin-left: 10px">
+          <div class="col-xs-12" style="margin-left: 10px">
             <p>I Loved this Route, fun dyno, I want more!</p>
             <p>The dyno on this Route was way too far, I'm only 5'3!!!</p>
             <p>Some Other Examlpe Feedback!</p>
@@ -332,8 +332,12 @@
 
   <div class="page-header"></div>
   <div class="row">
-    <div class="col-md-1 col-md-offset-11">
+    <div class="col-xs-1 col-xs-offset-8">
+      <button class="btn btn-danger"  ng-click="deleteRoute()">Delete</button>
+    </div>
+    <div class="col-xs-1 col-xs-offset-1">
       <button class="btn btn-primary" ng-disabled="routeForm.$invalid" ng-click="saveRoute()">Save</button>
+
     </div>
   </div>
 </div>
