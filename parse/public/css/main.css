@@ -21,4 +21,21 @@ ul.nav li.dropdown:hover > ul.dropdown-menu {
 .grayBar {
     stroke: gray;
     fill: gray;
+
+}
+
+.notSet {
+    background-color: #e74c3c;
+}
+
+.set {
+    background-color: #3498db;
+}
+
+.forRun {
+    background-color: #f1c40f;
+}
+
+.complete {
+    background-color: #2ecc71;
 }

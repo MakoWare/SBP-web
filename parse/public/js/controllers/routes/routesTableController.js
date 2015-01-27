@@ -2,7 +2,6 @@
 var RoutesTableCtrl = function($scope, $location, $modalInstance, ParseService, GlobalService, currentRoutes){
 
     $scope.init = function(){
-        GlobalService.showSpinner();
         console.log("RoutesTableCtrl");
         console.log(currentRoutes);
         $scope.getRoutes();
@@ -11,6 +10,7 @@ var RoutesTableCtrl = function($scope, $location, $modalInstance, ParseService, 
 
     //Get Routes
     $scope.getRoutes = function(){
+        GlobalService.showSpinner();
         ParseService.getRoutes(function(results){
             $scope.routes = results;
 
@@ -30,7 +30,6 @@ var RoutesTableCtrl = function($scope, $location, $modalInstance, ParseService, 
     //Search Routes
     $scope.searchRoutes = function(){
         if($scope.dt){
-            GlobalService.showSpinner();
             var query = new Parse.Query("Route");
 
             var beginDate = new Date($scope.dt);
@@ -44,7 +43,6 @@ var RoutesTableCtrl = function($scope, $location, $modalInstance, ParseService, 
 
             query.find({
                 success: function(results){
-                    GlobalService.dismissSpinner();
                     $scope.routes = results;
                     $scope.getSetters();
                     $scope.$apply();

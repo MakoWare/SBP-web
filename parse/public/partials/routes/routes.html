@@ -30,10 +30,6 @@
         <td><a href="" ng-click="predicate = 'attributes.name'; reverse=!reverse">Name</a></td>
         <td><a href="" ng-click="predicate = 'attributes.color'; reverse=!reverse">Color</a></td>
         <td><a href="" ng-click="predicate = 'attributes.grade'; reverse=!reverse">Grade</a></td>
-        <td><a href="" ng-click="predicate = 'attributes.setterComments'; reverse=!reverse">Setter's Comments</a></td>
-        <td><a href="" ng-click="predicate = 'attributes.risk'; reverse=!reverse">Risk</a></td>
-        <td><a href="" ng-click="predicate = 'attributes.intensity'; reverse=!reverse">Intensity</a></td>
-        <td><a href="" ng-click="predicate = 'attributes.complexity'; reverse=!reverse">Complexity</a></td>
         <td><a href="" ng-click="predicate = 'attributes.status'; reverse=!reverse">Status</a></td>
         <td><a href="" ng-click="predicate = 'attributes.setter.attributes.username'; reverse=!reverse">Setter</a></td>
         <td><a href="" ng-click="predicate = 'createdAt'; reverse=!reverse">Created On</a></td>
@@ -41,15 +37,11 @@
       </tr>
     </thead>
     <tbody id="routesTable">
-      <tr ng-repeat="route in routes | orderBy:predicate:reverse | filter:search:strict">
+      <tr ng-repeat="route in routes | orderBy:['attributes.order', predicate]:reverse | filter:search:strict">
         <td>{{route.attributes.name}}</td>
         <td ng-style="{'background-color': route.attributes.color}"></td>
         <td>{{route.attributes.grade}}</td>
-        <td>{{route.attributes.setterComments}}</td>
-        <td>{{route.attributes.risk}}</td>
-        <td>{{route.attributes.intensity}}</td>
-        <td>{{route.attributes.complexity}}</td>
-        <td>
+        <td ng-class="{notSet: route.attributes.status == 'Not Set', set: route.attributes.status == 'Set', forRun: route.attributes.status == 'For Ran', complete: route.attributes.status == 'Complete'}">
           <select class="form-control" ng-model="route.attributes.status" ng-change="saveRoute(route)" name="status">
             <option>Not Set</option>
             <option>Set</option>

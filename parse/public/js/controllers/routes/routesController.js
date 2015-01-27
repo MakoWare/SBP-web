@@ -3,8 +3,10 @@ var RoutesCtrl = function($scope, $location, ParseService, GlobalService){
     $scope.init = function(){
         console.log("RoutesCtrl");
         $scope.predicate = "attributes.grade";
-        $scope.getRoutes();
+        //$scope.getRoutes();
+
         $scope.setUpDatePicker();
+        $scope.searchRoutes();
     },
 
     //Get Routes
@@ -37,7 +39,7 @@ var RoutesCtrl = function($scope, $location, ParseService, GlobalService){
 
     $scope.setUpDatePicker = function(){
         $scope.today = function() {
-            $scope.dt = null;
+            $scope.dt = new Date();
         };
         $scope.today();
 
