@@ -125,6 +125,7 @@ var RoutesCtrl = function($scope, $location, ParseService, GlobalService){
         GlobalService.showSpinner();
         route.set("status", route.attributes.status);
         route.set("setter", route.attributes.setter);
+        route.set("grade", route.attributes.grade);
         route.save({
             success: function(route){
                 GlobalService.dismissSpinner();

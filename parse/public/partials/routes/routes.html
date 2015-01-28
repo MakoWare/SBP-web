@@ -27,7 +27,6 @@
   <table class="table table-bordered" style="overflow: scroll">
     <thead>
       <tr>
-        <td><a href="" ng-click="predicate = 'attributes.name'; reverse=!reverse">Name</a></td>
         <td><a href="" ng-click="predicate = 'attributes.color'; reverse=!reverse">Color</a></td>
         <td><a href="" ng-click="predicate = 'attributes.grade'; reverse=!reverse">Grade</a></td>
         <td><a href="" ng-click="predicate = 'attributes.status'; reverse=!reverse">Status</a></td>
@@ -38,13 +37,29 @@
     </thead>
     <tbody id="routesTable">
       <tr ng-repeat="route in routes | orderBy:['attributes.order', predicate]:reverse | filter:search:strict">
-        <td>{{route.attributes.name}}</td>
         <td ng-style="{'background-color': route.attributes.color}"></td>
-        <td>{{route.attributes.grade}}</td>
-        <td ng-class="{notSet: route.attributes.status == 'Not Set', set: route.attributes.status == 'Set', forRun: route.attributes.status == 'For Ran', complete: route.attributes.status == 'Complete'}">
+        <td>
+          <select class="form-control" ng-model="route.attributes.grade" ng-change="saveRoute(route)" name="status">
+            <option>0</option>
+            <option>1</option>
+            <option>2</option>
+            <option>3</option>
+            <option>4</option>
+            <option>5</option>
+            <option>6</option>
+            <option>7</option>
+            <option>8</option>
+            <option>9</option>
+            <option>10</option>
+            <option>11</option>
+            <option>12</option>
+          </select>
+        </td>
+        <td ng-class="{notSet: route.attributes.status == 'Not Set', set: route.attributes.status == 'Set', tweek: route.attributes.status == 'Initial Tweek', forRun: route.attributes.status == 'For Ran', complete: route.attributes.status == 'Complete'}">
           <select class="form-control" ng-model="route.attributes.status" ng-change="saveRoute(route)" name="status">
             <option>Not Set</option>
             <option>Set</option>
+            <option>Initial Tweek</option>
             <option>For Ran</option>
             <option>Complete</option>
           </select>

@@ -210,6 +210,7 @@ angular.module('parseService', [])
                 route.set("pinches", "0");
                 route.set("slopers", "0");
                 route.set("edges", "0");
+                route.set("volumes", "0");
 
                 return route;
             },

@@ -25,7 +25,8 @@
 
 ** TODO Be able to Select Wall Route will be on
 
-** TODO Safe Delete - remove from Wall
+** DONE Safe Delete - remove from Wall
+   CLOSED: [2015-01-27 Tue 13:07]
 
 
 
@@ -136,3 +137,30 @@ Travis
 Jeff
 Oliver
 Luise
+
+* Tuesday 1/27 First Floor Run
+
+** TODO What else does it need?
+
+
+** DONE Add Grade Select on Routes.html
+   CLOSED: [2015-01-28 Wed 11:41]
+
+** DONE Remove Name Column in Routes Table
+   CLOSED: [2015-01-28 Wed 11:42]
+
+** DONE Scale only to v12
+   CLOSED: [2015-01-28 Wed 11:42]
+
+
+** TODO Make All Tables the same
+
+
+** TODO Change Color of status boxes - not Ciruit colors
+
+
+** TODO Change Status to Boxes - Tap Button - Inc Line
+
+** TODO Create Users
+
+** TODO Add Idealistic Gym Disto to Gyms/:id to Current Route Distro

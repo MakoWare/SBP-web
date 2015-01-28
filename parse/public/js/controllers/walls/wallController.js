@@ -228,9 +228,6 @@ var WallCtrl = function($scope, $location, $modal, ParseService, GlobalService){
         var v10 = {}; v10.black = 0;
         var v11 = {}; v11.black = 0;
         var v12 = {}; v12.black = 0;
-        var v13 = {}; v13.black = 0;
-        var v14 = {}; v14.black = 0;
-        var v15 = {}; v15.black = 0;
 
         var routes = $scope.wall.attributes.routes;
         routes.forEach(function(route){
@@ -315,25 +312,16 @@ var WallCtrl = function($scope, $location, $modal, ParseService, GlobalService){
                 case "12":
                     v12.black++;
                     break;
-                case "13":
-                    v13.black++;
-                    break;
-                case "14":
-                    v14.black++;
-                    break;
-                case "15":
-                    v15.black++;
-                    break;
                 };
             }
         });
 
         var data = {
-            labels: ['v0','v1', 'v2', 'v3', 'V4', 'v5','v6', 'v7', 'v8', 'V9', 'v10','v11', 'v12', 'v13', 'V14', 'v15'],
+            labels: ['v0','v1', 'v2', 'v3', 'V4', 'v5','v6', 'v7', 'v8', 'V9', 'v10','v11', 'v12'],
             series: [
-                [v0.gray, v1.yellow, v2.yellow, v3.green, v4.green, v5.red, v6.blue, v7.orange, v8.purple, v9.black, v10.black, v11.black, v12.black, v13.black, v14.black, v15.black],
-                [0, 0, v2.green, v3.red, v4.red, v5.blue, v6.orange, v7.purple, v8.black, 0, 0, 0, 0, 0, 0, 0],
-                [0, 0, 0, 0, v4.blue, v5.orange, v6.purple, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+                [v0.gray, v1.yellow, v2.yellow, v3.green, v4.green, v5.red, v6.blue, v7.orange, v8.purple, v9.black, v10.black, v11.black, v12.black],
+                [0, 0, v2.green, v3.red, v4.red, v5.blue, v6.orange, v7.purple, v8.black, 0, 0, 0, 0],
+                [0, 0, 0, 0, v4.blue, v5.orange, v6.purple, 0, 0, 0, 0, 0, 0]
             ]
         };
 
@@ -424,21 +412,12 @@ var WallCtrl = function($scope, $location, $modal, ParseService, GlobalService){
                 case 12:
                     style = "stroke: black; fill: green; stroke-width: 30px";
                     break;
-                case 13:
-                    style = "stroke: black; fill: green; stroke-width: 30px";
-                    break;
-                case 14:
-                    style = "stroke: black; fill: green; stroke-width: 30px";
-                    break;
-                case 15:
-                    style = "stroke: black; fill: green; stroke-width: 30px";
-                    break;
                 };
                 data.element.attr({
                     style: style
                 });
 
-                if(data.index == 15){
+                if(data.index == 12){
                     i++;
                 }
             }
