@@ -1,6 +1,7 @@
 //Wall Controller
 var WallCtrl = function($scope, $location, $modal, ParseService, GlobalService){
     $scope.init = function(){
+        $scope.predicate = "attributes.grade";
         var last = $location.url().split("/")[$location.url().split("/").length -1];
         if(last == "create"){
             $scope.tab = "wallInfo";
@@ -35,8 +36,25 @@ var WallCtrl = function($scope, $location, $modal, ParseService, GlobalService){
     //Setup Wall
     $scope.setUpWall = function(){
         $scope.setUpDatePicker();
+        $scope.getSetters();
     };
 
+    //Get Setters
+    $scope.getSetters = function(){
+        var currentUser = ParseService.getCurrentUser();
+        ParseService.getUsersByGym(currentUser.get("currentGym"), function(results){
+            $scope.setters = results;
+            $scope.wall.attributes.routes.forEach(function(route){
+                var currentSetter = route.attributes.setter;
+                results.forEach(function(setter){
+                    if(currentSetter && currentSetter.id == setter.id){
+                        route.attributes.setter = setter;
+                    }
+                });
+            });
+            $scope.$apply();
+        });
+    };
 
     $scope.setUpDatePicker = function(){
         $scope.today = function() {
@@ -150,6 +168,24 @@ var WallCtrl = function($scope, $location, $modal, ParseService, GlobalService){
         } else if(tab == "wallInfo"){
             $scope.tab = "wallInfo";
         }
+    };
+
+    //Save Route
+    $scope.saveRoute = function(route){
+        GlobalService.showSpinner();
+        ParseService.saveRoute(route, function(results){
+            GlobalService.dismissSpinner();
+        });
+    };
+
+    //Delete Route
+    $scope.deleteRoute = function(route){
+        GlobalService.showSpinner();
+        ParseService.deleteRoute(route, function(results){
+            GlobalService.dismissSpinner();
+            $scope.getWall();
+            $scope.$apply();
+        });
     };
 
 

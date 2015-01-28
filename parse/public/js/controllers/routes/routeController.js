@@ -95,51 +95,10 @@ var RouteCtrl = function($scope, $location, $modal, ParseService, GlobalService)
     //Save Route
     $scope.saveRoute = function(){
         GlobalService.showSpinner();
-
-        var route = $scope.route;
-
-        switch(route.attributes.color){
-        case "gray":
-            route.attributes.order = 0;
-            break;
-        case "yellow":
-            route.attributes.order = 1;
-            break;
-        case "green":
-            route.attributes.order = 2;
-            break;
-        case "red":
-            route.attributes.order = 3;
-            break;
-        case "blue":
-            route.attributes.order = 4;
-            break;
-        case "orange":
-            route.attributes.order = 5;
-            break;
-        case "purple":
-            route.attributes.order = 6;
-            break;
-        case "black":
-            route.attributes.order = 7;
-            break;
-        };
-
-        for(var attr in route.attributes) {
-            route.set(attr, route.attributes[attr]);
-        }
-
-
-        console.log(route);
-        $scope.route.save({
-            success: function(route){
-                GlobalService.dismissSpinner();
-                $location.path("/routes");
-                $scope.$apply();
-            },
-            error: function(route, error){
-
-            }
+        ParseService.saveRoute($scope.route, function(results){
+            GlobalService.dismissSpinner();
+            $location.path("/routes");
+            $scope.$apply();
         });
     };
 

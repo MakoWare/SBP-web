@@ -38,39 +38,66 @@
       </div>
     </div>
 
-    <table class="table table-bordered">
+
+    <table class="table table-bordered" style="overflow: scroll">
       <thead>
         <tr>
-          <td><a href="" ng-click="predicate = 'attributes.name'; reverse=!reverse">Name</a></td>
           <td><a href="" ng-click="predicate = 'attributes.color'; reverse=!reverse">Color</a></td>
           <td><a href="" ng-click="predicate = 'attributes.grade'; reverse=!reverse">Grade</a></td>
-          <td><a href="" ng-click="predicate = 'attributes.setterComments'; reverse=!reverse">Setter's Comments</a></td>
-          <td><a href="" ng-click="predicate = 'attributes.risk'; reverse=!reverse">Risk</a></td>
-          <td><a href="" ng-click="predicate = 'attributes.intensity'; reverse=!reverse">Intensity</a></td>
-          <td><a href="" ng-click="predicate = 'attributes.complexity'; reverse=!reverse">Complexity</a></td>
           <td><a href="" ng-click="predicate = 'attributes.status'; reverse=!reverse">Status</a></td>
           <td><a href="" ng-click="predicate = 'attributes.setter.attributes.username'; reverse=!reverse">Setter</a></td>
-          <td><a href="" ng-click="predicate = 'createdAt'; reverse=!reverse">Created On</a></td>
           <td>View</td>
-          <td>Remove</td>
+          <td>Delete</td>
         </tr>
       </thead>
-      <tbody>
-        <tr ng-repeat="route in wall.attributes.routes | orderBy:predicate:reverse | filter:search:strict">
-          <td>{{route.attributes.name}}</td>
+      <tbody id="routesTable">
+        <tr ng-repeat="route in wall.attributes.routes | orderBy:['attributes.order', predicate]:reverse | filter:search:strict">
           <td ng-style="{'background-color': route.attributes.color}"></td>
-          <td>{{route.attributes.grade}}</td>
-          <td>{{route.attributes.setterComments}}</td>
-          <td>{{route.attributes.risk}}</td>
-          <td>{{route.attributes.intensity}}</td>
-          <td>{{route.attributes.complexity}}</td>
-          <td>{{route.attributes.status}}</td>
-          <td>{{route.attributes.setter.attributes.username.toUpperCase()}}</td>
-          <td>{{(route.createdAt.getMonth() + 1) + "/" + route.createdAt.getDate() + "/" + route.createdAt.getFullYear()}}</td>
-          <td><button class="btn btn-primary" ng-click="viewRoute(route)">View</button></td>       <td><button class="btn btn-danger" ng-click="removeRouteFromWall(route)">Remove</button></td>
+          <td>
+            <select class="form-control" ng-model="route.attributes.grade" ng-change="saveRoute(route)" name="status">
+              <option>0</option>
+              <option>1</option>
+              <option>2</option>
+              <option>3</option>
+              <option>4</option>
+              <option>5</option>
+              <option>6</option>
+              <option>7</option>
+              <option>8</option>
+              <option>9</option>
+              <option>10</option>
+              <option>11</option>
+              <option>12</option>
+            </select>
+          </td>
+          <td ng-class="{notSet: route.attributes.status == 'Not Set', set: route.attributes.status == 'Set', tweek: route.attributes.status == 'Initial Tweek', forRun: route.attributes.status == 'For Ran', complete: route.attributes.status == 'Complete'}">
+
+
+            <button type="button" class="btn btn-default" ng-click="changeStatus()">
+              <span class="glyphicon glyphicon-align-left" aria-hidden="true"></span>
+            </button>
+
+            <!--
+                <select class="form-control" ng-model="route.attributes.status" ng-change="saveRoute(route)" name="status">
+                  <option>Not Set</option>
+                  <option>Set</option>
+                  <option>Initial Tweek</option>
+                  <option>For Ran</option>
+                  <option>Complete</option>
+                </select>
+                -->
+          </td>
+          <td>
+            <select class="form-control" ng-model="route.attributes.setter" name="setter" ng-options="setter as setter.attributes.username for setter in setters" ng-change="saveRoute(route)">
+              <option></option>
+            </select>
+          </td>
+          <td><button class="btn btn-primary" ng-click="editRoute(route)">View</button></td>
+          <td><button class="btn btn-danger" ng-click="deleteRoute(route)">Delete</button></td>
         </tr>
       <tbody>
     </table>
+
 
     <div class="row">
       <div class="col-md-1 col-md-offset-11">

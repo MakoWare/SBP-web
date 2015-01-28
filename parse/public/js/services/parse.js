@@ -101,6 +101,7 @@ angular.module('parseService', [])
                 var query = new Parse.Query("Wall");
                 query.equalTo("gym", gym);
                 query.include("routes");
+                query.include("routes.wall");
                 query.find({
                     success: function(results){
                         callback(results);
@@ -116,6 +117,7 @@ angular.module('parseService', [])
                 var query = new Parse.Query("Wall");
                 query.include("routes");
                 query.include("routes.setter");
+                query.include("routes.wall");
                 query.get(id, {
                     success: function(results){
                         callback(results);
@@ -147,6 +149,7 @@ angular.module('parseService', [])
             getRoutes: function(callback){
                 var query = new Parse.Query("Route");
                 query.include("setter");
+                query.include("wall");
                 query.limit(1000);
                 query.find({
                     success: function(results){
@@ -163,6 +166,7 @@ angular.module('parseService', [])
                 var query = new Parse.Query("Route");
                 query.include("setter");
                 query.include("holds");
+                query.include("wall");
                 query.get(id, {
                     success: function(results){
                         callback(results);
@@ -215,6 +219,170 @@ angular.module('parseService', [])
                 return route;
             },
 
+
+            //Save Route
+            saveRoute: function(route, callback){
+                //First Set Everything
+                switch(route.attributes.color){
+                case "gray":
+                    route.attributes.order = 0;
+                    break;
+                case "yellow":
+                    route.attributes.order = 1;
+                    break;
+                case "green":
+                    route.attributes.order = 2;
+                    break;
+                case "red":
+                    route.attributes.order = 3;
+                    break;
+                case "blue":
+                    route.attributes.order = 4;
+                    break;
+                case "orange":
+                    route.attributes.order = 5;
+                    break;
+                case "purple":
+                    route.attributes.order = 6;
+                    break;
+                case "black":
+                    route.attributes.order = 7;
+                    break;
+                };
+
+                for(var attr in route.attributes) {
+                    route.set(attr, route.attributes[attr]);
+                }
+
+
+
+                route.save({
+                    success: function(route){
+                        //If the Route's current Wall is different, remove it from that Wall
+                        if(route.attributes.wall){
+                            var routeIds = [];
+                            route.attributes.wall.attributes.routes.forEach(function(route){
+                                routeIds.push(route.id);
+                            });
+                        } else {
+                            route.save({
+                                success: function(route){
+                                    callback(route);
+                                },
+                                error: function(route, error){
+                                    callback(error);
+                                }
+                            });
+                        }
+                        if(route.attributes.wall && ($.inArray(route.id, routeIds) == -1)){
+                            var query = new Parse.Query("Wall");
+                            query.equalTo("routes", route);
+                            query.first({
+                                success: function(wall){
+                                    if(wall){
+                                        wall.remove("routes", route);
+                                        wall.save({
+                                            success: function(wall){
+                                                //If Route has a Wall set, add it to the Wall, if Wall doesn't already have it
+                                                if(route.attributes.wall){
+                                                    route.attributes.wall.add("routes", route);
+                                                    route.attributes.wall.save({
+                                                        success: function(wall){
+                                                            route.save({
+                                                                success: function(route){
+                                                                    callback(route);
+                                                                },
+                                                                error: function(route, error){
+                                                                    callback(error);
+                                                                }
+                                                            });
+                                                        },
+                                                        error: function(route, error){
+                                                            callback(error);
+                                                        }
+                                                    });
+                                                } else {
+                                                    route.save({
+                                                        success: function(route){
+                                                            callback(route);
+                                                        },
+                                                        error: function(route, error){
+                                                            callback(error);
+                                                        }
+                                                    });
+                                                }
+                                            },
+                                            error: function(wall, error){
+                                                callback(error);
+                                            }
+                                        });
+                                    } else {
+                                        if(route.attributes.wall){
+                                            route.attributes.wall.add("routes", route);
+                                            route.attributes.wall.save({
+                                                success: function(wall){
+                                                    route.save({
+                                                        success: function(route){
+                                                            callback(route);
+                                                        },
+                                                        error: function(route, error){
+                                                            callback(error);
+                                                        }
+                                                    });
+                                                },
+                                                error: function(route, error){
+                                                    callback(error);
+                                                }
+                                            });
+                                        } else {
+                                            route.save({
+                                                success: function(route){
+                                                    callback(route);
+                                                },
+                                                error: function(route, error){
+                                                    callback(error);
+                                                }
+                                            });
+                                        }
+                                    }
+                                },
+                                error: function(error){
+                                    callback(error);
+                                }
+                            });
+                        } else {
+                            //If Route has a Wall set, add it to the Wall, if Wall doesn't already have it
+                            if(route.attributes.wall){
+                                route.attributes.wall.add("routes", route);
+                                route.attributes.wall.save({
+                                    success: function(wall){
+                                        route.save({
+                                            success: function(route){
+                                                callback(route);
+                                            },
+                                            error: function(route, error){
+                                                callback(error);
+                                            }
+                                        });
+                                    },
+                                    error: function(route, error){
+                                        callback(error);
+                                    }
+                                });
+                            } else {
+                                route.save({
+                                    success: function(route){
+                                        callback(route);
+                                    },
+                                    error: function(route, error){
+                                        callback(error);
+                                    }
+                                });
+                            }
+                        }
+                    }
+                });
+            },
 
             //Delete Route
             deleteRoute: function(route, callback){

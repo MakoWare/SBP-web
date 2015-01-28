@@ -150,20 +150,10 @@ var RoutesCtrl = function($scope, $location, ParseService, GlobalService){
     //Save Route
     $scope.saveRoute = function(route){
         GlobalService.showSpinner();
-        route.set("status", route.attributes.status);
-        route.set("setter", route.attributes.setter);
-        route.set("grade", route.attributes.grade);
-        route.set("wall", route.attributes.wall);
-        route.save({
-            success: function(route){
-                GlobalService.dismissSpinner();
-            },
-            error: function(route, error){
-                console.log(error);
-            }
+        ParseService.saveRoute(route, function(results){
+            GlobalService.dismissSpinner();
         });
     };
-
 
 
     $scope.init();
