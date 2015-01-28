@@ -75,36 +75,10 @@
         </div>
 
         <div class="row">
-          <div class="col-xs-2 form-group">
-            <label for="risk">Risk</label>
-            <select class="form-control" ng-model="route.attributes.risk" name="risk">
-              <option>1</option>
-              <option>2</option>
-              <option>3</option>
-              <option>4</option>
-              <option>5</option>
-            </select>
-          </div>
-
-          <div class="col-xs-2 form-group">
-            <label for="intensity">Intensity</label>
-            <select class="form-control" ng-model="route.attributes.intensity" name="intensity">
-              <option>1</option>
-              <option>2</option>
-              <option>3</option>
-              <option>4</option>
-              <option>5</option>
-            </select>
-          </div>
-
-          <div class="col-xs-2 form-group">
-            <label for="complexity">Complexity</label>
-            <select class="form-control" ng-model="route.attributes.complexity" name="complexity">
-              <option>1</option>
-              <option>2</option>
-              <option>3</option>
-              <option>4</option>
-              <option>5</option>
+          <div class="col-xs-3 form-group">
+            <label for="wall">Wall</label>
+            <select class="form-control" ng-model="route.attributes.wall" name="wall" ng-options="wall as wall.attributes.name for wall in walls">
+              <option></option>
             </select>
           </div>
 
@@ -293,6 +267,39 @@
               <option>unicorn</option>
               <option>tictacky</option>
               <option>starfish</option>
+            </select>
+          </div>
+
+          <div class="col-xs-2 form-group">
+            <label for="risk">Risk</label>
+            <select class="form-control" ng-model="route.attributes.risk" name="risk">
+              <option>1</option>
+              <option>2</option>
+              <option>3</option>
+              <option>4</option>
+              <option>5</option>
+            </select>
+          </div>
+
+          <div class="col-xs-2 form-group">
+            <label for="intensity">Intensity</label>
+            <select class="form-control" ng-model="route.attributes.intensity" name="intensity">
+              <option>1</option>
+              <option>2</option>
+              <option>3</option>
+              <option>4</option>
+              <option>5</option>
+            </select>
+          </div>
+
+          <div class="col-xs-2 form-group">
+            <label for="complexity">Complexity</label>
+            <select class="form-control" ng-model="route.attributes.complexity" name="complexity">
+              <option>1</option>
+              <option>2</option>
+              <option>3</option>
+              <option>4</option>
+              <option>5</option>
             </select>
           </div>
         </div>

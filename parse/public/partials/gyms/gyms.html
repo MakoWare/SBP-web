@@ -12,6 +12,7 @@
       <tr>
         <td><a href="" ng-click="predicate = 'attributes.name'; reverse=!reverse">Name</a></td>
         <td><a href="" ng-click="predicate = 'attributes.walls.length'; reverse=!reverse">Number of Walls</a></td>
+        <td><a href="" ng-click="predicate = 'attributes.routes.length'; reverse=!reverse">Number of Routes</a></td>
         <td>Set as Working Gym</td>
         <td>View</td>
       </tr>
@@ -20,6 +21,7 @@
       <tr ng-repeat="gym in gyms | orderBy:predicate:reverse">
         <td>{{gym.attributes.name}}</td>
         <td>{{gym.attributes.walls.length}}</td>
+        <td>{{gym.attributes.routes.length}}</td>
         <td><button class="btn btn-default" ng-click="setGym(gym)">Work in this Gym</button></td>
         <td><button class="btn btn-primary" ng-click="viewGym(gym)">View</button></td>
       </tr>

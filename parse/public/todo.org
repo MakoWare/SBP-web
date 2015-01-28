@@ -23,7 +23,8 @@
 ** DONE Search Functionality on all Tables
    CLOSED: [2015-01-26 Mon 13:36]
 
-** TODO Be able to Select Wall Route will be on
+** DONE Be able to Select Wall Route will be on
+   CLOSED: [2015-01-28 Wed 12:29]
 
 ** DONE Safe Delete - remove from Wall
    CLOSED: [2015-01-27 Tue 13:07]
@@ -152,8 +153,8 @@ Luise
 ** DONE Scale only to v12
    CLOSED: [2015-01-28 Wed 11:42]
 
-
-** TODO Make All Tables the same
+** DONE Make All Tables the same
+   CLOSED: [2015-01-28 Wed 11:53]
 
 
 ** TODO Change Color of status boxes - not Ciruit colors

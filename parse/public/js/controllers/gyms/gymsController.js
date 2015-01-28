@@ -15,9 +15,24 @@ var GymsCtrl = function($scope, $location, ParseService, GlobalService){
     $scope.getGyms = function(){
         ParseService.getGyms(function(results){
             $scope.gyms = results;
+            $scope.calculateRoutes();
             $scope.$apply();
             console.log(results);
         });
+    };
+
+
+    //Calculate Routes
+    $scope.calculateRoutes = function(){
+        $scope.gyms.forEach(function(gym){
+            gym.attributes.routes = [];
+            gym.attributes.walls.forEach(function(wall){
+                wall.attributes.routes.forEach(function(route){
+                    gym.attributes.routes.push(route);
+                });
+            });
+        });
+        console.log($scope.gyms);
     };
 
     //Set Gym

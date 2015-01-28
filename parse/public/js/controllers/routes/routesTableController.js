@@ -13,7 +13,7 @@ var RoutesTableCtrl = function($scope, $location, $modalInstance, ParseService, 
         GlobalService.showSpinner();
         ParseService.getRoutes(function(results){
             $scope.routes = results;
-
+            $scope.getSetters();
             $scope.routes.forEach(function(route){
                 route.attributes.add = false;
                 currentRoutes.forEach(function(currentRoute){
@@ -55,6 +55,24 @@ var RoutesTableCtrl = function($scope, $location, $modalInstance, ParseService, 
             $scope.getRoutes();
         }
     };
+
+    //Get Setters
+    $scope.getSetters = function(){
+        var currentUser = ParseService.getCurrentUser();
+        ParseService.getUsersByGym(currentUser.get("currentGym"), function(results){
+            $scope.setters = results;
+            $scope.routes.forEach(function(route){
+                var currentSetter = route.attributes.setter;
+                results.forEach(function(setter){
+                    if(currentSetter && currentSetter.id == setter.id){
+                        route.attributes.setter = setter;
+                    }
+                });
+            });
+            $scope.$apply();
+        });
+    };
+
 
     $scope.setUpDatePicker = function(){
         $scope.today = function() {

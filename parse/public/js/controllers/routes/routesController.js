@@ -37,6 +37,13 @@ var RoutesCtrl = function($scope, $location, ParseService, GlobalService){
         });
     };
 
+    //Status Changed
+    $scope.changeStatus = function(){
+        console.log("change Status");
+
+    };
+
+    //Set up Date Picker
     $scope.setUpDatePicker = function(){
         $scope.today = function() {
             $scope.dt = new Date();
@@ -69,6 +76,25 @@ var RoutesCtrl = function($scope, $location, ParseService, GlobalService){
         $scope.format = $scope.formats[0];
     };
 
+
+    //Get Walls
+    $scope.getWalls = function(){
+        var currentUser = ParseService.getCurrentUser();
+        ParseService.getWallsByGym(currentUser.get('currentGym'), function(results){
+            $scope.walls = results;
+            $scope.routes.forEach(function(route){
+                var currentWall = route.attributes.wall;
+                results.forEach(function(wall){
+                    if(currentWall && currentWall.id == wall.id){
+                        route.attributes.wall = wall;
+                    }
+                });
+            });
+            $scope.$apply();
+        });
+    };
+
+
     //Search Routes
     $scope.searchRoutes = function(){
         if($scope.dt){
@@ -89,6 +115,7 @@ var RoutesCtrl = function($scope, $location, ParseService, GlobalService){
                     GlobalService.dismissSpinner();
                     $scope.routes = results;
                     $scope.getSetters();
+                    $scope.getWalls();
                     $scope.$apply();
                 },
                 error: function(error){
@@ -114,8 +141,8 @@ var RoutesCtrl = function($scope, $location, ParseService, GlobalService){
     $scope.deleteRoute = function(route){
         GlobalService.showSpinner();
         ParseService.deleteRoute(route, function(results){
+            GlobalService.dismissSpinner();
             $scope.getRoutes();
-
             $scope.$apply();
         });
     };
@@ -126,6 +153,7 @@ var RoutesCtrl = function($scope, $location, ParseService, GlobalService){
         route.set("status", route.attributes.status);
         route.set("setter", route.attributes.setter);
         route.set("grade", route.attributes.grade);
+        route.set("wall", route.attributes.wall);
         route.save({
             success: function(route){
                 GlobalService.dismissSpinner();

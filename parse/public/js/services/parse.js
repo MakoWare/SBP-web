@@ -218,11 +218,39 @@ angular.module('parseService', [])
 
             //Delete Route
             deleteRoute: function(route, callback){
-                route.destroy({
-                    success: function(results){
-                        callback(results);
+                var query = new Parse.Query("Wall");
+                query.equalTo("routes", route);
+                query.first({
+                    success: function(wall){
+                        if(wall){
+                            wall.remove("routes", route);
+                            wall.save({
+                                success: function(wall){
+                                    route.destroy({
+                                        success: function(result){
+                                            callback(result);
+                                        },
+                                        error: function(object, error){
+                                            callback(error);
+                                        }
+                                    });
+                                },
+                                error: function(wall, error){
+                                    callback(error);
+                                }
+                            });
+                        } else {
+                            route.destroy({
+                                success: function(result){
+                                    callback(result);
+                                },
+                                error: function(object, error){
+                                    callback(error);
+                                }
+                            });
+                        }
                     },
-                    error: function(route, error){
+                    error: function(error){
                         callback(error);
                     }
                 });

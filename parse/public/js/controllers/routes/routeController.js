@@ -30,6 +30,21 @@ var RouteCtrl = function($scope, $location, $modal, ParseService, GlobalService)
         });
     };
 
+    //Get Walls
+    $scope.getWalls = function(){
+        var currentUser = ParseService.getCurrentUser();
+        ParseService.getWallsByGym(currentUser.get('currentGym'), function(results){
+            $scope.walls = results;
+            var currentWall = $scope.route.attributes.wall;
+            results.forEach(function(wall){
+                if(currentWall && currentWall.id == wall.id){
+                    $scope.route.attributes.wall = wall;
+                }
+            });
+            $scope.$apply();
+        });
+    };
+
     //Create Modal
     $scope.createModal = function(){
         var modalInstance = $modal.open({
@@ -74,6 +89,7 @@ var RouteCtrl = function($scope, $location, $modal, ParseService, GlobalService)
             $scope.$apply();
         });
 
+        $scope.getWalls();
     };
 
     //Save Route
@@ -130,49 +146,12 @@ var RouteCtrl = function($scope, $location, $modal, ParseService, GlobalService)
     //Delete Route
     $scope.deleteRoute = function(){
         GlobalService.showSpinner();
-        var query = new Parse.Query("Wall");
-        query.equalTo("routes", $scope.route);
-        query.first({
-            success: function(wall){
-                if(wall){
-                    wall.remove("routes", $scope.route);
-                    wall.save({
-                        success: function(wall){
-                            $scope.route.destroy({
-                                success: function(result){
-                                    GlobalService.dismissSpinner();
-                                    $location.path("/routes");
-                                    $scope.$apply();
-                                },
-                                error: function(object, error){
-                                    GlobalService.dismissSpinner();
-                                    alert(GlobalService.errorMessage + error.message);
-                                    console.log(error);
-                                }
-                            });
-                        },
-                        error: function(wall, error){
-                            GlobalService.dismissSpinner();
-                            alert(GlobalService.errorMessage + error.message);
-                            console.log(error);
-                        }
-                    });
-                } else {
-                    $scope.route.destroy({
-                        success: function(result){
-                            GlobalService.dismissSpinner();
-                            $location.path("/routes");
-                            $scope.$apply();
-                        },
-                        error: function(object, error){
-                            GlobalService.dismissSpinner();
-                            alert(GlobalService.errorMessage + error.message);
-                            console.log(error);
-                        }
-                    });
-                }
-            },
-            error: function(error){
+        ParseService.deleteRoute($scope.route, function(results){
+            GlobalService.dismissSpinner();
+            if(!results.message){
+                $location.path("/routes");
+                $scope.$apply();
+            } else {
                 alert(GlobalService.errorMessage + error.message);
                 console.log(error);
             }

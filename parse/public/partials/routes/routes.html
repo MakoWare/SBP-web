@@ -31,8 +31,9 @@
         <td><a href="" ng-click="predicate = 'attributes.grade'; reverse=!reverse">Grade</a></td>
         <td><a href="" ng-click="predicate = 'attributes.status'; reverse=!reverse">Status</a></td>
         <td><a href="" ng-click="predicate = 'attributes.setter.attributes.username'; reverse=!reverse">Setter</a></td>
-        <td><a href="" ng-click="predicate = 'createdAt'; reverse=!reverse">Created On</a></td>
+        <td><a href="" ng-click="predicate = 'attributes.wall'; reverse=!reverse">Wall</a></td>
         <td>View</td>
+        <td>Delete</td>
       </tr>
     </thead>
     <tbody id="routesTable">
@@ -56,6 +57,13 @@
           </select>
         </td>
         <td ng-class="{notSet: route.attributes.status == 'Not Set', set: route.attributes.status == 'Set', tweek: route.attributes.status == 'Initial Tweek', forRun: route.attributes.status == 'For Ran', complete: route.attributes.status == 'Complete'}">
+
+
+          <button type="button" class="btn btn-default" ng-click="changeStatus()">
+            <span class="glyphicon glyphicon-align-left" aria-hidden="true"></span>
+          </button>
+
+          <!--
           <select class="form-control" ng-model="route.attributes.status" ng-change="saveRoute(route)" name="status">
             <option>Not Set</option>
             <option>Set</option>
@@ -63,14 +71,20 @@
             <option>For Ran</option>
             <option>Complete</option>
           </select>
+          -->
         </td>
         <td>
           <select class="form-control" ng-model="route.attributes.setter" name="setter" ng-options="setter as setter.attributes.username for setter in setters" ng-change="saveRoute(route)">
             <option></option>
           </select>
         </td>
-        <td>{{(route.createdAt.getMonth() + 1) + "/" + route.createdAt.getDate() + "/" + route.createdAt.getFullYear()}}</td>
+        <td>
+          <select class="form-control" ng-model="route.attributes.wall" ng-change="saveRoute(route)" name="wall" ng-options="wall as wall.attributes.name for wall in walls">
+            <option></option>
+          </select>
+        </td>
         <td><button class="btn btn-primary" ng-click="editRoute(route)">View</button></td>
+        <td><button class="btn btn-danger" ng-click="deleteRoute(route)">Delete</button></td>
       </tr>
     <tbody>
   </table>
