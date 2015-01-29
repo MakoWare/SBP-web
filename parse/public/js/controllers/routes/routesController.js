@@ -17,6 +17,7 @@ var RoutesCtrl = function($scope, $location, ParseService, GlobalService){
             $scope.routes = results;
             $scope.$apply();
             $scope.getSetters();
+            $scope.getWalls();
         });
     };
 

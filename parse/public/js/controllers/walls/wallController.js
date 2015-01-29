@@ -248,29 +248,10 @@ var WallCtrl = function($scope, $location, $modal, ParseService, GlobalService){
     //Save Wall
     $scope.saveWall = function(){
         GlobalService.showSpinner();
-        var wall = $scope.wall;
-        console.log($scope.wall);
-        wall.set("name", wall.attributes.name);
-        wall.set("routes", wall.attributes.routes);
-
-        //First Save each Route to the Wall
-        var routePromises = [];
-        wall.attributes.routes.forEach(function(route){
-            route.set("wall", $scope.wall);
-            routePromises.push(route.save());
-        });
-
-        Parse.Promise.when(routePromises).then(function(){
-            wall.save({
-                success: function(wall){
-                    GlobalService.dismissSpinner();
-                    $location.path("/walls");
-                    $scope.$apply();
-                },
-                error: function(wall, error){
-                    alert(GlobalService.errorMessage + error.message);
-                }
-            });
+        ParseService.saveWall($scope.wall, function(result){
+            GlobalService.dismissSpinner();
+            $location.path("/walls");
+            $scope.$apply();
         });
     };
 

@@ -184,7 +184,7 @@ var GymCtrl = function($scope, $location, $modal, ParseService, GlobalService){
                 case "2":
                     if(route.attributes.color == "yellow"){
                         v2.yellow++;
-                    } else if(route.attributes.rolor == "green"){
+                    } else if(route.attributes.color == "green"){
                         v2.green++;
                     }
                     break;
@@ -277,6 +277,7 @@ var GymCtrl = function($scope, $location, $modal, ParseService, GlobalService){
         new Chartist.Bar("#routeDistribution", data, options).on('draw', function(data) {
             var style = "";
             if(data.type == "bar"){
+
                 switch(data.index){
                 case 0:
                     style = "stroke: gray; fill: gray; stroke-width: 30px";

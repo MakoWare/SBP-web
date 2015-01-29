@@ -142,6 +142,35 @@ angular.module('parseService', [])
                 return wall;
             },
 
+            saveWall: function(wall, callback){
+                //Update lastSet
+                var today = new Date();
+                wall.attributes.lastSet = today;
+
+                //Set all attributes
+                for(var attr in wall.attributes) {
+                    wall.set(attr, wall.attributes[attr]);
+                }
+
+                //Set all route.atttributes.wall = wall;
+                var routePromises = [];
+                wall.attributes.routes.forEach(function(route){
+                    route.set("wall", wall);
+                    routePromises.push(route.save());
+                });
+
+                Parse.Promise.when(routePromises).then(function(){
+                    wall.save({
+                        success: function(result){
+                            callback(result);
+                        },
+                        error: function(wall, error){
+                            callback(result);
+                        }
+                    });
+                });
+            },
+
 
             //***** Routes ******//
 
