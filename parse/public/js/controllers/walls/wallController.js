@@ -41,10 +41,34 @@ var WallCtrl = function($scope, $location, $modal, ParseService, GlobalService){
 
     //Get Setters
     $scope.getSetters = function(){
+        GlobalService.showSpinner();
         var currentUser = ParseService.getCurrentUser();
         ParseService.getUsersByGym(currentUser.get("currentGym"), function(results){
             $scope.setters = results;
             $scope.wall.attributes.routes.forEach(function(route){
+
+                var currentStatus = route.attributes.status;
+                switch(currentStatus){
+                case "0":
+                    $("#" + route.id).attr("src", "/images/line1.svg");
+                    break;
+                case "1":
+                    $("#" + route.id).attr("src", "/images/line2.svg");
+                    break;
+                case "2":
+                    $("#" + route.id).attr("src", "/images/line3.svg");
+                    break;
+                case "3":
+                    $("#" + route.id).attr("src", "/images/line4.svg");
+                    break;
+                case "4":
+                    $("#" + route.id).attr("src", "/images/line5.svg");
+                    break;
+                case "5":
+                    $("#" + route.id).attr("src", "/images/line6.svg");
+                    break;
+                }
+
                 var currentSetter = route.attributes.setter;
                 results.forEach(function(setter){
                     if(currentSetter && currentSetter.id == setter.id){
@@ -53,6 +77,7 @@ var WallCtrl = function($scope, $location, $modal, ParseService, GlobalService){
                 });
             });
             $scope.$apply();
+            GlobalService.dismissSpinner();
         });
     };
 
@@ -188,6 +213,37 @@ var WallCtrl = function($scope, $location, $modal, ParseService, GlobalService){
         });
     };
 
+    //Status Changed
+    $scope.changeStatus = function(route){
+        var currentStatus = route.attributes.status;
+        switch(currentStatus){
+        case "0":
+            route.attributes.status = "1";
+            $("#" + route.id).attr("src", "/images/line2.svg");
+            break;
+        case "1":
+            route.attributes.status = "2";
+            $("#" + route.id).attr("src", "/images/line3.svg");
+            break;
+        case "2":
+            route.attributes.status = "3";
+            $("#" + route.id).attr("src", "/images/line4.svg");
+            break;
+        case "3":
+            route.attributes.status = "4";
+            $("#" + route.id).attr("src", "/images/line5.svg");
+            break;
+        case "4":
+            route.attributes.status = "5";
+            $("#" + route.id).attr("src", "/images/line6.svg");
+            break;
+        case "5":
+            route.attributes.status = "0";
+            $("#" + route.id).attr("src", "/images/line1.svg");
+            break;
+        }
+        $scope.saveRoute(route);
+    };
 
     //Save Wall
     $scope.saveWall = function(){

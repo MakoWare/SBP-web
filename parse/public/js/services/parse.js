@@ -205,7 +205,7 @@ angular.module('parseService', [])
                 route.set("grade", "");
                 route.set("color", "");
                 route.set("setterComments", "");
-                route.set("status", "Not Set");
+                route.set("status", "0");
                 route.set("createdBy", user);
                 route.set("gymCreatedAt", gym);
                 route.set("holds", []);
@@ -254,8 +254,6 @@ angular.module('parseService', [])
                     route.set(attr, route.attributes[attr]);
                 }
 
-
-
                 route.save({
                     success: function(route){
                         //If the Route's current Wall is different, remove it from that Wall
@@ -275,6 +273,7 @@ angular.module('parseService', [])
                             });
                         }
                         if(route.attributes.wall && ($.inArray(route.id, routeIds) == -1)){
+                            console.log("route in different wall");
                             var query = new Parse.Query("Wall");
                             query.equalTo("routes", route);
                             query.first({
@@ -351,8 +350,9 @@ angular.module('parseService', [])
                                 }
                             });
                         } else {
+                            //Route has same wall
                             //If Route has a Wall set, add it to the Wall, if Wall doesn't already have it
-                            if(route.attributes.wall){
+                            if(route.attributes.wall && ($.inArray(route.id, routeIds) == -1)){
                                 route.attributes.wall.add("routes", route);
                                 route.attributes.wall.save({
                                     success: function(wall){

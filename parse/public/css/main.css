@@ -24,22 +24,26 @@ ul.nav li.dropdown:hover > ul.dropdown-menu {
 
 }
 
-.notSet {
-    background-color: #e74c3c;
+.status0 {
+    background-color: rgba(192, 57, 23, 1)
 }
 
-.set {
-    background-color: #3498db;
+.status1 {
+    background-color: rgba(230, 126, 34,1.0)
 }
 
-.tweek {
-    background-color: #e67e22
+.status2 {
+    background-color: rgba(241, 196, 15,1.0)
 }
 
-.forRun {
-    background-color: #f1c40f;
+.status3 {
+    background-color: rgba(46, 204, 113,1.0)
 }
 
-.complete {
-    background-color: #2ecc71;
+.status4 {
+    background-color: rgba(52, 152, 219,1.0)
+}
+
+.status5 {
+    background-color: rgba(155, 89, 182,1.0)
 }

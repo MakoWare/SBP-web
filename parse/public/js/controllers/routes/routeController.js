@@ -88,15 +88,77 @@ var RouteCtrl = function($scope, $location, $modal, ParseService, GlobalService)
             });
             $scope.$apply();
         });
-
         $scope.getWalls();
+
+
+
+        var currentStatus = $scope.route.attributes.status;
+        console.log(currentStatus);
+        switch(currentStatus){
+        case "0":
+            $("#statusImage").attr("src", "/images/line1.svg");
+            break;
+        case "1":
+            $("#statusImage").attr("src", "/images/line2.svg");
+            break;
+        case "2":
+            $("#statusImage").attr("src", "/images/line3.svg");
+            break;
+        case "3":
+            $("#statusImage").attr("src", "/images/line4.svg");
+            break;
+        case "4":
+            $("#statusImage").attr("src", "/images/line5.svg");
+            break;
+        case "5":
+            $("#statusImage").attr("src", "/images/line6.svg");
+            break;
+        }
+
     };
+
+    //Status Changed
+    $scope.changeStatus = function(route){
+        var currentStatus = route.attributes.status;
+        switch(currentStatus){
+        case "0":
+            route.attributes.status = "1";
+            $("#statusImage").attr("src", "/images/line2.svg");
+            break;
+        case "1":
+            route.attributes.status = "2";
+            $("#statusImage").attr("src", "/images/line3.svg");
+            break;
+        case "2":
+            route.attributes.status = "3";
+            $("#statusImage").attr("src", "/images/line4.svg");
+            break;
+        case "3":
+            route.attributes.status = "4";
+            $("#statusImage").attr("src", "/images/line5.svg");
+            break;
+        case "4":
+            route.attributes.status = "5";
+            $("#statusImage").attr("src", "/images/line6.svg");
+            break;
+        case "5":
+            route.attributes.status = "0";
+            $("#statusImage").attr("src", "/images/line1.svg");
+            break;
+        }
+    };
+
+
 
     //Save Route
     $scope.saveRoute = function(){
         GlobalService.showSpinner();
+        var spinning = true;
         ParseService.saveRoute($scope.route, function(results){
-            GlobalService.dismissSpinner();
+            if(spinning){
+                GlobalService.dismissSpinner();
+                spinning = false;
+            }
             $location.path("/routes");
             $scope.$apply();
         });

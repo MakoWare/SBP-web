@@ -56,11 +56,9 @@
             <option>12</option>
           </select>
         </td>
-        <td ng-class="{notSet: route.attributes.status == 'Not Set', set: route.attributes.status == 'Set', tweek: route.attributes.status == 'Initial Tweek', forRun: route.attributes.status == 'For Ran', complete: route.attributes.status == 'Complete'}">
-
-
-          <button type="button" class="btn btn-default" ng-click="changeStatus()">
-            <span class="glyphicon glyphicon-align-left" aria-hidden="true"></span>
+        <td ng-class="{status0: route.attributes.status == '0', status1: route.attributes.status == '1', status2: route.attributes.status == '2', status3: route.attributes.status == '3', status4: route.attributes.status == '4', status5: route.attributes.status == '5', status6: route.attributes.status == '6' }" align="center">
+          <button type="button" class="btn btn-default" ng-click="changeStatus(route)">
+              <img width="35" src="" id="{{route.id}}"></img>
           </button>
 
           <!--

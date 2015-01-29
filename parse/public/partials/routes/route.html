@@ -64,13 +64,10 @@
 
           <div class="col-xs-2 form-group">
             <label for="satuts">Status</label>
-            <select class="form-control" ng-model="route.attributes.status" name="status">
-              <option>Not Set</option>
-              <option>Set</option>
-              <option>Initial Tweek</option>
-              <option>For Ran</option>
-              <option>Complete</option>
-            </select>
+            <br>
+            <button type="button" class="btn btn-default" ng-click="changeStatus(route)">
+              <img width="35" src="/images/line1.svg" id="statusImage"></img>
+            </button>
           </div>
         </div>
 
