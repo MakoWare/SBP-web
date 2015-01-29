@@ -52,6 +52,7 @@ var GymCtrl = function($scope, $location, $modal, ParseService, GlobalService){
     //Tab Clicked
     $scope.tabClicked = function(tab){
         if(tab == "routeDistro"){
+            $scope.generateIdealGraph();
             $scope.generateRoutesGraph();
             $scope.tab = "routeDistro";
         } else if(tab == "routes"){
@@ -149,6 +150,40 @@ var GymCtrl = function($scope, $location, $modal, ParseService, GlobalService){
         });
 
     };
+
+
+
+    //Generate Routes Graph
+    $scope.generateIdealGraph = function(){
+
+        var data = {
+            labels: ['v0','v1', 'v2'],
+            series: [
+
+                [3, 4, 5, 3],
+                [7, 6, 3, 3]
+            ]
+        };
+
+        var options = {
+            seriesBarDistance: 0,
+            axisY: {
+                scaleMinSpace: 15,
+                labelInterpolationFnc: function(value) {
+                    return ( value % 1 === 0 ) ? value : '';
+                }
+            }
+        };
+
+        var i = 0;
+        new Chartist.Bar("#idealDistribution", data, options).on('draw', function(data) {
+            console.log(data);
+        });
+    };
+
+
+
+
 
 
     //Generate Routes Graph
@@ -363,6 +398,9 @@ var GymCtrl = function($scope, $location, $modal, ParseService, GlobalService){
             }
         });
     };
+
+
+
 
 
     //Holds Distro Graph

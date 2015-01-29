@@ -158,11 +158,16 @@ Luise
    CLOSED: [2015-01-28 Wed 11:53]
 
 
-** TODO Change Color of status boxes - not Ciruit colors
+** DONE Change Color of status boxes - not Ciruit colors
+   CLOSED: [2015-01-29 Thu 08:55]
 
 
-** TODO Change Status to Boxes - Tap Button - Inc Line
+** DONE Change Status to Boxes - Tap Button - Inc Line
+   CLOSED: [2015-01-29 Thu 08:56]
 
 ** TODO Create Users
 
 ** TODO Add Idealistic Gym Disto to Gyms/:id to Current Route Distro
+
+
+** TODO Quick Route Create
