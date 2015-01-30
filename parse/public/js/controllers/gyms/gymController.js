@@ -52,8 +52,8 @@ var GymCtrl = function($scope, $location, $modal, ParseService, GlobalService){
     //Tab Clicked
     $scope.tabClicked = function(tab){
         if(tab == "routeDistro"){
-            $scope.generateIdealGraph();
             $scope.generateRoutesGraph();
+            $scope.generateIdealGraph();
             $scope.moveGraph();
             $scope.tab = "routeDistro";
         } else if(tab == "routes"){
@@ -185,9 +185,21 @@ var GymCtrl = function($scope, $location, $modal, ParseService, GlobalService){
         };
 
         var i = 0;
+        var j = 0;
         new Chartist.Bar("#idealDistribution", data, options).on('draw', function(data) {
             var style = "";
             if(data.type == "bar"){
+                console.log($scope.graphData);
+
+                var hackData = $scope.graphData[j];
+                if(hackData){
+                    data.element.attr({
+                        x1: hackData.x1,
+                        x2: hackData.x2
+                    });
+                }
+                j++;
+
 
                 switch(data.index){
                 case 0:
@@ -297,6 +309,7 @@ var GymCtrl = function($scope, $location, $modal, ParseService, GlobalService){
 
     //Generate Routes Graph
     $scope.generateRoutesGraph = function(){
+        $scope.graphData = [];
         var v0 = {}; v0.gray = 0; v0.yellow = 0;
         var v1 = {}; v1.yellow = 0;
         var v2 = {}; v2.yellow = 0; v2.green = 0;
@@ -420,7 +433,15 @@ var GymCtrl = function($scope, $location, $modal, ParseService, GlobalService){
         var i = 0;
         new Chartist.Bar("#routeDistribution", data, options).on('draw', function(data) {
             var style = "";
+            if(data.type === 'label' && data.axis === 'x') {
+                data.element.attr({
+                    x: data.x + data.space / 2
+                });
+            }
+
+
             if(data.type == "bar"){
+                $scope.graphData.push(data);
 
                 switch(data.index){
                 case 0:
