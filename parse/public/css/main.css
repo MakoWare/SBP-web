@@ -47,3 +47,9 @@ ul.nav li.dropdown:hover > ul.dropdown-menu {
 .status5 {
     background-color: rgba(155, 89, 182,1.0)
 }
+
+
+#idealDistribution {
+    opacity: 0.4;
+    position: absolute;
+}

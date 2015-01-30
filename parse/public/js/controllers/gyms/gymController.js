@@ -54,6 +54,7 @@ var GymCtrl = function($scope, $location, $modal, ParseService, GlobalService){
         if(tab == "routeDistro"){
             $scope.generateIdealGraph();
             $scope.generateRoutesGraph();
+            $scope.moveGraph();
             $scope.tab = "routeDistro";
         } else if(tab == "routes"){
             $scope.tab = "routes";
@@ -74,7 +75,6 @@ var GymCtrl = function($scope, $location, $modal, ParseService, GlobalService){
 
     //Create Modal
     $scope.createModal = function(){
-        console.log("createModal");
         var modalInstance = $modal.open({
             templateUrl: 'partials/walls/wallsTable.html',
             controller: 'WallsTableCtrl',
@@ -134,10 +134,11 @@ var GymCtrl = function($scope, $location, $modal, ParseService, GlobalService){
         $scope.gym.set("walls", $scope.gym.attributes.walls);
 
         for (var attr in $scope.gym.attributes) {
+            console.log(attr);
+            console.log($scope.gym.attributes[attr]);
             $scope.gym.set(attr, $scope.gym.attributes[attr]);
         }
 
-        console.log($scope.gym);
         $scope.gym.save({
             success: function(gym){
                 GlobalService.dismissSpinner();
@@ -155,35 +156,143 @@ var GymCtrl = function($scope, $location, $modal, ParseService, GlobalService){
 
     //Generate Routes Graph
     $scope.generateIdealGraph = function(){
-
+        var gym = $scope.gym.attributes;
         var data = {
-            labels: ['v0','v1', 'v2'],
+            labels: ['v0', 'v1','v2', 'v3', 'v4', 'v5', 'v6', 'v7', 'v8', 'v9', 'v10', 'v11', 'v12'],
             series: [
-
-                [3, 4, 5, 3],
-                [7, 6, 3, 3]
+                [gym.grayV0, gym.yellowV1, gym.yellowV2, gym.greenV3, gym.greenV4, gym.redV5, gym.blueV6, gym.orangeV7, gym.purpleV6, gym.blackV9, gym.blackV10, gym.blackV11, gym.blackV12],
+                [gym.yellowV0, 0, gym.greenV2, gym.redV3, gym.redV4, gym.blueV5, gym.orangeV6, gym.purpleV7, gym.blackV8, 0, 0, 0, 0],
+                [0, 0, 0, 0, gym.blueV4, gym.orangeV5, gym.purpleV8, 0, 0, 0, 0, 0, 0]
             ]
         };
 
         var options = {
-            seriesBarDistance: 0,
+            seriesBarDistance: 5,
+            stackBars: true,
             axisY: {
-                scaleMinSpace: 15,
+                showGrid: false,
+                showLabel: false,
+
+                offset: 0,
                 labelInterpolationFnc: function(value) {
                     return ( value % 1 === 0 ) ? value : '';
                 }
+            },
+            axisX: {
+                showGrid: false,
+                showLabel: false
             }
         };
 
         var i = 0;
         new Chartist.Bar("#idealDistribution", data, options).on('draw', function(data) {
-            console.log(data);
+            var style = "";
+            if(data.type == "bar"){
+
+                switch(data.index){
+                case 0:
+                    if(i == 0){
+                        style = "stroke: gray; fill: gray; stroke-width: 20px";
+                    } else if(i == 1){
+                        style = "stroke: yellow; fill: yellow; stroke-width: 20px";
+                    }
+                    break;
+                case 1:
+                    style = "stroke: yellow; fill: yellow; stroke-width: 20px";
+                    break;
+                case 2:
+                    if(i == 0){
+                        style = "stroke: yellow; fill: yellow; stroke-width: 20px";
+                    } else if(i == 1){
+                        style = "stroke: green; fill: green; stroke-width: 20px";
+                    }
+                    break;
+                case 3:
+                    if(i == 0){
+                        style = "stroke: green; fill: green; stroke-width: 20px";
+                    } else if(i == 1){
+                        style = "stroke: red; fill: green; stroke-width: 20px";
+                    }
+                    break;
+                case 4:
+                    if(i == 0){
+                        style = "stroke: green; fill: green; stroke-width: 20px";
+                    } else if(i == 1){
+                        style = "stroke: red; fill: green; stroke-width: 20px";
+                    } else if(i == 2){
+                        style = "stroke: blue; fill: green; stroke-width: 20px";
+                    }
+                    break;
+                case 5:
+                    if(i == 0){
+                        style = "stroke: red; fill: green; stroke-width: 20px";
+                    } else if(i == 1){
+                        style = "stroke: blue; fill: green; stroke-width: 20px";
+                    } else if(i == 2){
+                        style = "stroke: orange; fill: green; stroke-width: 20px";
+                    }
+                    break;
+                case 6:
+                    if(i == 0){
+                        style = "stroke: blue; fill: green; stroke-width: 20px";
+                    } else if(i == 1){
+                        style = "stroke: orange; fill: green; stroke-width: 20px";
+                    } else if(i == 2){
+                        style = "stroke: purple; fill: green; stroke-width: 20px";
+                    }
+                    break;
+                case 7:
+                    if(i == 0){
+                        style = "stroke: orange; fill: green; stroke-width: 20px";
+                    } else if(i == 1){
+                        style = "stroke: purple; fill: green; stroke-width: 20px";
+                    }
+                    break;
+                case 8:
+                    if(i == 0){
+                        style = "stroke: purple; fill: green; stroke-width: 20px";
+                    } else if(i == 1){
+                        style = "stroke: black; fill: green; stroke-width: 20px";
+                    }
+                    break;
+                case 9:
+                    style = "stroke: black; fill: green; stroke-width: 20px";
+                    break;
+                case 10:
+                    style = "stroke: black; fill: green; stroke-width: 20px";
+                    break;
+                case 11:
+                    style = "stroke: black; fill: green; stroke-width: 20px";
+                    break;
+                case 12:
+                    style = "stroke: black; fill: green; stroke-width: 20px";
+                    break;
+                };
+                data.element.attr({
+                    style: style
+                });
+
+                if(data.index == 12){
+                    i++;
+                }
+            }
         });
     };
 
 
+    //Move Idea Graph
+    $scope.moveGraph = function(){
+        console.log("moving graph");
+        var idealGraph = $("#idealDistribution");
+        var currentGraph = $("#routeDistribution");
+        console.log(idealGraph);
+        console.log(currentGraph);
 
+        var left = currentGraph.offset().left + 43;
+        var top = currentGraph.offset().top - 15;
 
+        idealGraph.offset({left: left, top: top});
+    };
 
 
     //Generate Routes Graph
@@ -289,17 +398,17 @@ var GymCtrl = function($scope, $location, $modal, ParseService, GlobalService){
             }
         });
 
-
         var data = {
             labels: ['v0','v1', 'v2', 'v3', 'V4', 'v5','v6', 'v7', 'v8', 'V9', 'v10','v11', 'v12'],
             series: [
                 [v0.gray, v1.yellow, v2.yellow, v3.green, v4.green, v5.red, v6.blue, v7.orange, v8.purple, v9.black, v10.black, v11.black, v12.black],
-                [0, 0, v2.green, v3.red, v4.red, v5.blue, v6.orange, v7.purple, v8.black, 0, 0, 0, 0],
+                [v0.yellow, 0, v2.green, v3.red, v4.red, v5.blue, v6.orange, v7.purple, v8.black, 0, 0, 0, 0],
                 [0, 0, 0, 0, v4.blue, v5.orange, v6.purple, 0, 0, 0, 0, 0, 0]
             ]
         };
 
         var options = {
+            seriesBarDistance: 0,
             stackBars: true,
             axisY: {
                 labelInterpolationFnc: function(value) {
@@ -315,77 +424,81 @@ var GymCtrl = function($scope, $location, $modal, ParseService, GlobalService){
 
                 switch(data.index){
                 case 0:
-                    style = "stroke: gray; fill: gray; stroke-width: 30px";
+                    if(i == 0){
+                        style = "stroke: gray; fill: gray; stroke-width: 20px";
+                    } else if(i == 1){
+                        style = "stroke: yellow; fill: yellow; stroke-width: 20px";
+                    }
                     break;
                 case 1:
-                    style = "stroke: yellow; fill: yellow; stroke-width: 30px";
+                    style = "stroke: yellow; fill: yellow; stroke-width: 20px";
                     break;
                 case 2:
                     if(i == 0){
-                        style = "stroke: yellow; fill: yellow; stroke-width: 30px";
+                        style = "stroke: yellow; fill: yellow; stroke-width: 20px";
                     } else if(i == 1){
-                        style = "stroke: green; fill: green; stroke-width: 30px";
+                        style = "stroke: green; fill: green; stroke-width: 20px";
                     }
                     break;
                 case 3:
                     if(i == 0){
-                        style = "stroke: green; fill: green; stroke-width: 30px";
+                        style = "stroke: green; fill: green; stroke-width: 20px";
                     } else if(i == 1){
-                        style = "stroke: red; fill: green; stroke-width: 30px";
+                        style = "stroke: red; fill: green; stroke-width: 20px";
                     }
                     break;
                 case 4:
                     if(i == 0){
-                        style = "stroke: green; fill: green; stroke-width: 30px";
+                        style = "stroke: green; fill: green; stroke-width: 20px";
                     } else if(i == 1){
-                        style = "stroke: red; fill: green; stroke-width: 30px";
+                        style = "stroke: red; fill: green; stroke-width: 20px";
                     } else if(i == 2){
-                        style = "stroke: blue; fill: green; stroke-width: 30px";
+                        style = "stroke: blue; fill: green; stroke-width: 20px";
                     }
                     break;
                 case 5:
                     if(i == 0){
-                        style = "stroke: red; fill: green; stroke-width: 30px";
+                        style = "stroke: red; fill: green; stroke-width: 20px";
                     } else if(i == 1){
-                        style = "stroke: blue; fill: green; stroke-width: 30px";
+                        style = "stroke: blue; fill: green; stroke-width: 20px";
                     } else if(i == 2){
-                        style = "stroke: orange; fill: green; stroke-width: 30px";
+                        style = "stroke: orange; fill: green; stroke-width: 20px";
                     }
                     break;
                 case 6:
                     if(i == 0){
-                        style = "stroke: blue; fill: green; stroke-width: 30px";
+                        style = "stroke: blue; fill: green; stroke-width: 20px";
                     } else if(i == 1){
-                        style = "stroke: orange; fill: green; stroke-width: 30px";
+                        style = "stroke: orange; fill: green; stroke-width: 20px";
                     } else if(i == 2){
-                        style = "stroke: purple; fill: green; stroke-width: 30px";
+                        style = "stroke: purple; fill: green; stroke-width: 20px";
                     }
                     break;
                 case 7:
                     if(i == 0){
-                        style = "stroke: orange; fill: green; stroke-width: 30px";
+                        style = "stroke: orange; fill: green; stroke-width: 20px";
                     } else if(i == 1){
-                        style = "stroke: purple; fill: green; stroke-width: 30px";
+                        style = "stroke: purple; fill: green; stroke-width: 20px";
                     }
                     break;
                 case 8:
                     if(i == 0){
-                        style = "stroke: purple; fill: green; stroke-width: 30px";
+                        style = "stroke: purple; fill: green; stroke-width: 20px";
                     } else if(i == 1){
-                        style = "stroke: black; fill: green; stroke-width: 30px";
+                        style = "stroke: black; fill: green; stroke-width: 20px";
                     }
                     break;
                 case 9:
-                    style = "stroke: black; fill: green; stroke-width: 30px";
+                    style = "stroke: black; fill: green; stroke-width: 20px";
                     break;
                 case 10:
-                    style = "stroke: black; fill: green; stroke-width: 30px";
+                    style = "stroke: black; fill: green; stroke-width: 20px";
                     break;
                 case 11:
-                    style = "stroke: black; fill: green; stroke-width: 30px";
+                    style = "stroke: black; fill: green; stroke-width: 20px";
                     break;
                 case 12:
-                    style = "stroke: black; fill: green; stroke-width: 30px";
+                    style = "stroke: black; fill: green; stroke-width: 20px";
                     break;
                 };
                 data.element.attr({
@@ -478,8 +591,6 @@ var GymCtrl = function($scope, $location, $modal, ParseService, GlobalService){
             }
         });
 
-        console.log(blue);
-        console.log(green);
         var data = {
             labels: ['Crimps','Pinches', 'Jugs', 'Edges', 'Slopers'],
             series: [
