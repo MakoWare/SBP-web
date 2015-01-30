@@ -28,16 +28,16 @@
     <thead>
       <tr>
         <td><a href="" ng-click="predicate = 'attributes.color'; reverse=!reverse">Color</a></td>
-        <td><a href="" ng-click="predicate = 'attributes.grade'; reverse=!reverse">Grade</a></td>
-        <td><a href="" ng-click="predicate = 'attributes.status'; reverse=!reverse">Status</a></td>
-        <td><a href="" ng-click="predicate = 'attributes.setter.attributes.username'; reverse=!reverse">Setter</a></td>
-        <td><a href="" ng-click="predicate = 'attributes.wall'; reverse=!reverse">Wall</a></td>
+          <td><a href="" ng-click="predicate = 'attributes.order'; secondary = 'grade'; reverse=!reverse">Grade</a></td>
+          <td><a href="" ng-click="predicate = 'attributes.status'; secondary = 'attributes.order'; reverse=!reverse">Status</a></td>
+          <td><a href="" ng-click="predicate = 'attributes.setter.attributes.username'; secondary = 'attributes.order'; reverse=!reverse">Setter</a></td>
+        <td><a href="" ng-click="predicate = 'attributes.wall.attributes.name'; reverse=!reverse">Wall</a></td>
         <td>View</td>
         <td>Delete</td>
       </tr>
     </thead>
     <tbody id="routesTable">
-      <tr ng-repeat="route in routes | orderBy:['attributes.order', predicate]:reverse | filter:search:strict">
+      <tr ng-repeat="route in routes | orderBy:[predicate, secondary]:reverse | filter:search:strict">
         <td ng-style="{'background-color': route.attributes.color}"></td>
         <td>
           <select class="form-control" ng-model="route.attributes.grade" ng-change="saveRoute(route)" name="status">

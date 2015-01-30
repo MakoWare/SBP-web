@@ -42,16 +42,16 @@
     <table class="table table-bordered" style="overflow: scroll">
       <thead>
         <tr>
-          <td><a href="" ng-click="predicate = 'attributes.color'; reverse=!reverse">Color</a></td>
-          <td><a href="" ng-click="predicate = 'attributes.grade'; reverse=!reverse">Grade</a></td>
-          <td><a href="" ng-click="predicate = 'attributes.status'; reverse=!reverse">Status</a></td>
-          <td><a href="" ng-click="predicate = 'attributes.setter.attributes.username'; reverse=!reverse">Setter</a></td>
+          <td><a href="" ng-click="predicate = 'attributes.order'; reverse=!reverse">Color</a></td>
+          <td><a href="" ng-click="predicate = 'attributes.order'; secondary = 'grade'; reverse=!reverse">Grade</a></td>
+          <td><a href="" ng-click="predicate = 'attributes.status'; secondary = 'attributes.order'; reverse=!reverse">Status</a></td>
+          <td><a href="" ng-click="predicate = 'attributes.setter.attributes.username'; secondary = 'attributes.order'; reverse=!reverse">Setter</a></td>
           <td>View</td>
           <td>Delete</td>
         </tr>
       </thead>
       <tbody id="routesTable">
-        <tr ng-repeat="route in wall.attributes.routes | orderBy:['attributes.order', predicate]:reverse | filter:search:strict">
+        <tr ng-repeat="route in wall.attributes.routes | orderBy:[predicate, secondary]:reverse | filter:search:strict">
           <td ng-style="{'background-color': route.attributes.color}"></td>
           <td>
             <select class="form-control" ng-model="route.attributes.grade" ng-change="saveRoute(route)" name="status">
@@ -72,7 +72,7 @@
           </td>
           <td ng-class="{status0: route.attributes.status == '1', status1: route.attributes.status == '2', status2: route.attributes.status == '3', status3: route.attributes.status == '4', status4: route.attributes.status == '5', status5: route.attributes.status == '6', status6: route.attributes.status == '6' }" align="center">
             <button type="button" class="btn btn-default" ng-click="changeStatus(route)">
-              <img width="35" src="" id="{{route.id}}"></img>
+              <img width="35" src="" id="{{route.id}}"/>
             </button>
           </td>
           <td>
@@ -83,10 +83,13 @@
           <td><button class="btn btn-primary" ng-click="viewRoute(route)">View</button></td>
           <td><button class="btn btn-danger" ng-click="deleteRoute(route)">Delete</button></td>
         </tr>
-      <tbody>
+      </tbody>
     </table>
+    </div>
+  </div>
 
 
+    <!--
     <div class="row">
       <div class="col-md-1 col-md-offset-11">
         <button class="btn btn-primary" ng-disabled="wallForm.$invalid" ng-click="saveWall()">Save</button>
@@ -94,6 +97,7 @@
     </div>
   </div>
 
+    -->
   <div ng-show="tab == 'routeDistribution'">
     <div class="row">
       <div class="col-md-12">

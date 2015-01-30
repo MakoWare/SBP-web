@@ -2,11 +2,10 @@
 var RoutesCtrl = function($scope, $location, ParseService, GlobalService){
     $scope.init = function(){
         console.log("RoutesCtrl");
-        $scope.predicate = "attributes.grade";
-        //$scope.getRoutes();
-
+        $scope.predicate = "attributes.order";
+        $scope.secondary = "grade";
+        $scope.getRoutes();
         $scope.setUpDatePicker();
-        $scope.searchRoutes();
     },
 
     //Get Routes
@@ -18,13 +17,20 @@ var RoutesCtrl = function($scope, $location, ParseService, GlobalService){
             $scope.$apply();
             $scope.getSetters();
             $scope.getWalls();
+
+            angular.forEach($scope.routes, function (route) {
+                route.grade = parseFloat(route.attributes.grade);
+            });
         });
     };
 
+
     //Get Setters
     $scope.getSetters = function(){
+        GlobalService.showSpinner();
         var currentUser = ParseService.getCurrentUser();
         ParseService.getUsersByGym(currentUser.get("currentGym"), function(results){
+        GlobalService.dismissSpinner();
             $scope.setters = results;
             $scope.routes.forEach(function(route){
                 var currentStatus = route.attributes.status;
@@ -99,7 +105,7 @@ var RoutesCtrl = function($scope, $location, ParseService, GlobalService){
     //Set up Date Picker
     $scope.setUpDatePicker = function(){
         $scope.today = function() {
-            $scope.dt = new Date();
+            $scope.dt = null;
         };
         $scope.today();
 
@@ -132,8 +138,10 @@ var RoutesCtrl = function($scope, $location, ParseService, GlobalService){
 
     //Get Walls
     $scope.getWalls = function(){
+        GlobalService.showSpinner();
         var currentUser = ParseService.getCurrentUser();
         ParseService.getWallsByGym(currentUser.get('currentGym'), function(results){
+            GlobalService.dismissSpinner();
             $scope.walls = results;
             $scope.routes.forEach(function(route){
                 var currentWall = route.attributes.wall;
@@ -146,7 +154,6 @@ var RoutesCtrl = function($scope, $location, ParseService, GlobalService){
             $scope.$apply();
         });
     };
-
 
     //Search Routes
     $scope.searchRoutes = function(){

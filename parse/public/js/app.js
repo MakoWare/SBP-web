@@ -7,7 +7,7 @@ angular.module('sbp', [
     'ui.bootstrap',
     'ngRoute'
   ])
-  .config(function ($routeProvider) {
+  .config(function ($routeProvider, $controllerProvider) {
     $routeProvider
 //Login
       .when('/', {
@@ -63,4 +63,5 @@ angular.module('sbp', [
       .otherwise({
         redirectTo: '/'
       });
+      $controllerProvider.allowGlobals();
   });

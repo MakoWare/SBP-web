@@ -169,5 +169,12 @@ Luise
 
 ** TODO Add Idealistic Gym Disto to Gyms/:id to Current Route Distro
 
-
 ** TODO Quick Route Create
+
+
+* Thursday 1/29
+
+** TODO Remember location and go back after View
+
+** DONE Order By - Routes
+   CLOSED: [2015-01-30 Fri 13:27]

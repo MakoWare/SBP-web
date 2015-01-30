@@ -1,7 +1,8 @@
 //Wall Controller
 var WallCtrl = function($scope, $location, $modal, ParseService, GlobalService){
     $scope.init = function(){
-        $scope.predicate = "attributes.grade";
+        $scope.predicate = "attributes.order";
+        $scope.secondary = "grade";
         var last = $location.url().split("/")[$location.url().split("/").length -1];
         if(last == "create"){
             $scope.tab = "wallInfo";
@@ -30,6 +31,9 @@ var WallCtrl = function($scope, $location, $modal, ParseService, GlobalService){
             console.log(results);
             $scope.$apply();
             $scope.setUpWall();
+            angular.forEach($scope.wall.attributes.routes, function (route) {
+                route.grade = parseFloat(route.attributes.grade);
+            });
         });
     };
 
@@ -135,6 +139,13 @@ var WallCtrl = function($scope, $location, $modal, ParseService, GlobalService){
             console.log(query);
             query.find({
                 success: function(results){
+                    $scope.predicate = "attributes.order";
+                    $scope.secondary = "grade";
+
+                    angular.forEach(results, function (route) {
+                        route.grade = parseFloat(route.attributes.grade);
+                    });
+
                     GlobalService.dismissSpinner();
                     console.log(results);
                     $scope.wall.attributes.routes = results;
@@ -289,8 +300,6 @@ var WallCtrl = function($scope, $location, $modal, ParseService, GlobalService){
             });
         });
     };
-
-
 
     //Routes Distro Graph
     //Generate Routes Graph
