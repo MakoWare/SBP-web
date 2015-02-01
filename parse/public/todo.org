@@ -167,7 +167,8 @@ Luise
 
 ** TODO Create Users
 
-** TODO Add Idealistic Gym Disto to Gyms/:id to Current Route Distro
+** DONE Add Idealistic Gym Disto to Gyms/:id to Current Route Distro
+   CLOSED: [2015-01-30 Fri 17:33]
 
 ** TODO Quick Route Create
 

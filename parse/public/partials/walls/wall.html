@@ -121,7 +121,7 @@
         <div class="col-md-4">
           <div class="form-group">
             <label for="name">Wall Name</label>
-            <input type="text" class="form-control" id="name" placeholder="Wall Name">
+            <input type="text" class="form-control" id="name" placeholder="Wall Name" ng-model="wall.attributes.name">
           </div>
         </div>
       </div>
@@ -129,7 +129,7 @@
         <div class="col-md-4">
           <div class="form-group">
             <label for="exampleInputFile">Route Map Picture</label>
-            <input type="file" id="routeMapInput">
+            <input type="file" id="routeMapInput" ng-model="wall.attributes.currentPicture">
           </div>
         </div>
       </div>
