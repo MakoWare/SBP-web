@@ -59,7 +59,19 @@
   </head>
   <body  style="padding-top: 75px;">
     <div id="overlay"></div>
-    <div class="navigation" data-navigation=""></div>
+
+    <div id="backgroundPic" style="position: fixed; z-index: -1;"></div>
+    <div class="navigation" data-navigation="" ></div>
     <div ng-view=""></div>
+
   </body>
+
+  <script>
+    var windowWidth = $(window).width();
+    var windowHeight = $(window).height();
+    $("#backgroundPic").height(windowHeight);
+    $("#backgroundPic").width(windowWidth);
+
+  </script>
+
 </html>
