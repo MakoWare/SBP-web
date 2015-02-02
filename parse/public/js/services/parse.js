@@ -171,6 +171,30 @@ angular.module('parseService', [])
                 });
             },
 
+            //Take Down Routes on Wall
+            takeDownRoutes: function(wall, callback){
+                //First Give each Route a Taken Down Date.
+                var routePromises = [];
+                wall.attributes.routes.forEach(function(route){
+                    var today = new Date();
+                    route.set("takenDown", today);
+                    routePromises.push(route.save());
+                });
+
+                Parse.Promise.when(routePromises).then(function(){
+                    wall.set("routes", []);
+                    wall.save({
+                        success: function(wall){
+                            callback(wall);
+                        },
+                        error: function(wall, error){
+                            callback(error);
+                        }
+                    });
+                });
+            },
+
+
 
             //***** Routes ******//
 

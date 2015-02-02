@@ -18,7 +18,7 @@
         <h4 style="margin-top: 10px">Routes on Wall</h4>
       </div>
 
-      <div class="col-md-5">
+      <div class="col-md-4">
         <form class="form-inline">
           <div class="form-group">
             <label for="exampleInputName2">Set On</label>
@@ -32,12 +32,15 @@
         </form>
       </div>
 
-<!--
+
+      <div class="col-md-2">
+        <button class="btn btn-danger" ng-click="takeDownRoutes()">Take Down Routes</button>
+      </div>
       <div class="col-md-2 pull-right">
         <button class="btn btn-success" ng-click="createModal()">Add Routes</button>
       </div>
     </div>
--->
+
 
     <table class="table table-bordered" style="overflow: scroll">
       <thead>
@@ -85,19 +88,10 @@
         </tr>
       </tbody>
     </table>
-    </div>
   </div>
 
 
-    <!--
-    <div class="row">
-      <div class="col-md-1 col-md-offset-11">
-        <button class="btn btn-primary" ng-disabled="wallForm.$invalid" ng-click="saveWall()">Save</button>
-      </div>
-    </div>
-  </div>
 
-    -->
   <div ng-show="tab == 'routeDistribution'">
     <div class="row">
       <div class="col-md-12">

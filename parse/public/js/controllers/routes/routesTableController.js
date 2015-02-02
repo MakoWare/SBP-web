@@ -3,137 +3,91 @@ var RoutesTableCtrl = function($scope, $location, $modalInstance, ParseService, 
 
     $scope.init = function(){
         console.log("RoutesTableCtrl");
-        console.log(currentRoutes);
-        $scope.getRoutes();
-        $scope.setUpDatePicker();
+        $scope.routesToAdd = [];
+        $scope.setters = [];
+        $scope.spinning = false;
+        $scope.getSetters();
     },
 
-    //Get Routes
-    $scope.getRoutes = function(){
-        GlobalService.showSpinner();
-        ParseService.getRoutes(function(results){
-            $scope.routes = results;
-            $scope.getSetters();
-            $scope.routes.forEach(function(route){
-                route.attributes.add = false;
-                currentRoutes.forEach(function(currentRoute){
-                    if(route.id == currentRoute.id){
-                        route.attributes.add = true;
-                    }
-                });
-            });
-            GlobalService.dismissSpinner();
-            $scope.$apply();
-        });
-    };
-
-    //Search Routes
-    $scope.searchRoutes = function(){
-        if($scope.dt){
-            var query = new Parse.Query("Route");
-
-            var beginDate = new Date($scope.dt);
-            beginDate.setHours(0, 0, 0, 0);
-
-            var endDate = new Date($scope.dt);
-            endDate.setHours(23,59,59,999);
-
-            query.greaterThan("createdAt", beginDate);
-            query.lessThan("createdAt", endDate);
-
-            query.find({
-                success: function(results){
-                    $scope.routes = results;
-                    $scope.getSetters();
-                    $scope.$apply();
-                },
-                error: function(error){
-                    console.log(error);
-                }
-            });
-        } else {
-            $scope.getRoutes();
-        }
-    };
-
-    //Get Setters
     $scope.getSetters = function(){
         var currentUser = ParseService.getCurrentUser();
-        ParseService.getUsersByGym(currentUser.get("currentGym"), function(results){
+        ParseService.getUsersByGym(currentUser.get('currentGym'), function(results){
             $scope.setters = results;
-            $scope.routes.forEach(function(route){
-                var currentSetter = route.attributes.setter;
-                results.forEach(function(setter){
-                    if(currentSetter && currentSetter.id == setter.id){
-                        route.attributes.setter = setter;
-                    }
-                });
-            });
             $scope.$apply();
         });
     };
 
 
-    $scope.setUpDatePicker = function(){
-        $scope.today = function() {
-            $scope.dt = null;
-        };
-        $scope.today();
-
-        $scope.clear = function () {
-            $scope.dt = null;
-        };
-
-        // Disable weekend selection
-        $scope.disabled = function(date, mode) {
-            return ( mode === 'day' && ( date.getDay() === 0 || date.getDay() === 6 ) );
-        };
-
-
-        $scope.open = function($event) {
-            $event.preventDefault();
-            $event.stopPropagation();
-
-            $scope.opened = true;
-        };
-
-        $scope.dateOptions = {
-            formatYear: 'yy',
-            startingDay: 1
-        };
-
-        $scope.formats = ['dd-MMMM-yyyy', 'yyyy/MM/dd', 'dd.MM.yyyy', 'shortDate'];
-        $scope.format = $scope.formats[0];
+    $scope.addRoute = function(){
+        $scope.routesToAdd.push(ParseService.createRoute());
+        console.log($scope.routesToAdd);
     };
 
 
-
-    //Row Clicked
-    $scope.rowClicked = function(route){
-        route.attributes.add = !route.attributes.add;
-        if(route.attributes.add){
-            var hasRoute = false;
-            currentRoutes.forEach(function(currentRoute){
-                if(currentRoute.id == route.id){
-                    hasRoute = true;
-                }
-            });
-            if(!hasRoute){
-                currentRoutes.push(route);
-            }
-        } else {
-            for(var i = 0; i < currentRoutes.length; i++){
-                var currentRoute = currentRoutes[i];
-                if(currentRoute.id == route.id){
-                    currentRoutes.splice(i, 1);
-                }
+    $scope.removeRoute = function(routeToRemove){
+        console.log("hi");
+        for(var i = 0; i < $scope.routesToAdd.length; i++){
+            var currentRoute = $scope.routesToAdd[i];
+            if(currentRoute.id == routeToRemove.id){
+                $scope.routesToAdd.splice(i, 1);
             }
         }
+    };
+
+
+    //Status Changed
+    $scope.changeStatus = function(route){
+        var currentStatus = route.attributes.status;
+        switch(currentStatus){
+        case "0":
+            route.attributes.status = "1";
+            $("#" + route.cid).attr("src", "/images/line1.svg");
+            break;
+        case "1":
+            route.attributes.status = "2";
+            $("#" + route.cid).attr("src", "/images/line2.svg");
+            break;
+        case "2":
+            route.attributes.status = "3";
+            $("#" + route.cid).attr("src", "/images/line3.svg");
+            break;
+        case "3":
+            route.attributes.status = "4";
+            $("#" + route.cid).attr("src", "/images/line4.svg");
+            break;
+        case "4":
+            route.attributes.status = "5";
+            $("#" + route.cid).attr("src", "/images/line5.svg");
+            break;
+        case "5":
+            route.attributes.status = "6";
+            $("#" + route.cid).attr("src", "/images/line6.svg");
+            break;
+        case "6":
+            route.attributes.status = "0";
+            $("#" + route.cid).attr("src", "/images/line0.svg");
+            break;
+        }
+    };
+
+    $scope.saveRoutes = function(){
+        var routes = $scope.routesToAdd;
+        var routePromises = [];
+        routes.forEach(function(route){
+            for(var attr in route.attributes) {
+                route.set(attr, route.attributes[attr]);
+            }
+            routePromises.push(route.save());
+        });
+
+        Parse.Promise.when(routePromises).then(function(){
+            $modalInstance.close(routes);
+        });
+
     };
 
     $scope.ok = function () {
-        console.log(currentRoutes);
-        $modalInstance.close(currentRoutes);
+        $scope.saveRoutes();
     };
 
     $scope.cancel = function () {

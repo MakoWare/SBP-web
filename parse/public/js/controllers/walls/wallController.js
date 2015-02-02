@@ -174,6 +174,7 @@ var WallCtrl = function($scope, $location, $modal, ParseService, GlobalService){
         });
         modalInstance.result.then(function(routes){
             console.log(routes);
+            $scope.getWall();
         }, function () {
             console.log("modal closed");
         });
@@ -275,30 +276,15 @@ var WallCtrl = function($scope, $location, $modal, ParseService, GlobalService){
 
     //Take Down Routes
     $scope.takeDownRoutes = function(){
+        alert("If you are reading this report to Dylan so he can yell at you");
+
+        /*
         GlobalService.showSpinner();
-        var wall = $scope.wall;
-
-        //First Give each Route a Taken Down Date.
-        var routePromises = [];
-        wall.attributes.routes.forEach(function(route){
-            var today = new Date();
-            route.set("takenDown", today);
-            routePromises.push(route.save());
+        ParseService.takeDownRoutes($scope.wall, function(results){
+            GlobalService.dismissSpinner();
+            $scope.wall = results;
         });
-
-        Parse.Promise.when(routePromises).then(function(){
-            wall.set("routes", []);
-            wall.save({
-                success: function(wall){
-                    GlobalService.dismissSpinner();
-                    $location.path("/walls");
-                    $scope.$apply();
-                },
-                error: function(wall, error){
-                    alert(GlobalService.errorMessage + error.message);
-                }
-            });
-        });
+         */
     };
 
     //Routes Distro Graph

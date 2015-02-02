@@ -11,8 +11,9 @@ var RoutesCtrl = function($scope, $location, ParseService, GlobalService){
     //Get Routes
     $scope.getRoutes = function(){
         GlobalService.showSpinner();
+        $scope.spinner = true;
         ParseService.getRoutes(function(results){
-            GlobalService.dismissSpinner();
+            //GlobalService.dismissSpinner();
             $scope.routes = results;
             $scope.$apply();
             $scope.getSetters();
@@ -27,10 +28,16 @@ var RoutesCtrl = function($scope, $location, ParseService, GlobalService){
 
     //Get Setters
     $scope.getSetters = function(){
-        GlobalService.showSpinner();
+        if(!$scope.spinner){
+            GlobalService.showSpinner();
+            $scope.spinner = true;
+        }
         var currentUser = ParseService.getCurrentUser();
         ParseService.getUsersByGym(currentUser.get("currentGym"), function(results){
-        GlobalService.dismissSpinner();
+            if($scope.spinner){
+                GlobalService.dismissSpinner();
+                $scope.spinner = false;
+            }
             $scope.setters = results;
             $scope.routes.forEach(function(route){
                 var currentStatus = route.attributes.status;
@@ -138,10 +145,16 @@ var RoutesCtrl = function($scope, $location, ParseService, GlobalService){
 
     //Get Walls
     $scope.getWalls = function(){
-        GlobalService.showSpinner();
+        if(!$scope.spinner){
+            GlobalService.showSpinner();
+            $scope.spinner = true;
+        }
         var currentUser = ParseService.getCurrentUser();
         ParseService.getWallsByGym(currentUser.get('currentGym'), function(results){
-            GlobalService.dismissSpinner();
+            if($scope.spinner){
+                GlobalService.dismissSpinner();
+                $scope.spinner = false;
+            }
             $scope.walls = results;
             $scope.routes.forEach(function(route){
                 var currentWall = route.attributes.wall;

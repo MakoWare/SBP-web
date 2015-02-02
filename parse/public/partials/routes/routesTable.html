@@ -1,18 +1,7 @@
 <div class="modal-header">
-  Search
   <div class="row">
-    <div class="col-md-5">
-      <form class="form-inline">
-        <div class="form-group">
-          <label for="exampleInputName2">Created On</label>
-          <p class="input-group">
-            <input type="text" class="form-control" datepicker-popup="{{format}}" ng-model="dt" is-open="opened" datepicker-options="dateOptions" close-text="Close" ng-change="searchRoutes()"/>
-            <span class="input-group-btn">
-              <button type="button" class="btn btn-default" ng-click="open($event)"><i class="glyphicon glyphicon-calendar"></i></button>
-            </span>
-          </p>
-        </div>
-      </form>
+    <div class="col-xs-2 col-xs-offset-10">
+      <button class="btn btn-success" ng-click="addRoute()">Add Route</button>
     </div>
   </div>
 </div>
@@ -21,38 +10,56 @@
   <table class="table table-bordered table-hover">
     <thead>
       <tr>
-        <td><a href="" ng-click="predicate = 'attributes.name'; reverse=!reverse">Name</a></td>
         <td><a href="" ng-click="predicate = 'attributes.color'; reverse=!reverse">Color</a></td>
-        <td><a href="" ng-click="predicate = 'attributes.grade'; reverse=!reverse">Grade</a></td>
-        <td><a href="" ng-click="predicate = 'attributes.setterComments'; reverse=!reverse">Setter's Comments</a></td>
-        <td><a href="" ng-click="predicate = 'attributes.risk'; reverse=!reverse">Risk</a></td>
-        <td><a href="" ng-click="predicate = 'attributes.intensity'; reverse=!reverse">Intensity</a></td>
-        <td><a href="" ng-click="predicate = 'attributes.complexity'; reverse=!reverse">Complexity</a></td>
-        <td><a href="" ng-click="predicate = 'attributes.status'; reverse=!reverse">Status</a></td>
-        <td><a href="" ng-click="predicate = 'attributes.setter.attributes.username'; reverse=!reverse">Setter</a></td>
-        <td><a href="" ng-click="predicate = 'createdAt'; reverse=!reverse">Created On</a></td>
-        <td><a href="" ng-click="predicate = 'attributes.add'; reverse=!reverse">Using Route</td>
+        <td><a href="" ng-click="predicate = 'attributes.order'; secondary = 'grade'; reverse=!reverse">Grade</a></td>
+        <td><a href="" ng-click="predicate = 'attributes.status'; secondary = 'attributes.order'; reverse=!reverse">Status</a></td>
+        <td><a href="" ng-click="predicate = 'attributes.setter.attributes.username'; secondary = 'attributes.order'; reverse=!reverse">Setter</a></td>
+        <td>Remove Route</td>
       </tr>
     </thead>
     <tbody>
-      <tr ng-repeat="route in routes | orderBy:predicate:reverse | filter:search:strict" ng-click="rowClicked(route)" >
-        <td>{{route.attributes.name}}</td>
-        <td ng-style="{'background-color': route.attributes.color}"></td>
-        <td>{{route.attributes.grade}}</td>
-        <td>{{route.attributes.setterComments}}</td>
-        <td>{{route.attributes.risk}}</td>
-        <td>{{route.attributes.intensity}}</td>
-        <td>{{route.attributes.complexity}}</td>
-        <td>{{route.attributes.status}}</td>
-        <td>{{route.attributes.setter.attributes.username}}</td>
-        <td>{{(route.createdAt.getMonth() + 1) + "/" + route.createdAt.getDate() + "/" + route.createdAt.getFullYear()}}</td>
-        <td>
-          <div class="checkbox">
-            <label>
-              <input type="checkbox" ng-model="route.attributes.add">
-            </label>
-          </div>
+      <tr ng-repeat="route in routesToAdd | orderBy:[predicate, secondary]:reverse | filter:search:strict">
+        <td ng-style="{'background-color': route.attributes.color}">
+            <select class="form-control" ng-model="route.attributes.color" name="color" ng-style="{'background-color': route.attributes.color}">
+              <option></option>
+              <option>gray</option>
+              <option>yellow</option>
+              <option>green</option>
+              <option>red</option>
+              <option>blue</option>
+              <option>orange</option>
+              <option>purple</option>
+              <option>black</option>
+            </select>
         </td>
+        <td>
+          <select class="form-control" ng-model="route.attributes.grade" ng-change="saveRoute(route)" name="status">
+            <option>0</option>
+            <option>1</option>
+            <option>2</option>
+            <option>3</option>
+            <option>4</option>
+            <option>5</option>
+            <option>6</option>
+            <option>7</option>
+            <option>8</option>
+            <option>9</option>
+            <option>10</option>
+            <option>11</option>
+            <option>12</option>
+          </select>
+        </td>
+        <td ng-class="{status0: route.attributes.status == '1', status1: route.attributes.status == '2', status2: route.attributes.status == '3', status3: route.attributes.status == '4', status4: route.attributes.status == '5', status5: route.attributes.status == '6', status6: route.attributes.status == '6' }" align="center">
+          <button type="button" class="btn btn-default" ng-click="changeStatus(route)">
+            <img width="35" src="/images/line0.svg" id="{{route.cid}}"/>
+          </button>
+        </td>
+        <td>
+          <select class="form-control" ng-model="route.attributes.setter" name="setter" ng-options="setter as setter.attributes.username for setter in setters" ng-change="saveRoute(route)">
+            <option></option>
+          </select>
+        </td>
+        <td><button class="btn btn-danger" ng-click="removeRoute(route)">Remove</button></td>
       </tr>
     <tbody>
   </table>

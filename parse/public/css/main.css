@@ -58,7 +58,7 @@ ul.nav li.dropdown:hover > ul.dropdown-menu {
 #backgroundPic {
     background-image: url("/images/sbp_logo.svg");
     background-repeat: no-repeat;
-    background-position: 50% 60%;
+    background-position: 50%, 60%;
     opacity: 0.2;
     Background-size: 80%;
 
