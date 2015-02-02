@@ -21,7 +21,6 @@
       <tr ng-repeat="route in routesToAdd | orderBy:[predicate, secondary]:reverse | filter:search:strict">
         <td ng-style="{'background-color': route.attributes.color}">
             <select class="form-control" ng-model="route.attributes.color" name="color" ng-style="{'background-color': route.attributes.color}">
-              <option></option>
               <option>gray</option>
               <option>yellow</option>
               <option>green</option>

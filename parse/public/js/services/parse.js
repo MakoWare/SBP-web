@@ -275,6 +275,7 @@ angular.module('parseService', [])
 
             //Save Route
             saveRoute: function(route, callback){
+                console.log("saving");
                 //First Set Everything
                 switch(route.attributes.color){
                 case "gray":
@@ -307,7 +308,7 @@ angular.module('parseService', [])
                     route.set(attr, route.attributes[attr]);
                 }
 
-                route.save({
+                return route.save({
                     success: function(route){
                         //If the Route's current Wall is different, remove it from that Wall
                         if(route.attributes.wall){
@@ -369,6 +370,7 @@ angular.module('parseService', [])
                                             }
                                         });
                                     } else {
+                                        console.log("didn't find wall");
                                         if(route.attributes.wall){
                                             route.attributes.wall.add("routes", route);
                                             route.attributes.wall.save({
@@ -403,6 +405,7 @@ angular.module('parseService', [])
                                 }
                             });
                         } else {
+                            console.log("route has same wall");
                             //Route has same wall
                             //If Route has a Wall set, add it to the Wall, if Wall doesn't already have it
                             if(route.attributes.wall && ($.inArray(route.id, routeIds) == -1)){

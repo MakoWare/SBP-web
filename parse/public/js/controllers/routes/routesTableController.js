@@ -1,5 +1,5 @@
 //Routes Table Controller
-var RoutesTableCtrl = function($scope, $location, $modalInstance, ParseService, GlobalService, currentRoutes){
+var RoutesTableCtrl = function($scope, $location, $modalInstance, ParseService, GlobalService, currentWall){
 
     $scope.init = function(){
         console.log("RoutesTableCtrl");
@@ -19,7 +19,11 @@ var RoutesTableCtrl = function($scope, $location, $modalInstance, ParseService, 
 
 
     $scope.addRoute = function(){
-        $scope.routesToAdd.push(ParseService.createRoute());
+        var newRoute = ParseService.createRoute();
+        newRoute.set("wall", currentWall);
+        newRoute.set("color", "gray");
+        newRoute.set("grade", "0");
+        $scope.routesToAdd.push(newRoute);
         console.log($scope.routesToAdd);
     };
 
@@ -71,19 +75,23 @@ var RoutesTableCtrl = function($scope, $location, $modalInstance, ParseService, 
     };
 
     $scope.saveRoutes = function(){
+
         var routes = $scope.routesToAdd;
+        console.log(routes);
+
         var routePromises = [];
         routes.forEach(function(route){
             for(var attr in route.attributes) {
                 route.set(attr, route.attributes[attr]);
             }
-            routePromises.push(route.save());
+            routePromises.push(ParseService.saveRoute(route, function(){
+                console.log("done saving route");
+            }));
         });
 
         Parse.Promise.when(routePromises).then(function(){
             $modalInstance.close(routes);
         });
-
     };
 
     $scope.ok = function () {

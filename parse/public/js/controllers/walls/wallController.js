@@ -31,14 +31,16 @@ var WallCtrl = function($scope, $location, $modal, ParseService, GlobalService){
             console.log(results);
             $scope.$apply();
             $scope.setUpWall();
-            angular.forEach($scope.wall.attributes.routes, function (route) {
-                route.grade = parseFloat(route.attributes.grade);
-            });
         });
     };
 
     //Setup Wall
     $scope.setUpWall = function(){
+        angular.forEach($scope.wall.attributes.routes, function (route) {
+            if(route){
+                route.grade = parseFloat(route.attributes.grade);
+            }
+        });
         $scope.setUpDatePicker();
         $scope.getSetters();
     };
@@ -50,38 +52,39 @@ var WallCtrl = function($scope, $location, $modal, ParseService, GlobalService){
         ParseService.getUsersByGym(currentUser.get("currentGym"), function(results){
             $scope.setters = results;
             $scope.wall.attributes.routes.forEach(function(route){
-
-                var currentStatus = route.attributes.status;
-                switch(currentStatus){
-                case "0":
-                    $("#" + route.id).attr("src", "/images/line0.svg");
-                    break;
-                case "1":
-                    $("#" + route.id).attr("src", "/images/line1.svg");
-                    break;
-                case "2":
-                    $("#" + route.id).attr("src", "/images/line2.svg");
-                    break;
-                case "3":
-                    $("#" + route.id).attr("src", "/images/line3.svg");
-                    break;
-                case "4":
-                    $("#" + route.id).attr("src", "/images/line4.svg");
-                    break;
-                case "5":
-                    $("#" + route.id).attr("src", "/images/line5.svg");
-                    break;
-                case "6":
-                    $("#" + route.id).attr("src", "/images/line6.svg");
-                    break;
-                }
-
-                var currentSetter = route.attributes.setter;
-                results.forEach(function(setter){
-                    if(currentSetter && currentSetter.id == setter.id){
-                        route.attributes.setter = setter;
+                if(route){
+                    var currentStatus = route.attributes.status;
+                    switch(currentStatus){
+                    case "0":
+                        $("#" + route.id).attr("src", "/images/line0.svg");
+                        break;
+                    case "1":
+                        $("#" + route.id).attr("src", "/images/line1.svg");
+                        break;
+                    case "2":
+                        $("#" + route.id).attr("src", "/images/line2.svg");
+                        break;
+                    case "3":
+                        $("#" + route.id).attr("src", "/images/line3.svg");
+                        break;
+                    case "4":
+                        $("#" + route.id).attr("src", "/images/line4.svg");
+                        break;
+                    case "5":
+                        $("#" + route.id).attr("src", "/images/line5.svg");
+                        break;
+                    case "6":
+                        $("#" + route.id).attr("src", "/images/line6.svg");
+                        break;
                     }
-                });
+
+                    var currentSetter = route.attributes.setter;
+                    results.forEach(function(setter){
+                        if(currentSetter && currentSetter.id == setter.id){
+                            route.attributes.setter = setter;
+                        }
+                    });
+                }
             });
             $scope.$apply();
             GlobalService.dismissSpinner();
@@ -167,14 +170,15 @@ var WallCtrl = function($scope, $location, $modal, ParseService, GlobalService){
             controller: 'RoutesTableCtrl',
             size: "lg",
             resolve: {
-                currentRoutes: function () {
-                    return $scope.wall.attributes.routes;
+                currentWall: function () {
+                    return $scope.wall;
                 }
             }
         });
         modalInstance.result.then(function(routes){
             console.log(routes);
-            $scope.getWall();
+            //$scope.getWall();
+            $scope.setUpWall();
         }, function () {
             console.log("modal closed");
         });
