@@ -170,7 +170,8 @@ Luise
 ** DONE Add Idealistic Gym Disto to Gyms/:id to Current Route Distro
    CLOSED: [2015-01-30 Fri 17:33]
 
-** TODO Quick Route Create
+** DONE Quick Route Create
+   CLOSED: [2015-02-03 Tue 08:32]
 
 
 * Thursday 1/29
@@ -180,3 +181,10 @@ Luise
 
 ** DONE Order By - Routes
    CLOSED: [2015-01-30 Fri 13:27]
+
+
+
+* Tuesday 2/3
+
+** DONE Gym Route distro - pull from walls, not routes.
+   CLOSED: [2015-02-03 Tue 09:07]

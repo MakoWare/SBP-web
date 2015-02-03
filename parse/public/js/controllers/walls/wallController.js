@@ -281,8 +281,8 @@ var WallCtrl = function($scope, $location, $modal, ParseService, GlobalService){
     //Take Down Routes
     $scope.takeDownRoutes = function(){
         alert("If you are reading this report to Dylan so he can yell at you");
-
         /*
+
         GlobalService.showSpinner();
         ParseService.takeDownRoutes($scope.wall, function(results){
             GlobalService.dismissSpinner();

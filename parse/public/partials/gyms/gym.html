@@ -36,20 +36,23 @@
         <tr ng-repeat="wall in gym.attributes.walls">
           <td>{{wall.attributes.name}}</td>
           <td>{{wall.attributes.routes.length}}</td>
-          <td>{{wall.attributes.updatedAt}}</td>
+          <td>{{ (wall.updatedAt.getMonth() + 1) + "/" + wall.updatedAt.getDate() + "/" + wall.updatedAt.getFullYear()}}</td>
           <td><button class="btn btn-primary" ng-click="viewWall(wall)">View</button></td>       <td><button class="btn btn-danger" ng-click="removeWallFromGym(wall)">Remove</button></td>
         </tr>
       <tbody>
     </table>
 
-
+    <!--
     <div class="page-header"></div>
     <div class="row">
       <div class="col-md-1 col-md-offset-11">
         <button class="btn btn-primary" ng-disabled="gymForm.$invalid" ng-click="saveGym()">Save</button>
       </div>
     </div>
+    -->
   </div>
+
+
 
   <div ng-show="tab == 'routeDistro'">
     <div class="row">
