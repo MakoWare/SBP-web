@@ -6,6 +6,7 @@ var RoutesTableCtrl = function($scope, $location, $modalInstance, ParseService, 
         $scope.routesToAdd = [];
         $scope.setters = [];
         $scope.spinning = false;
+        $scope.routesToGenerate = 0;
         $scope.getSetters();
     },
 
@@ -72,6 +73,13 @@ var RoutesTableCtrl = function($scope, $location, $modalInstance, ParseService, 
             $("#" + route.cid).attr("src", "/images/line0.svg");
             break;
         }
+    };
+
+    $scope.autoGenRoutes = function(){
+        ParseService.autoGenRoutes(currentWall.attributes.gym, $scope.routesToGenerate, function(results){
+            console.log(results);
+            $scope.routesToAdd = results;
+        });
     };
 
     $scope.saveRoutes = function(){

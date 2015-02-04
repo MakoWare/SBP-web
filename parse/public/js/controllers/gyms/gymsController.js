@@ -17,7 +17,6 @@ var GymsCtrl = function($scope, $location, ParseService, GlobalService){
             $scope.gyms = results;
             $scope.calculateRoutes();
             $scope.$apply();
-            console.log(results);
         });
     };
 
@@ -32,7 +31,6 @@ var GymsCtrl = function($scope, $location, ParseService, GlobalService){
                 });
             });
         });
-        console.log($scope.gyms);
     };
 
     //Set Gym

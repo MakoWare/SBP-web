@@ -118,6 +118,7 @@ angular.module('parseService', [])
                 query.include("routes");
                 query.include("routes.setter");
                 query.include("routes.wall");
+                query.include("gym.walls.routes");
                 query.get(id, {
                     success: function(results){
                         callback(results);
@@ -570,14 +571,195 @@ angular.module('parseService', [])
                 });
             },
 
-            //Delet User
+            //Delete User
             deleteUser: function(user, callback){
                 //var query = new Parse.Query("User");
             },
 
 
+            //Auto Generate Routes
+            autoGenRoutes: function(gym, number, callback){
+                var routes = [];
+                gym.attributes.walls.forEach(function(wall){
+                    wall.attributes.routes.forEach(function(route){
+                        routes.push(route);
+                    });
+                });
 
+                var v0 = {}; v0.gray = 0; v0.yellow = 0;
+                var v1 = {}; v1.yellow = 0;
+                var v2 = {}; v2.yellow = 0; v2.green = 0;
+                var v3 = {}; v3.green = 0; v3.red = 0;
+                var v4 = {}; v4.green = 0; v4.red = 0; v4.blue = 0;
+                var v5 = {}; v5.red = 0; v5.blue = 0; v5.orange = 0;
+                var v6 = {}; v6.blue = 0; v6.orange = 0; v6.purple = 0;
+                var v7 = {}; v7.orange = 0; v7.purple = 0;
+                var v8 = {}; v8.purple = 0; v8.black = 0;
+                var v9 = {}; v9.black = 0;
+                var v10 = {}; v10.black = 0;
+                var v11 = {}; v11.black = 0;
+                var v12 = {}; v12.black = 0;
 
+                routes.forEach(function(route){
+                    if(route){
+                        switch(route.attributes.grade){
+                        case "0":
+                            if(route.attributes.color == "gray"){
+                                v0.gray++;
+                            } else if(route.attributes.color == "yellow"){
+                                v0.yellow++;
+                            }
+                            break;
+                        case "1":
+                            v1.yellow++;
+                            break;
+                        case "2":
+                            if(route.attributes.color == "yellow"){
+                                v2.yellow++;
+                            } else if(route.attributes.color == "green"){
+                                v2.green++;
+                            }
+                            break;
+                        case "3":
+                            if(route.attributes.color == "yellow"){
+                                v3.yellow++;
+                            } else if(route.attributes.color == "green") {
+                                v3.green++;
+                            } else if(route.attributes.color == "red") {
+                                v3.red++;
+                            }
+                            break;
+                        case "4":
+                            if(route.attributes.color == "blue"){
+                                v4.blue++;
+                            } else if(route.attributes.color == "green") {
+                                v4.green++;
+                            } else if(route.attributes.color == "red") {
+                                v4.red++;
+                            }
+                            break;
+                        case "5":
+                            if(route.attributes.color == "blue"){
+                                v5.blue++;
+                            } else if(route.attributes.color == "orange") {
+                                v5.orange++;
+                            } else if(route.attributes.color == "red") {
+                                v5.red++;
+                            }
+                            break;
+                        case "6":
+                            if(route.attributes.color == "blue"){
+                                v6.blue++;
+                            } else if(route.attributes.color == "orange") {
+                                v6.orange++;
+                            } else if(route.attributes.color == "purple") {
+                                v6.purple++;
+                            }
+                            break;
+                        case "7":
+                            if(route.attributes.color == "purple"){
+                                v7.purple++;
+                            } else if(route.attributes.color == "orange") {
+                                v7.orange++;
+                            }
+                            break;
+                        case "8":
+                            if(route.attributes.color == "purple"){
+                                v8.purple++;
+                            } else if(route.attributes.color == "black") {
+                                v8.black++;
+                            }
+                            break;
+                        case "9":
+                            v9.black++;
+                            break;
+                        case "10":
+                            v10.black++;
+                            break;
+                        case "11":
+                            v11.black++;
+                            break;
+                        case "12":
+                            v12.black++;
+                            break;
+                        };
+                    }
+                });
+
+                //Now Subtract the Current Routes from the Idealistic
+                var needed = {};
+                needed.grayV0 = gym.attributes.grayV0 - v0.gray;
+                needed.yellowV0 = gym.attributes.yellowV0 - v0.yellow;
+                needed.yellowV1 = gym.attributes.yellowV1 - v1.yellow;
+                needed.yellowV2 = gym.attributes.yellowV2 - v2.yellow;
+                needed.greenV2 = gym.attributes.greenV2 - v2.green;
+                needed.greenV3 = gym.attributes.greenV3 - v3.green;
+                needed.greenV4 = gym.attributes.greenV4 - v4.green;
+                needed.redV3 = gym.attributes.redV3 - v3.red;
+                needed.redV4 = gym.attributes.redV4 - v4.red;
+                needed.redV5 = gym.attributes.redV5 - v5.red;
+                needed.blueV4 = gym.attributes.blueV4 - v4.blue;
+                needed.blueV5 = gym.attributes.blueV5 - v5.blue;
+                needed.blueV6 = gym.attributes.blueV6 - v6.blue;
+                needed.orangeV5 = gym.attributes.orangeV5 - v5.orange;
+                needed.orangeV6 = gym.attributes.orangeV6 - v6.orange;
+                needed.orangeV7 = gym.attributes.orangeV7 - v7.orange;
+                needed.purpleV6 = gym.attributes.purpleV6 - v6.purple;
+                needed.purpleV7 = gym.attributes.purpleV7 - v7.purple;
+                needed.purpleV8 = gym.attributes.purpleV8 - v8.purple;
+
+                needed.blackV8 = gym.attributes.blackV8 - v8.black;
+                needed.blackV9 = gym.attributes.blackV9 - v9.black;
+                needed.blackV10 = gym.attributes.blackV10 - v10.black;
+                needed.blackV11 = gym.attributes.blackV11 - v11.black;
+                needed.blackV12 = gym.attributes.blackV12 - v12.black;
+
+                function randomIntFromInterval(min,max){
+                    return Math.floor(Math.random()*(max-min+1)+min);
+                };
+
+                function createRoute(routeString){
+                    var color = routeString.split("V")[0];
+                    var grade = routeString.split("V")[1];
+
+                    var route = ParseService.createRoute();
+                    route.set("color", color);
+                    route.set("grade", grade);
+                    return route;
+                };
+
+                var routesCreated = [];
+
+                for(var i = 0; i < number; i++){
+                    var highest = "grayV0";
+                    var contenders = [];
+                    for(var attr in needed){
+                        if(needed[highest] < needed[attr]){
+                            highest = attr;
+                            contenders = [];
+                        } else if(needed[highest] == needed[attr]){
+                            contenders.push(attr);
+                        }
+                    }
+
+                    //If there are Routes with equal amounts needed, rando pick one
+                    if(contenders.length > 0){
+                        contenders.push(highest);
+                        var rando = randomIntFromInterval(0, (contenders.length -1));
+                        var selected = contenders[rando];
+                        needed[selected]--;
+                        routesCreated.push(createRoute(selected));
+
+                    } else {
+                        //Just Create Route, then subtract
+                        needed[highest]--;
+                        routesCreated.push(createRoute(highest));
+                    }
+                }
+                callback(routesCreated);
+            }
         };
+
+
         return ParseService;
     });

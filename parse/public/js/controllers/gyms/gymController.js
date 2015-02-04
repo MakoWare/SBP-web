@@ -134,8 +134,6 @@ var GymCtrl = function($scope, $location, $modal, ParseService, GlobalService){
         $scope.gym.set("walls", $scope.gym.attributes.walls);
 
         for (var attr in $scope.gym.attributes) {
-            console.log(attr);
-            console.log($scope.gym.attributes[attr]);
             $scope.gym.set(attr, $scope.gym.attributes[attr]);
         }
 
@@ -189,7 +187,6 @@ var GymCtrl = function($scope, $location, $modal, ParseService, GlobalService){
         new Chartist.Bar("#idealDistribution", data, options).on('draw', function(data) {
             var style = "";
             if(data.type == "bar"){
-                console.log($scope.graphData);
 
                 var hackData = $scope.graphData[j];
                 if(hackData){
@@ -294,12 +291,8 @@ var GymCtrl = function($scope, $location, $modal, ParseService, GlobalService){
 
     //Move Idea Graph
     $scope.moveGraph = function(){
-        console.log("moving graph");
         var idealGraph = $("#idealDistribution");
         var currentGraph = $("#routeDistribution");
-        console.log(idealGraph);
-        console.log(currentGraph);
-
         var left = currentGraph.offset().left + 43;
         var top = currentGraph.offset().top - 15;
 
@@ -433,9 +426,10 @@ var GymCtrl = function($scope, $location, $modal, ParseService, GlobalService){
         var i = 0;
         new Chartist.Bar("#routeDistribution", data, options).on('draw', function(data) {
             var style = "";
-            if(data.type === 'label' && data.axis === 'x') {
+
+            if(data.type === 'label') {
                 data.element.attr({
-                    x: data.x + data.space / 2
+                    x: data.x
                 });
             }
 
