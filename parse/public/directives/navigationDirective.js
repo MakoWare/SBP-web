@@ -7,6 +7,6 @@ angular.module('navigation',[])
 		new NavCtrl($scope, $location, ParseService, GlobalService);
 	    },
 	    scope:true,
-            templateUrl: "partials/nav/nav.html"
+            templateUrl: "components/nav/nav.html"
 	};
     }]);

@@ -166,7 +166,7 @@ var WallCtrl = function($scope, $location, $modal, ParseService, GlobalService){
     //Create Modal
     $scope.createModal = function(){
         var modalInstance = $modal.open({
-            templateUrl: 'partials/routes/routesTable.html',
+            templateUrl: 'components/routesTable/routesTable.html',
             controller: 'RoutesTableCtrl',
             size: "lg",
             resolve: {
