@@ -17,7 +17,6 @@ var WallCtrl = function($scope, $location, $modal, ParseService, GlobalService){
     //Create Wall
     $scope.createWall = function(){
         $scope.wall = ParseService.createWall();
-
     };
 
     //Get Wall
@@ -27,68 +26,18 @@ var WallCtrl = function($scope, $location, $modal, ParseService, GlobalService){
         ParseService.getWallById(id, function(results){
             GlobalService.dismissSpinner();
             $scope.wall = results;
+            $scope.routes = results.attributes.routes;
             $scope.title = results.get("name");
             console.log(results);
             $scope.$apply();
             $scope.setUpWall();
+            $scope.$broadcast('newRoutes');
         });
     };
 
     //Setup Wall
     $scope.setUpWall = function(){
-        angular.forEach($scope.wall.attributes.routes, function (route) {
-            if(route){
-                route.grade = parseFloat(route.attributes.grade);
-            }
-        });
         $scope.setUpDatePicker();
-        $scope.getSetters();
-    };
-
-    //Get Setters
-    $scope.getSetters = function(){
-        GlobalService.showSpinner();
-        var currentUser = ParseService.getCurrentUser();
-        ParseService.getUsersByGym(currentUser.get("currentGym"), function(results){
-            $scope.setters = results;
-            $scope.wall.attributes.routes.forEach(function(route){
-                if(route){
-                    var currentStatus = route.attributes.status;
-                    switch(currentStatus){
-                    case "0":
-                        $("#" + route.id).attr("src", "/images/line0.svg");
-                        break;
-                    case "1":
-                        $("#" + route.id).attr("src", "/images/line1.svg");
-                        break;
-                    case "2":
-                        $("#" + route.id).attr("src", "/images/line2.svg");
-                        break;
-                    case "3":
-                        $("#" + route.id).attr("src", "/images/line3.svg");
-                        break;
-                    case "4":
-                        $("#" + route.id).attr("src", "/images/line4.svg");
-                        break;
-                    case "5":
-                        $("#" + route.id).attr("src", "/images/line5.svg");
-                        break;
-                    case "6":
-                        $("#" + route.id).attr("src", "/images/line6.svg");
-                        break;
-                    }
-
-                    var currentSetter = route.attributes.setter;
-                    results.forEach(function(setter){
-                        if(currentSetter && currentSetter.id == setter.id){
-                            route.attributes.setter = setter;
-                        }
-                    });
-                }
-            });
-            $scope.$apply();
-            GlobalService.dismissSpinner();
-        });
     };
 
     $scope.setUpDatePicker = function(){
@@ -100,12 +49,6 @@ var WallCtrl = function($scope, $location, $modal, ParseService, GlobalService){
         $scope.clear = function () {
             $scope.dt = null;
         };
-
-        // Disable weekend selection
-        $scope.disabled = function(date, mode) {
-            return ( mode === 'day' && ( date.getDay() === 0 || date.getDay() === 6 ) );
-        };
-
 
         $scope.open = function($event) {
             $event.preventDefault();
@@ -119,8 +62,7 @@ var WallCtrl = function($scope, $location, $modal, ParseService, GlobalService){
             startingDay: 1
         };
 
-        $scope.formats = ['dd-MMMM-yyyy', 'yyyy/MM/dd', 'dd.MM.yyyy', 'shortDate'];
-        $scope.format = $scope.formats[0];
+        $scope.format = 'dd-MMMM-yyyy';
     };
 
 
@@ -166,8 +108,8 @@ var WallCtrl = function($scope, $location, $modal, ParseService, GlobalService){
     //Create Modal
     $scope.createModal = function(){
         var modalInstance = $modal.open({
-            templateUrl: 'components/routesTable/routesTable.html',
-            controller: 'RoutesTableCtrl',
+            templateUrl: 'components/routesModal/routesModal.html',
+            controller: 'RoutesModalCtrl',
             size: "lg",
             resolve: {
                 currentWall: function () {
