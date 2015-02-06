@@ -188,3 +188,6 @@ Luise
 
 ** DONE Gym Route distro - pull from walls, not routes.
    CLOSED: [2015-02-03 Tue 09:07]
+
+* Thursday 2/5
+** TODO RouteTable Adding is broken
