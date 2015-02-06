@@ -4,7 +4,7 @@ var gulp = require('gulp'),
 
 //Default
 gulp.task('default', ['connect'], function () {
-    gulp.watch(['index.html', 'partials/**/**.*', 'css/**/**.*', 'js/**/**.*', 'images/**/**.*'], function (event) {
+    gulp.watch(['index.html', 'app.js', 'components/**/**.*', 'css/**/**.*', 'images/**/**.*'], function (event) {
         return gulp.src(event.path)
             .pipe($.connect.reload());
     });

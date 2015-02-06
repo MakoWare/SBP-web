@@ -18,41 +18,11 @@
         <h4 style="margin-top: 10px">Walls in Gym</h4>
       </div>
       <div class="col-md-2 pull-right">
-        <button class="btn btn-success" ng-click="createModal()">Add Wall</button>
+        <a ng-href="{{'#/walls/create'}}"><button class="btn btn-success">Add Wall</button></a>
       </div>
     </div>
-
-    <table class="table table-bordered">
-      <thead>
-        <tr>
-          <td>Name</td>
-          <td>Routes</td>
-          <td>Last Set</td>
-          <td>View Wall</td>
-          <td>Remove Wall</td>
-        </tr>
-      </thead>
-      <tbody>
-        <tr ng-repeat="wall in gym.attributes.walls">
-          <td>{{wall.attributes.name}}</td>
-          <td>{{wall.attributes.routes.length}}</td>
-          <td>{{ (wall.updatedAt.getMonth() + 1) + "/" + wall.updatedAt.getDate() + "/" + wall.updatedAt.getFullYear()}}</td>
-          <td><button class="btn btn-primary" ng-click="viewWall(wall)">View</button></td>       <td><button class="btn btn-danger" ng-click="removeWallFromGym(wall)">Remove</button></td>
-        </tr>
-      <tbody>
-    </table>
-
-    <!--
-    <div class="page-header"></div>
-    <div class="row">
-      <div class="col-md-1 col-md-offset-11">
-        <button class="btn btn-primary" ng-disabled="gymForm.$invalid" ng-click="saveGym()">Save</button>
-      </div>
-    </div>
-    -->
+    <div ng-include="'/components/wallsTable/wallsTable.html'"></div>
   </div>
-
-
 
   <div ng-show="tab == 'routeDistro'">
     <div class="row">

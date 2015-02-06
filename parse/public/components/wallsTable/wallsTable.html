@@ -1,34 +1,20 @@
-<div class="modal-header">
-  Search
-
-</div>
-<div class="modal-body">
-  <table class="table table-bordered table-hover">
-    <thead>
-      <tr>
-        <td>Name</td>
-        <td>Routes</td>
-        <td>Description</td>
-        <td>Wall Added</td>
-      </tr>
-    </thead>
-    <tbody>
-      <tr ng-repeat="wall in walls" ng-click="rowClicked(wall)">
-        <td>{{wall.attributes.name}}</td>
-        <td>{{wall.attributes.routes.length}}</td>
-        <td>{{wall.attributes.description}}</td>
-        <td>
-          <div class="checkbox">
-            <label>
-              <input type="checkbox" ng-model="wall.attributes.add">
-            </label>
-          </div>
-        </td>
-      </tr>
-    <tbody>
-  </table>
-</div>
-<div class="modal-footer">
-  <button class="btn btn-primary" ng-click="ok()">OK</button>
-  <button class="btn btn-warning" ng-click="cancel()">Cancel</button>
-</div>
+<table class="table table-bordered" ng-controller="WallsTableCtrl">
+  <thead>
+    <tr>
+      <td><a href="" ng-click="predicate = 'attributes.name'; reverse=!reverse">Name</a></td>
+      <td><a href="" ng-click="predicate = 'attributes.routes.length'; reverse=!reverse">Routes</a></td>
+      <td><a href="" ng-click="predicate = 'updatedAt'; reverse=!reverse">Last Updated</a></td>
+      <td>View Wall</td>
+      <td>Remove Wall</td>
+    </tr>
+  </thead>
+  <tbody>
+    <tr ng-repeat="wall in walls | orderBy:predicate:reverse | filter:search:strict">
+      <td>{{wall.attributes.name}}</td>
+      <td>{{wall.attributes.routes.length}}</td>
+      <td>{{ (wall.updatedAt.getMonth() + 1) + "/" + wall.updatedAt.getDate() + "/" + wall.updatedAt.getFullYear()}}</td>
+      <td><a ng-href="{{'#/walls/' + wall.id}}"><button class="btn btn-primary" ng-click="viewWall(wall)">View</button></a></td>
+      <td><button class="btn btn-danger" ng-click="removeWallFromGym(wall)">Remove</button></td>
+    </tr>
+  <tbody>
+</table>

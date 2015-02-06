@@ -68,30 +68,6 @@ var GymCtrl = function($scope, $location, $modal, ParseService, GlobalService){
         }
     };
 
-    //View Wall
-    $scope.viewWall = function(wall){
-        $location.path("/walls/" + wall.id);
-    };
-
-    //Create Modal
-    $scope.createModal = function(){
-        var modalInstance = $modal.open({
-            templateUrl: 'partials/walls/wallsTable.html',
-            controller: 'WallsTableCtrl',
-            size: "lg",
-            resolve: {
-                currentWalls: function () {
-                    return $scope.gym.attributes.walls;
-                }
-            }
-        });
-        modalInstance.result.then(function(walls){
-            console.log(walls);
-        }, function () {
-            console.log("modal closed");
-        });
-    };
-
     //Calculate Totals
     $scope.calculateTotals = function(){
         //Grade Totals

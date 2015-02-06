@@ -9,20 +9,5 @@
     </div>
   </div>
 
-  <table class="table table-bordered table-hover">
-    <thead>
-      <tr>
-        <td><a href="" ng-click="predicate = 'attributes.name'; reverse=!reverse">Name</a></td>
-        <td><a href="" ng-click="predicate = 'attributes.routes.length'; reverse=!reverse"># of Routes</a></td>
-        <td>View</td>
-      </tr>
-    </thead>
-    <tbody>
-      <tr ng-repeat="wall in walls | orderBy:predicate:reverse">
-        <td>{{wall.attributes.name}}</td>
-        <td>{{wall.attributes.routes.length}}</td>
-        <td><button class="btn btn-primary" ng-click="viewWall(wall)">View</button></td>
-      </tr>
-    <tbody>
-  </table>
+  <div ng-include="'/components/wallsTable/wallsTable.html'"></div>
 </div>
