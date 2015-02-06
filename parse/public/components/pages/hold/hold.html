@@ -1,0 +1,85 @@
+<div class="container">
+  <div class="page-header" style="margin-top: 0px">
+    <h2 style="margin-top: 0px">{{title}}</h2>
+  </div>
+
+  <form name="holdForm">
+    <div class="row">
+      <div class="col-md-4">
+        <div class="form-group">
+          <label for="holdPicture">Hold Picture</label>
+          <input type="file" id="holdFile" ng-model="hold.attributes.picture">
+        </div>
+      </div>
+      <div class="col-md-6 col-md-offset-2">
+        <img src="" class="img-responsive" alt="Hold Image" id="holdPicture" style="width: 200px; height: 200px;">
+      </div>
+    </div>
+
+    <br>
+    <div class="row">
+      <div class="col-md-4 form-group" ng-class="{ 'has-error': holdForm.name.$invalid }">
+        <label for="name">Name</label>
+        <input ng-model="hold.attributes.name" type="text" name="name" class="form-control" id="name" placeholder="Name" required/>
+      </div>
+      <div class="col-md-4 form-group">
+        <label for="type">Type</label>
+        <select class="form-control" ng-model="hold.attributes.type">
+          <option>Crimp</option>
+          <option>Edge</option>
+          <option>Gaston</option>
+          <option>Incut</option>
+          <option>Jug</option>
+          <option>Pinch</option>
+          <option>Pocket</option>
+          <option>Slab</option>
+          <option>Sloper</option>
+          <option>Undercling</option>
+        </select>
+      </div>
+
+      <div class="col-md-2 form-group">
+        <label for="size">Size</label>
+        <select class="form-control" ng-model="hold.attributes.size">
+          <option>XS</option>
+          <option>SM</option>
+          <option>MD</option>
+          <option>LG</option>
+          <option>XL</option>
+        </select>
+      </div>
+
+
+      <div class="col-md-2 form-group">
+        <label for="color">Color</label>
+        <select class="form-control" ng-model="hold.attributes.color" name="color" ng-style="{'background-color': hold.attributes.color}">
+          <option></option>
+          <option>gray</option>
+          <option>yellow</option>
+          <option>green</option>
+          <option>red</option>
+          <option>blue</option>
+          <option>orange</option>
+          <option>purple</option>
+          <option>black</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-8 form-group">
+        <label for="description">Description</label>
+        <textarea class="form-control" rows="3" ng-model="hold.attributes.description"></textarea>
+      </div>
+    </div>
+  </form>
+
+
+
+  <div class="page-header"></div>
+  <div class="row">
+    <div class="col-md-1 col-md-offset-11">
+      <button class="btn btn-primary" ng-disabled="holdForm.$invalid" ng-click="saveHold()">Save</button>
+    </div>
+  </div>
+</div>

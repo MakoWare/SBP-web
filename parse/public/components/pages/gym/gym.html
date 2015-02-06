@@ -1,0 +1,283 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-12">
+      <h3 style="margin-top: 0px">{{title}}</h3>
+    </div>
+  </div>
+
+  <ul class="nav nav-tabs nav-justified">
+    <li role="presentation" ng-class="{'active':  tab == 'walls'}"><a ng-click="tabClicked('walls')">Walls</a></li>
+    <li role="presentation" ng-class="{'active':  tab == 'routeDistro'}"><a ng-click="tabClicked('routeDistro')">Route Distribution</a></li>
+    <li role="presentation" ng-class="{'active':  tab == 'holdDistro'}"><a ng-click="tabClicked('holdDistro')">Hold Distribution</a></li>
+    <li role="presentation" ng-class="{'active':  tab == 'gymInfo'}"><a ng-click="tabClicked('gymInfo')">Gym Information</a></li>
+</ui>
+
+  <div ng-show="tab == 'walls'">
+    <div class="row" style="margin-bottom: 5px; margin-top: 15px;">
+      <div class="col-md-10">
+        <h4 style="margin-top: 10px">Walls in Gym</h4>
+      </div>
+      <div class="col-md-2 pull-right">
+        <button class="btn btn-success" ng-click="createModal()">Add Wall</button>
+      </div>
+    </div>
+
+    <table class="table table-bordered">
+      <thead>
+        <tr>
+          <td>Name</td>
+          <td>Routes</td>
+          <td>Last Set</td>
+          <td>View Wall</td>
+          <td>Remove Wall</td>
+        </tr>
+      </thead>
+      <tbody>
+        <tr ng-repeat="wall in gym.attributes.walls">
+          <td>{{wall.attributes.name}}</td>
+          <td>{{wall.attributes.routes.length}}</td>
+          <td>{{ (wall.updatedAt.getMonth() + 1) + "/" + wall.updatedAt.getDate() + "/" + wall.updatedAt.getFullYear()}}</td>
+          <td><button class="btn btn-primary" ng-click="viewWall(wall)">View</button></td>       <td><button class="btn btn-danger" ng-click="removeWallFromGym(wall)">Remove</button></td>
+        </tr>
+      <tbody>
+    </table>
+
+    <!--
+    <div class="page-header"></div>
+    <div class="row">
+      <div class="col-md-1 col-md-offset-11">
+        <button class="btn btn-primary" ng-disabled="gymForm.$invalid" ng-click="saveGym()">Save</button>
+      </div>
+    </div>
+    -->
+  </div>
+
+
+
+  <div ng-show="tab == 'routeDistro'">
+    <div class="row">
+      <div class="col-md-12">
+        <div style="font-size: 18px" class="ct-chart ct-octave" id="routeDistribution"></div>
+        <div style="font-size: 18px" class="ct-chart ct-octave idealGraph" id="idealDistribution"></div>
+      </div>
+    </div>
+  </div>
+
+  <div ng-show="tab == 'holdDistro'">
+    <div class="row">
+      <div class="col-md-12">
+        <div style="font-size: 18px" class="ct-chart ct-octave" id="holdDistribution"></div>
+      </div>
+    </div>
+  </div>
+
+
+  <div ng-show="tab == 'gymInfo'">
+    <br>
+    <form name="gymForm">
+      <div class="row">
+        <div class="col-xs-4">
+          <label for="name">Name</label>
+          <input ng-model="gym.attributes.name" type="text" name="name" class="form-control" id="name" placeholder="Name" required/>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-xs-12">
+          <h4>Idealistic Route Numbers</h4>
+        </div>
+      </div>
+
+      <table class="table table-bordered">
+        <thead>
+          <tr>
+            <td></td>
+            <td>v0</td>
+            <td>v1</td>
+            <td>v2</td>
+            <td>v3</td>
+            <td>v4</td>
+            <td>v5</td>
+            <td>v6</td>
+            <td>v7</td>
+            <td>v8</td>
+            <td>v9</td>
+            <td>v10</td>
+            <td>v11</td>
+            <td>v12</td>
+            <td>Total</td>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Gray</td>
+            <td><input ng-change="calculateTotals()" ng-model="gym.attributes.grayV0" type="number" class="form-control"/></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td><input ng-model="gym.attributes.totalGray" class="form-control" disabled/></td>
+          </tr>
+          <tr>
+            <td>Yellow</td>
+            <td><input ng-change="calculateTotals()" ng-model="gym.attributes.yellowV0" type="number" class="form-control"/></td>
+            <td><input ng-change="calculateTotals()" ng-model="gym.attributes.yellowV1" type="number" class="form-control"/></td>
+            <td><input ng-change="calculateTotals()" ng-model="gym.attributes.yellowV2" type="number" class="form-control"/></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td><input  ng-model="gym.attributes.totalYellow" class="form-control" disabled/></td>
+          </tr>
+          <tr>
+            <td>Green</td>
+            <td></td>
+            <td></td>
+            <td><input ng-change="calculateTotals()" ng-model="gym.attributes.greenV2" type="number" class="form-control"/></td>
+            <td><input ng-change="calculateTotals()" ng-model="gym.attributes.greenV3" type="number" class="form-control"/></td>
+            <td><input ng-change="calculateTotals()" ng-model="gym.attributes.greenV4" type="number" class="form-control"/></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td><input ng-model="gym.attributes.totalGreen" class="form-control" disabled/></td>
+          </tr>
+          <tr>
+            <td>Red</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td><input ng-change="calculateTotals()" ng-model="gym.attributes.redV3" type="number" class="form-control"/></td>
+            <td><input ng-change="calculateTotals()" ng-model="gym.attributes.redV4" type="number" class="form-control"/></td>
+            <td><input ng-change="calculateTotals()" ng-model="gym.attributes.redV5" type="number" class="form-control"/></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td><input ng-model="gym.attributes.totalRed" class="form-control" disabled/></td>
+          </tr>
+          <tr>
+            <td>Blue</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td><input ng-change="calculateTotals()" ng-model="gym.attributes.blueV4" type="number" class="form-control"/></td>
+            <td><input ng-change="calculateTotals()" ng-model="gym.attributes.blueV5" type="number" class="form-control"/></td>
+            <td><input ng-change="calculateTotals()" ng-model="gym.attributes.blueV6" type="number" class="form-control"/></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td><input ng-model="gym.attributes.totalBlue" class="form-control" disabled/></td>
+          </tr>
+          <tr>
+            <td>Orange</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td><input ng-change="calculateTotals()" ng-model="gym.attributes.orangeV5" type="number" class="form-control"/></td>
+            <td><input ng-change="calculateTotals()" ng-model="gym.attributes.orangeV6" type="number" class="form-control"/></td>
+            <td><input ng-change="calculateTotals()" ng-model="gym.attributes.orangeV7" type="number" class="form-control"/></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td><input ng-model="gym.attributes.totalOrange" class="form-control" disabled/></td>
+          </tr>
+          <tr>
+            <td>Purple</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td><input ng-change="calculateTotals()" ng-model="gym.attributes.purpleV6" type="number" class="form-control"/></td>
+            <td><input ng-change="calculateTotals()" ng-model="gym.attributes.purpleV7" type="number" class="form-control"/></td>
+            <td><input ng-change="calculateTotals()" ng-model="gym.attributes.purpleV8" type="number" class="form-control"/></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td><input ng-model="gym.attributes.totalPurple" class="form-control" disabled/></td>
+          </tr>
+          <tr>
+            <td>Black</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td><input ng-change="calculateTotals()" ng-model="gym.attributes.blackV8" type="number" class="form-control"/></td>
+            <td><input ng-change="calculateTotals()" ng-model="gym.attributes.blackV9" type="number" class="form-control"/></td>
+            <td><input ng-change="calculateTotals()" ng-model="gym.attributes.blackV10" type="number" class="form-control"/></td>
+            <td><input ng-change="calculateTotals()" ng-model="gym.attributes.blackV11" type="number" class="form-control"/></td>
+            <td><input ng-change="calculateTotals()" ng-model="gym.attributes.blackV12" type="number" class="form-control"/></td>
+            <td><input ng-change="calculateTotals()" ng-model="gym.attributes.totalBlack" class="form-control" disabled/></td>
+          </tr>
+          <tr>
+            <td>Total</td>
+            <td><input ng-model="gym.attributes.totalV0" type="text" class="form-control" disabled/></td>
+            <td><input ng-model="gym.attributes.totalV1" type="text" class="form-control" disabled/></td>
+            <td><input ng-model="gym.attributes.totalV2" type="text" class="form-control" disabled/></td>
+            <td><input ng-model="gym.attributes.totalV3" type="text" class="form-control" disabled/></td>
+            <td><input ng-model="gym.attributes.totalV4" type="text" class="form-control" disabled/></td>
+            <td><input ng-model="gym.attributes.totalV5" type="text" class="form-control" disabled/></td>
+            <td><input ng-model="gym.attributes.totalV6" type="text" class="form-control" disabled/></td>
+            <td><input ng-model="gym.attributes.totalV7" type="text" class="form-control" disabled/></td>
+            <td><input ng-model="gym.attributes.totalV8" type="text" class="form-control" disabled/></td>
+            <td><input ng-model="gym.attributes.totalV9" type="text" class="form-control" disabled/></td>
+            <td><input ng-model="gym.attributes.totalV10" type="text" class="form-control" disabled/></td>
+            <td><input ng-model="gym.attributes.totalV11" type="text" class="form-control" disabled/></td>
+            <td><input ng-model="gym.attributes.totalV12" type="text" class="form-control" disabled/></td>
+            <td><input ng-model="gym.attributes.totalIdealRoutes" class="form-control" disabled/></td>
+          </tr>
+        </tbody>
+      </table>
+
+
+      <div class="page-header"></div>
+      <div class="row">
+        <div class="col-xs-1 col-xs-offset-8">
+          <button class="btn btn-danger"  ng-click="deleteGym()">Delete</button>
+        </div>
+        <div class="col-xs-1 col-xs-offset-1">
+          <button class="btn btn-primary" ng-disabled="gymForm.$invalid" ng-click="saveGym()">Save</button>
+
+        </div>
+      </div>
+    </form>
+  </div>
+
+
+</div>

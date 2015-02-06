@@ -1,0 +1,81 @@
+<div class="container">
+
+  <div class="row">
+    <div class="col-md-4">
+      <h2 style="margin: 0px">All Routes</h2>
+    </div>
+
+    <div class="col-md-5">
+      <form class="form-inline">
+        <div class="form-group">
+          <label for="exampleInputName2">Created On</label>
+          <p class="input-group">
+            <input type="text" class="form-control" datepicker-popup="{{format}}" ng-model="dt" is-open="opened" datepicker-options="dateOptions" close-text="Close" ng-change="searchRoutes()"/>
+            <span class="input-group-btn">
+              <button type="button" class="btn btn-default" ng-click="open($event)"><i class="glyphicon glyphicon-calendar"></i></button>
+            </span>
+          </p>
+        </div>
+      </form>
+    </div>
+
+    <!--
+    <div class="col-md pull-right" style="padding-right: 15px; padding-bottom: 10px;">
+      <button class="btn btn-success" ng-click="addRoute()">Add a Route</button>
+    </div>
+    -->
+  </div>
+
+  <table class="table table-bordered" style="overflow: scroll">
+    <thead>
+      <tr>
+        <td><a href="" ng-click="predicate = 'attributes.color'; reverse=!reverse">Color</a></td>
+          <td><a href="" ng-click="predicate = 'attributes.order'; secondary = 'grade'; reverse=!reverse">Grade</a></td>
+          <td><a href="" ng-click="predicate = 'attributes.status'; secondary = 'attributes.order'; reverse=!reverse">Status</a></td>
+          <td><a href="" ng-click="predicate = 'attributes.setter.attributes.username'; secondary = 'attributes.order'; reverse=!reverse">Setter</a></td>
+        <td><a href="" ng-click="predicate = 'attributes.wall.attributes.name'; reverse=!reverse">Wall</a></td>
+        <td>View</td>
+        <td>Delete</td>
+      </tr>
+    </thead>
+    <tbody id="routesTable">
+      <tr ng-repeat="route in routes | orderBy:[predicate, secondary]:reverse | filter:search:strict">
+        <td ng-style="{'background-color': route.attributes.color}"></td>
+        <td>
+          <select class="form-control" ng-model="route.attributes.grade" ng-change="saveRoute(route)" name="status">
+            <option>0</option>
+            <option>1</option>
+            <option>2</option>
+            <option>3</option>
+            <option>4</option>
+            <option>5</option>
+            <option>6</option>
+            <option>7</option>
+            <option>8</option>
+            <option>9</option>
+            <option>10</option>
+            <option>11</option>
+            <option>12</option>
+          </select>
+        </td>
+        <td ng-class="{status0: route.attributes.status == '1', status1: route.attributes.status == '2', status2: route.attributes.status == '3', status3: route.attributes.status == '4', status4: route.attributes.status == '5', status5: route.attributes.status == '6', status6: route.attributes.status == '6' }" align="center">
+          <button type="button" class="btn btn-default" ng-click="changeStatus(route)">
+              <img width="35" src="" id="{{route.id}}"></img>
+          </button>
+        </td>
+        <td>
+          <select class="form-control" ng-model="route.attributes.setter" name="setter" ng-options="setter as setter.attributes.username for setter in setters" ng-change="saveRoute(route)">
+            <option></option>
+          </select>
+        </td>
+        <td>
+          <select class="form-control" ng-model="route.attributes.wall" ng-change="saveRoute(route)" name="wall" ng-options="wall as wall.attributes.name for wall in walls">
+            <option></option>
+          </select>
+        </td>
+        <td><button class="btn btn-primary" ng-click="editRoute(route)">View</button></td>
+        <td><button class="btn btn-danger" ng-click="deleteRoute(route)">Delete</button></td>
+      </tr>
+    <tbody>
+  </table>
+</div>

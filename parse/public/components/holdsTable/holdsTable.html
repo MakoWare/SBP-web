@@ -1,0 +1,42 @@
+<div class="modal-header">
+  Search
+
+</div>
+<div class="modal-body">
+  <table class="table table-bordered table-hover">
+    <thead>
+      <tr>
+        <td>Picture</td>
+        <td>Color</td>
+        <td>Name</td>
+        <td>Type</td>
+        <td>Size</td>
+        <td>Description</td>
+        <td>ID</td>
+        <td>Using Hold</td>
+      </tr>
+    </thead>
+    <tbody>
+      <tr ng-repeat="hold in holds" ng-click="rowClicked(hold)">
+        <td><img ng-src="{{hold.attributes.holdPicture.url()}}" class="img-responsive" alt="Hold Image" id="holdPicture" style="width: 100px; height: 100px;"></td>
+        <td ng-style="{'background-color':  hold.attributes.color}"></td>
+        <td>{{hold.attributes.name}}</td>
+        <td>{{hold.attributes.type}}</td>
+        <td>{{hold.attributes.size}}</td>
+        <td>{{hold.attributes.description}}</td>
+        <td>{{hold.id}}</td>
+        <td>
+          <div class="checkbox">
+            <label>
+              <input type="checkbox" ng-model="hold.attributes.add">
+            </label>
+          </div>
+        </td>
+      </tr>
+    <tbody>
+  </table>
+</div>
+<div class="modal-footer">
+  <button class="btn btn-primary" ng-click="ok()">OK</button>
+  <button class="btn btn-warning" ng-click="cancel()">Cancel</button>
+</div>

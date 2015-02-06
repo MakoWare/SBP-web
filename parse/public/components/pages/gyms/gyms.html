@@ -1,0 +1,30 @@
+<div class="container">
+
+  <div class="page-header" style="margin-top: 0px">
+    <h2>
+      <span>Gyms</span>
+      <button class="btn btn-success pull-right" ng-click="addGym()">Add a Gym</button>
+    </h2>
+  </div>
+
+  <table class="table table-bordered">
+    <thead>
+      <tr>
+        <td><a href="" ng-click="predicate = 'attributes.name'; reverse=!reverse">Name</a></td>
+        <td><a href="" ng-click="predicate = 'attributes.walls.length'; reverse=!reverse">Number of Walls</a></td>
+        <td><a href="" ng-click="predicate = 'attributes.routes.length'; reverse=!reverse">Number of Routes</a></td>
+        <td>Set as Working Gym</td>
+        <td>View</td>
+      </tr>
+    </thead>
+    <tbody>
+      <tr ng-repeat="gym in gyms | orderBy:predicate:reverse">
+        <td>{{gym.attributes.name}}</td>
+        <td>{{gym.attributes.walls.length}}</td>
+        <td>{{gym.attributes.routes.length}}</td>
+        <td><button class="btn btn-default" ng-click="setGym(gym)">Work in this Gym</button></td>
+        <td><button class="btn btn-primary" ng-click="viewGym(gym)">View</button></td>
+      </tr>
+    <tbody>
+  </table>
+</div>
