@@ -176,14 +176,15 @@ angular.module('parseService', [])
             takeDownRoutes: function(wall, callback){
                 //First Give each Route a Taken Down Date.
                 var routePromises = [];
+                var today = new Date();
                 wall.attributes.routes.forEach(function(route){
-                    var today = new Date();
                     route.set("takenDown", today);
                     routePromises.push(route.save());
                 });
 
                 Parse.Promise.when(routePromises).then(function(){
                     wall.set("routes", []);
+                    wall.set("lastSet", today);
                     wall.save({
                         success: function(wall){
                             callback(wall);

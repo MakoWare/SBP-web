@@ -174,41 +174,7 @@ var WallCtrl = function($scope, $location, $modal, ParseService, GlobalService){
         });
     };
 
-    //Status Changed
-    $scope.changeStatus = function(route){
-        var currentStatus = route.attributes.status;
-        switch(currentStatus){
-        case "0":
-            route.attributes.status = "1";
-            $("#" + route.id).attr("src", "/images/line1.svg");
-            break;
-        case "1":
-            route.attributes.status = "2";
-            $("#" + route.id).attr("src", "/images/line2.svg");
-            break;
-        case "2":
-            route.attributes.status = "3";
-            $("#" + route.id).attr("src", "/images/line3.svg");
-            break;
-        case "3":
-            route.attributes.status = "4";
-            $("#" + route.id).attr("src", "/images/line4.svg");
-            break;
-        case "4":
-            route.attributes.status = "5";
-            $("#" + route.id).attr("src", "/images/line5.svg");
-            break;
-        case "5":
-            route.attributes.status = "6";
-            $("#" + route.id).attr("src", "/images/line6.svg");
-            break;
-        case "6":
-            route.attributes.status = "0";
-            $("#" + route.id).attr("src", "/images/line0.svg");
-            break;
-        }
-        $scope.saveRoute(route);
-    };
+
 
     //Save Wall
     $scope.saveWall = function(){
@@ -223,13 +189,15 @@ var WallCtrl = function($scope, $location, $modal, ParseService, GlobalService){
     //Take Down Routes
     $scope.takeDownRoutes = function(){
         //alert("If you are reading this report to Dylan so he can yell at you");
-        GlobalService.showSpinner();
-        ParseService.takeDownRoutes($scope.wall, function(results){
-            GlobalService.dismissSpinner();
-            $scope.wall = results;
-        });
+        var confirmed = confirm('Are you sure you want to TAKE DOWN ALL OF THE ROUTES from this Wall?');
+        if(confirmed){
+            GlobalService.showSpinner();
+            ParseService.takeDownRoutes($scope.wall, function(results){
+                GlobalService.dismissSpinner();
+                $scope.wall = results;
+            });
+        }
     };
-
 
     //Routes Distro Graph
     //Generate Routes Graph

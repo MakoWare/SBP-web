@@ -12,17 +12,34 @@ var RoutesTableCtrl = function($scope, $location, ParseService, GlobalService){
 
         $scope.$on('dateSelected', function(event, args) {
             console.log("oh, new Date");
+            $scope.searchRoutes();
+        });
+
+        $scope.setTableHeight();
+        $(window).resize(function(){
+            $scope.setTableHeight();
         });
     },
 
+    //Set Table Height
+    $scope.setTableHeight = function(){
+        var windowHeight = $(window).height();
+        var tableOffsetTop = $('#tableContainer').offset().top;
+        var margin = 20;
+        var tableHeight = windowHeight - tableOffsetTop - margin;
 
+        $('#tableContainer').height(tableHeight + "px");
+    };
+
+    //Setup Routes
     $scope.setupRoutes = function(){
-        angular.forEach($scope.wall.attributes.routes, function (route) {
+        angular.forEach($scope.routes, function (route) {
             if(route){
                 route.grade = parseFloat(route.attributes.grade);
             }
         });
         $scope.getSetters();
+        $scope.setTableHeight();
     };
 
     //Get Setters
@@ -71,7 +88,36 @@ var RoutesTableCtrl = function($scope, $location, ParseService, GlobalService){
         });
     };
 
+    //Search Routes
+    $scope.searchRoutes = function(){
+        if($scope.dt){
+            GlobalService.showSpinner();
+            var query = new Parse.Query("Route");
 
+            var beginDate = new Date($scope.dt);
+            beginDate.setHours(0, 0, 0, 0);
+
+            var endDate = new Date($scope.dt);
+            endDate.setHours(23,59,59,999);
+
+            query.greaterThan("createdAt", beginDate);
+            query.lessThan("createdAt", endDate);
+
+            query.find({
+                success: function(results){
+                    GlobalService.dismissSpinner();
+                    $scope.routes = results;
+                    $scope.getSetters();
+                    $scope.$apply();
+                },
+                error: function(error){
+                    console.log(error);
+                }
+            });
+        } else {
+            //$scope.getRoutes();
+        }
+    };
 
     //Save Route
     $scope.saveRoute = function(route){
@@ -90,7 +136,6 @@ var RoutesTableCtrl = function($scope, $location, ParseService, GlobalService){
             }
         }
     };
-
 
     //Delete Route
     $scope.deleteRoute = function(route){

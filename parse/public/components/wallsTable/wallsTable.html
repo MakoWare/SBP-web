@@ -3,7 +3,7 @@
     <tr>
       <td><a href="" ng-click="predicate = 'attributes.name'; reverse=!reverse">Name</a></td>
       <td><a href="" ng-click="predicate = 'attributes.routes.length'; reverse=!reverse">Routes</a></td>
-      <td><a href="" ng-click="predicate = 'updatedAt'; reverse=!reverse">Last Updated</a></td>
+      <td><a href="" ng-click="predicate = 'attributes.lasSet'; reverse=!reverse">Last Set</a></td>
       <td>View Wall</td>
       <td>Remove Wall</td>
     </tr>
@@ -12,7 +12,8 @@
     <tr ng-repeat="wall in walls | orderBy:predicate:reverse | filter:search:strict">
       <td>{{wall.attributes.name}}</td>
       <td>{{wall.attributes.routes.length}}</td>
-      <td>{{ (wall.updatedAt.getMonth() + 1) + "/" + wall.updatedAt.getDate() + "/" + wall.updatedAt.getFullYear()}}</td>
+      <td ng-if="wall.attributes.lastSet">{{(wall.attributes.lastSet.getMonth() + 1) + "/" + wall.attributes.lastSet.getDate() + "/" + wall.attributes.lastSet.getFullYear()}}</td>
+      <td ng-if="!wall.attributes.lastSet">{{"Not Available Yet"}}</td>
       <td><a ng-href="{{'#/walls/' + wall.id}}"><button class="btn btn-primary" ng-click="viewWall(wall)">View</button></a></td>
       <td><button class="btn btn-danger" ng-click="removeWallFromGym(wall)">Remove</button></td>
     </tr>
