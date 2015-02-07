@@ -726,6 +726,32 @@ angular.module('parseService', [])
                     var route = ParseService.createRoute();
                     route.set("color", color);
                     route.set("grade", grade);
+                    switch(route.attributes.color){
+                    case "gray":
+                        route.attributes.order = 0;
+                        break;
+                    case "yellow":
+                        route.attributes.order = 1;
+                        break;
+                    case "green":
+                        route.attributes.order = 2;
+                        break;
+                    case "red":
+                        route.attributes.order = 3;
+                        break;
+                    case "blue":
+                        route.attributes.order = 4;
+                        break;
+                    case "orange":
+                        route.attributes.order = 5;
+                        break;
+                    case "purple":
+                        route.attributes.order = 6;
+                        break;
+                    case "black":
+                        route.attributes.order = 7;
+                        break;
+                    };
                     return route;
                 };
 

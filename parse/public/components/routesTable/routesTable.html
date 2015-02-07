@@ -12,7 +12,18 @@
     </thead>
     <tbody id="routesTable">
       <tr ng-repeat="route in routes | orderBy:[predicate, secondary]:reverse | filter:search:strict">
-        <td ng-style="{'background-color': route.attributes.color}"></td>
+        <td ng-style="{'background-color': route.attributes.color}">
+          <select class="form-control" ng-model="route.attributes.color" name="color" ng-style="{'background-color': route.attributes.color}" ng-change="saveRoute(route)">
+            <option>gray</option>
+            <option>yellow</option>
+            <option>green</option>
+            <option>red</option>
+            <option>blue</option>
+            <option>orange</option>
+            <option>purple</option>
+            <option>black</option>
+          </select>
+        </td>
         <td>
           <select class="form-control" ng-model="route.attributes.grade" ng-change="saveRoute(route)" name="status">
             <option>0</option>
