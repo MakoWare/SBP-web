@@ -142,7 +142,8 @@ Luise
 
 * Tuesday 1/27 First Floor Run
 
-** TODO What else does it need?
+** DONE What else does it need?
+   CLOSED: [2015-02-06 Fri 20:34]
 
 
 ** DONE Add Grade Select on Routes.html
@@ -164,8 +165,6 @@ Luise
 
 ** DONE Change Status to Boxes - Tap Button - Inc Line
    CLOSED: [2015-01-29 Thu 08:56]
-
-** TODO Create Users
 
 ** DONE Add Idealistic Gym Disto to Gyms/:id to Current Route Distro
    CLOSED: [2015-01-30 Fri 17:33]
@@ -190,4 +189,7 @@ Luise
    CLOSED: [2015-02-03 Tue 09:07]
 
 * Thursday 2/5
-** TODO RouteTable Adding is broken
+** DONE RouteTable Adding is broken
+   CLOSED: [2015-02-06 Fri 20:34]
+* Tuesday 2/9
+** TODO  spinner on create routes table save.

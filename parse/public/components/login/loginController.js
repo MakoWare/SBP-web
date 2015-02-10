@@ -7,7 +7,7 @@ var LoginCtrl = function($scope, $location, ParseService, GlobalService){
         $scope.password = "";
         $scope.currentUser = ParseService.getCurrentUser();
         if($scope.currentUser){
-            var newPath = "/gyms";
+            var newPath = "/gyms/" + $scope.currentUser.get('currentGym').id;
             $location.path(newPath);
         }
     },
