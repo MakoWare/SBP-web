@@ -141,17 +141,17 @@ var RoutesTableCtrl = function($scope, $location, ParseService, GlobalService){
     $scope.deleteRoute = function(route){
         GlobalService.showSpinner();
 
-        for(var i = 0; i < $scope.routesToAdd.length; i++){
-            var currentRoute = $scope.routesToAdd[i];
-            if(currentRoute.id == route.id){
-                $scope.routesToAdd.splice(i, 1);
+        //Remove Route from $scope.routes, so we don't have to re-pull from db
+        for(var i = 0; i < $scope.routes.length; i++){
+            var currentRoute = $scope.routes[i];
+            if(route.id == currentRoute.id){
+                $scope.routes.splice(i, 1);
             }
         }
 
 
         ParseService.deleteRoute(route, function(results){
             GlobalService.dismissSpinner();
-            $scope.getWall();
             $scope.$apply();
         });
     };

@@ -172,7 +172,6 @@ Luise
 ** DONE Quick Route Create
    CLOSED: [2015-02-03 Tue 08:32]
 
-
 * Thursday 1/29
 
 ** TODO Remember location and go back after View
@@ -180,7 +179,6 @@ Luise
 
 ** DONE Order By - Routes
    CLOSED: [2015-01-30 Fri 13:27]
-
 
 
 * Tuesday 2/3
@@ -191,6 +189,6 @@ Luise
 * Thursday 2/5
 ** DONE RouteTable Adding is broken
    CLOSED: [2015-02-06 Fri 20:34]
-* Tuesday 2/9
+* Tuesday 2/10
 ** TODO  spinner on create routes table save.
 ** TODO  change status to a select

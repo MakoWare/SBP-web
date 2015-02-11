@@ -48,6 +48,10 @@ ul.nav li.dropdown:hover > ul.dropdown-menu {
     background-color: rgba(155, 89, 182,1.0)
 }
 
+.routeStatus1 {
+    background-image:url("/images/line1.svg");
+}
+
 
 #idealDistribution {
     opacity: 0.5;

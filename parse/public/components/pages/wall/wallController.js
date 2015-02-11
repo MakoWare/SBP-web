@@ -118,8 +118,8 @@ var WallCtrl = function($scope, $location, $modal, ParseService, GlobalService){
             }
         });
         modalInstance.result.then(function(routes){
-            console.log(routes);
-            //$scope.getWall();
+            $scope.routes = $scope.routes.concat(routes);
+            console.log($scope.routes);
             $scope.setUpWall();
         }, function () {
             console.log("modal closed");
