@@ -193,3 +193,4 @@ Luise
    CLOSED: [2015-02-06 Fri 20:34]
 * Tuesday 2/9
 ** TODO  spinner on create routes table save.
+** TODO  change status to a select
