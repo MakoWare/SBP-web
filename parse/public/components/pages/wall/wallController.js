@@ -27,6 +27,7 @@ var WallCtrl = function($scope, $location, $modal, ParseService, GlobalService){
             GlobalService.dismissSpinner();
             $scope.wall = results;
             $scope.routes = results.attributes.routes;
+            $scope.backUpRoutes = $scope.routes;
             $scope.title = results.get("name");
             console.log(results);
             $scope.$apply();
@@ -114,6 +115,9 @@ var WallCtrl = function($scope, $location, $modal, ParseService, GlobalService){
             resolve: {
                 currentWall: function () {
                     return $scope.wall;
+                },
+                backUpRoutes: function () {
+                    return $scope.backUpRoutes;
                 }
             }
         });

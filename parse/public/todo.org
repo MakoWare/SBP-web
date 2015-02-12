@@ -190,5 +190,6 @@ Luise
 ** DONE RouteTable Adding is broken
    CLOSED: [2015-02-06 Fri 20:34]
 * Tuesday 2/10
-** TODO  spinner on create routes table save.
+** DONE spinner on create routes table save.
+   CLOSED: [2015-02-11 Wed 14:40]
 ** TODO  change status to a select
