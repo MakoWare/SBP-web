@@ -159,37 +159,6 @@ var RoutesTableCtrl = function($scope, $location, ParseService, GlobalService){
 
     //Status Changed
     $scope.changeStatus = function(route){
-        var currentStatus = route.attributes.status;
-        switch(currentStatus){
-        case "0":
-            route.attributes.status = "1";
-            $("#" + route.id).attr("src", "/images/line1.svg");
-            break;
-        case "1":
-            route.attributes.status = "2";
-            $("#" + route.id).attr("src", "/images/line2.svg");
-            break;
-        case "2":
-            route.attributes.status = "3";
-            $("#" + route.id).attr("src", "/images/line3.svg");
-            break;
-        case "3":
-            route.attributes.status = "4";
-            $("#" + route.id).attr("src", "/images/line4.svg");
-            break;
-        case "4":
-            route.attributes.status = "5";
-            $("#" + route.id).attr("src", "/images/line5.svg");
-            break;
-        case "5":
-            route.attributes.status = "6";
-            $("#" + route.id).attr("src", "/images/line6.svg");
-            break;
-        case "6":
-            route.attributes.status = "0";
-            $("#" + route.id).attr("src", "/images/line0.svg");
-            break;
-        }
         $scope.saveRoute(route);
     };
 

@@ -41,10 +41,17 @@
             <option>12</option>
           </select>
         </td>
-        <td ng-class="{status0: route.attributes.status == '1', status1: route.attributes.status == '2', status2: route.attributes.status == '3', status3: route.attributes.status == '4', status4: route.attributes.status == '5', status5: route.attributes.status == '6', status6: route.attributes.status == '6' }" align="center">
-          <button type="button" class="btn btn-default" ng-click="changeStatus(route)">
-            <img width="35" src="" id="{{route.id}}"/>
-          </button>
+
+        <td ng-class="{status0: route.attributes.status == '1', status1: route.attributes.status == '2', status2: route.attributes.status == '3', status3: route.attributes.status == '4', status4: route.attributes.status == '5', status5: route.attributes.status == '6', status6: route.attributes.status == '6' }">
+          <select class="form-control" ng-model="route.attributes.status" name="status" style="font-size: 33px" ng-change="changeStatus(route)">
+            <option value="0"> </option>
+            <option value="1">&#8739</option>
+            <option value="2">&#8735</option>
+            <option value="3">&#8852</option>
+            <option value="4">&#9744</option>
+            <option value="5">&#9746;</option>
+            <option value="6">&#9745;</option>
+          </select>
         </td>
         <td>
           <select class="form-control" ng-model="route.attributes.setter" name="setter" ng-options="setter as setter.attributes.username for setter in setters" ng-change="saveRoute(route)">
