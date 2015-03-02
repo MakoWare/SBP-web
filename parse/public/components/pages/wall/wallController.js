@@ -33,6 +33,7 @@ var WallCtrl = function($scope, $location, $modal, ParseService, GlobalService){
             $scope.$apply();
             $scope.setUpWall();
             $scope.$broadcast('newRoutes');
+            console.log($scope.wall);
         });
     };
 
