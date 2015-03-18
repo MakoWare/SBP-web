@@ -119,7 +119,7 @@ var RoutesModalCtrl = function($scope, $location, $modalInstance, ParseService, 
         });
 
         Parse.Promise.when(routePromises).then(function(){
-            //$modalInstance.close(routes);
+            $modalInstance.close(routes);
         });
     };
 
